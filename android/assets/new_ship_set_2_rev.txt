@@ -1,0 +1,47 @@
+new_ship_set_2_rev.png
+size: 240, 32
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+back_body_2_rev
+  rotate: false
+  xy: 0, 0
+  size: 32, 30
+  orig: 32, 32
+  offset: 0, 2
+  index: -1
+front_body_2_rev
+  rotate: false
+  xy: 32, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+main_body_2_rev
+  rotate: false
+  xy: 64, 0
+  size: 80, 32
+  orig: 80, 32
+  offset: 0, 0
+  index: -1
+palka_rev
+  rotate: false
+  xy: 144, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+sail
+  rotate: false
+  xy: 176, 0
+  size: 48, 32
+  orig: 48, 32
+  offset: 0, 0
+  index: -1
+wood
+  rotate: false
+  xy: 224, 0
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: 2
