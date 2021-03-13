@@ -18,7 +18,7 @@ public class ShipMachta extends Sprite {
         super(fightScreen.getAtlas().findRegion("wood"));
         this.world = world;
         defineShip();
-        TextureRegion iron = new TextureRegion(getTexture(), 192, 0, 16, 32);
+        TextureRegion iron = new TextureRegion(getTexture(), 224, 0, 16, 32);
         setBounds(0, 0, 8, 16);
         setRegion(iron);
     }

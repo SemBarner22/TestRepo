@@ -18,7 +18,7 @@ public class ShipSail extends Sprite {
         super(fightScreen.getAtlas().findRegion("sail"));
         this.world = world;
         defineShip();
-        TextureRegion iron = new TextureRegion(getTexture(), 144, 0, 47, 32);
+        TextureRegion iron = new TextureRegion(getTexture(), 176, 0, 47, 32);
         setBounds(0, 0, 16 * 4, 32);
         setRegion(iron);
     }
