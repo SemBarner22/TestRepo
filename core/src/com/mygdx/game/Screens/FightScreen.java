@@ -41,18 +41,25 @@ public class FightScreen extends AbstractMechanicsScreen {
 
     }
 
+    public void handleInput(float dt) {
+        if (Gdx.input.isTouched()) {
+            gameCamera.position.x += 100 * dt;
+        }
+    }
+
     public void update(float dt) {
-        
+        handleInput(dt);
+        gameCamera.update();
+        renderer.setView(gameCamera);
     }
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(1, 0, 0, 1);
+        update(delta);
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        game.batch.setProjectionMatrix(gameCamera.combined);
-        game.batch.begin();
-        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
-        game.batch.end();
+
+        renderer.render();
     }
 
     @Override
