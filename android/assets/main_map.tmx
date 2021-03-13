@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="left-down" width="128" height="128" tilewidth="16" tileheight="16" infinite="0" nextlayerid="16" nextobjectid="31">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="left-down" width="128" height="128" tilewidth="16" tileheight="16" infinite="0" nextlayerid="20" nextobjectid="129">
  <tileset firstgid="1" source="SeaAndForest.tsx"/>
  <tileset firstgid="324" source="all_tiles_set.tsx"/>
- <objectgroup id="10" name="up_right_out_land">
-  <object id="12" x="1168" y="0">
-   <polygon points="0,0 0,32 -96,32 -96,48 -144,48 -144,64 -160,64 -160,96 -144,96 -144,112 -96,112 -96,176 -80,176 -80,192 48,192 48,224 112,224 112,240 320,240 320,224 512,224 512,208 544,208 544,192 560,192 560,176 608,176 608,224 688,224 688,208 736,208 736,192 752,192 752,176 832,176 832,160 880,160 880,176 848,176 848,192 768,192 768,208 752,208 752,224 704,224 704,240 592,240 592,192 576,192 576,208 560,208 560,224 528,224 528,240 336,240 336,256 96,256 96,240 32,240 32,208 -96,208 -96,192 -112,192 -112,128 -160,128 -160,112 -176,112 -176,48 -160,48 -160,32 -112,32 -112,16 -16,16 -16,0"/>
-  </object>
- </objectgroup>
+ <layer id="1" name="sea" width="128" height="128">
+  <data encoding="base64" compression="zlib">
+   eJztwwENAAAMAiCfz/59DHLY6CVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX1/QFKmwEe
+  </data>
+ </layer>
+ <layer id="2" name="land" width="128" height="128">
+  <data encoding="base64" compression="zlib">
+   eJztmutSIyEQRs27aZK9eI27Me//IjtWhVpqimG4N9Dnx/mjDgN9Phqing8PD+dJ+Fj4XZjLfeyjxSmBYwQp46ci7awX/28Lzw7eBfwfrWd844V8Df9hzt93xvb5d/na+rnUHhCbBY3+Xw/uPfyy4X7P+Zb/nHqXOgNi57D1HmlnUn3hEvhsqzO61dia/P9d+Fz4k+g/dZ/6zu8Yv7lZmNW78bqHy7vhuvCV6b7Efm1xlvTifO3NV3/fGD6vMVw9c0m5r7fs26M4t1mfw1s92Le/S7kPOQ9aZqCE6x6d3yz2/PvO69psZTHXRSnH0h5b+K/x+7tc/zUysee3tnO7v5Yeb82jxXpfXw9tenvoXSD2PiKxf02tv+d6cxDixq5zqtdevJXOgG+de/mo3aftu+8lwH/IXdn3Psl+3CMxZ0SNfm273PJv79mQNeE/nHV/SPn8GtNXff31ey6PDmLXpKGvt8pDjk8pnjqYA8j6JwN6wb9u8K8b/Ovm6UAGNIN/3eBfN7jXDf51g3/dcP7rBv+6wb9u8K8b/OsG97rBv27wr5u1/6cDdwJNrB3jXxf41w3+deNyjP/2DqTqveefDOjzTwZ0+Q/NgA/pGo6MZF333hWTAbIQXu/cGpeqfciz+C/v3/c7t978x2aiRG1mzVNJ15L+feupXRdph/gv67/FOnuhZ/8SdW251h4oubZae6+nOmjNgJT/2O9L+x8xH736j5nrKP57zMAM/kvUtmUGespBqbn14D+3tvjv23+rHLTIibR33zqkxop5rqda9zSX3vzHjJf7TM/+pV3X8NWD/xprmZ0aWZX0v/V+6Tr3SIteJeEf8A9z+Jeu0cy0uCfhv19a3JFy/EvXB+T8AwAAAAAAAAAAAACAHvg7gj74nz69hPyPCjmYj1Dv5GBOUv2TgznI9U8OxqaUf/IwJvjXTapL/M9BrkP8j00Jf/gfF9zpBve6wT0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAvC0833npYD4z8nPhx51fgS5sas7tsnC+89FBrUZky9s37wu3Fa+enz07qDlf+51mXtL1HIk3j7eTw73htPFMKf97mfS9z+SgxXlgeuOoZ4/dP2P9G3L9u1zvOQ7htWLdzL6xe+KoGfi0+Ar0H9MHQuqY67p1LzD7xtTBvGvUDBiuh/8ZCPW/l4GQOtbGl4OQzxDrHmUya/ufJQPGSYj/kB4QUsdWuO6urjtkyHm0ro/5+sifQ+x+fHKQ4l/Sd03WNTF1WGdolH6wdxa78hB6B5yVkDqMkIfa9zBw56GXLLS6h8F2Flr2COl7GOznopZrfI9BiXOCc30OUvsB5/o8pGSgB///AJgGCnY=
+  </data>
+ </layer>
  <objectgroup id="11" name="rocks">
   <object id="13" x="0" y="256">
    <polygon points="0,0 16,0 16,16 32,16 32,80 48,80 48,128 32,128 32,176 48,176 48,256 32,256 32,320 16,320 16,416 32,416 32,432 48,432 48,512 64,512 64,528 80,528 80,544 64,544 64,560 48,560 48,720 32,720 32,752 16,752 16,768 0,768"/>
@@ -25,22 +30,6 @@
   </object>
   <object id="18" x="0" y="1440">
    <polygon points="0,0 48,0 48,-16 64,-16 64,-32 80,-32 80,-48 96,-48 96,-64 112,-64 112,-80 144,-80 144,-96 224,-96 224,-80 256,-80 256,-64 272,-64 272,-48 352,-48 352,-128 288,-128 288,-144 256,-144 256,-160 224,-160 224,-176 192,-176 192,-192 160,-192 160,-208 128,-208 128,-224 96,-224 96,-208 48,-208 48,-192 32,-192 32,-176 0,-176"/>
-  </object>
- </objectgroup>
- <objectgroup id="12" name="down_left_land">
-  <object id="19" x="0" y="1936">
-   <polygon points="0,0 64,0 64,-16 128,-16 128,-48 144,-48 144,-64 224,-64 224,-80 336,-80 336,-96 384,-96 384,-128 416,-128 416,-96 448,-96 448,-80 480,-80 480,-64 496,-64 496,-48 528,-48 528,-32 560,-32 560,-16 656,-16 656,-32 688,-32 688,-16 800,-16 800,-32 864,-32 864,-64 880,-64 880,-80 912,-80 912,-64 928,-64 928,-48 944,-48 944,-32 960,-32 960,0 1024,0 1024,16 1088,16 1088,32 1136,32 1136,48 1232,48 1232,64 1248,64 1248,80 1296,80 1296,96 1312,96 1328,96 1328,112 1264,112 1264,96 1216,96 1216,80 1200,80 1200,64 1120,64 1120,48 1072,48 1072,32 1008,32 1008,16 960,16 832,16 832,0 544,0 544,-16 528,-16 496,-16 496,-32 464,-32 464,-48 432,-48 432,-64 240,-64 240,-48 160,-48 160,0 80,0 80,16 0,16"/>
-  </object>
-  <object id="20" x="0" y="1936">
-   <polygon points="0,0 64,0 64,-16 128,-16 128,-48 144,-48 144,-64 224,-64 224,-80 336,-80 336,-96 384,-96 384,-128 416,-128 416,-96 448,-96 448,-80 480,-80 480,-64 496,-64 496,-48 528,-48 528,-32 560,-32 560,-16 656,-16 656,-32 688,-32 688,-16 800,-16 800,-32 864,-32 864,-64 880,-64 880,-80 912,-80 912,-64 928,-64 928,-48 944,-48 944,-32 960,-32 960,0 1024,0 1024,16 1088,16 1088,32 1136,32 1136,48 1232,48 1232,64 1248,64 1248,80 1296,80 1296,96 1312,96 1312,112 1328,112 1328,80 1312,80 1312,64 1296,64 1264,64 1264,48 1248,48 1248,32 1152,32 1152,16 1104,16 1104,0 1040,0 1040,-16 976,-16 976,-48 960,-48 960,-64 944,-64 944,-80 928,-80 928,-96 864,-96 864,-80 848,-80 848,-48 784,-48 784,-32 704,-32 704,-48 640,-48 640,-32 576,-32 576,-48 544,-48 544,-64 512,-64 512,-80 496,-80 496,-96 464,-96 464,-112 432,-112 432,-144 368,-144 368,-112 320,-112 320,-96 208,-96 208,-80 128,-80 128,-64 112,-64 112,-32 48,-32 48,-16 0,-16"/>
-  </object>
- </objectgroup>
- <objectgroup id="13" name="down_right_land">
-  <object id="21" x="1536" y="2048">
-   <polygon points="0,0 0,-32 16,-32 16,-48 96,-48 96,-64 160,-64 160,-96 176,-96 176,-112 192,-112 192,-128 208,-128 208,-176 192,-176 192,-192 128,-192 128,-208 144,-208 144,-224 256,-224 256,-240 320,-240 320,-224 432,-224 432,-240 512,-240 512,-224 448,-224 448,-208 224,-208 224,-112 208,-112 208,-96 192,-96 192,-48 112,-48 112,-32 32,-32 32,-16 16,-16 16,0"/>
-  </object>
-  <object id="22" x="1536" y="2048">
-   <polygon points="0,0 0,-32 16,-32 16,-48 96,-48 96,-64 160,-64 160,-96 176,-96 176,-112 192,-112 192,-128 208,-128 208,-176 192,-176 192,-192 128,-192 128,-208 144,-208 144,-224 256,-224 256,-240 320,-240 320,-224 432,-224 432,-240 512,-240 512,-256 416,-256 416,-240 336,-240 336,-256 240,-256 240,-240 128,-240 128,-224 112,-224 112,-176 176,-176 176,-160 192,-160 192,-144 176,-144 176,-128 160,-128 160,-112 144,-112 144,-96 144,-80 80,-80 80,-64 0,-64 0,-48 -16,-48 -16,0"/>
   </object>
  </objectgroup>
  <objectgroup id="14" name="towns">
@@ -62,37 +51,120 @@
    <polygon points="0,0 0,16 48,16 48,0"/>
   </object>
   <object id="28" x="1776" y="224">
+   <properties>
+    <property name="port" type="int" value="4"/>
+   </properties>
    <polygon points="0,0 0,16 80,16 80,0"/>
   </object>
   <object id="29" x="1792" y="1792">
+   <properties>
+    <property name="port" type="int" value="2"/>
+   </properties>
    <polygon points="0,0 64,0 64,16 0,16"/>
   </object>
-  <object id="30" x="880" y="1840">
-   <polygon points="0,0 32,0 32,16 0,16"/>
+  <object id="31" x="384" y="176">
+   <properties>
+    <property name="port" type="int" value="3"/>
+   </properties>
+   <polygon points="0,0 48,0 48,16 0,16 0,0"/>
+  </object>
+  <object id="81" x="880" y="1840" width="32" height="16">
+   <properties>
+    <property name="port" type="int" value="1"/>
+   </properties>
   </object>
  </objectgroup>
- <objectgroup id="9" name="up_right_in_land"/>
- <objectgroup id="7" name="up_left_out_land">
-  <object id="9" x="1.33333" y="241.333">
-   <polygon points="0,0 110.667,-1.33333 110.667,-49.3333 270.667,-49.3333 270.667,-65.3333 430.667,-65.3333 430.667,-129.333 510.667,-129.333 510.667,-65.3333 558.667,-65.3333 558.667,-97.3333 590.667,-97.3333 590.667,-113.333 702.667,-113.333 702.667,-129.333 718.667,-129.333 718.667,-145.333 878.667,-145.333 878.667,-161.333 910.667,-161.333 910.667,-177.333 814.667,-177.333 814.667,-241.333 830.667,-241.333 830.667,-193.333 926.667,-193.333 926.667,-145.333 894.667,-145.333 894.667,-129.333 734.667,-129.333 734.667,-113.333 718.667,-113.333 718.667,-97.3333 606.667,-97.3333 606.667,-81.3333 574.667,-81.3333 574.667,-49.3333 494.667,-49.3333 494.667,-113.333 446.667,-113.333 446.667,-49.3333 286.667,-49.3333 286.667,-33.3333 126.667,-33.3333 126.667,14.6667 -1.33333,14.6667"/>
-  </object>
-  <object id="11" x="1168" y="2.66667">
-   <polygon points="0,0 0,29.3333 -96,29.3333 -96,45.3333 -144,45.3333 -144,61.3333 -160,61.3333 -160,93.3333 -144,93.3333 -144,109.333 -96,109.333 -96,173.333 -80,173.333 -80,189.333 48,189.333 48,221.333 112,221.333 112,237.333 320,237.333 320,221.333 512,221.333 512,205.333 544,205.333 544,189.333 560,189.333 560,173.333 608,173.333 608,221.333 688,221.333 688,205.333 736,205.333 736,189.333 752,189.333 752,173.333 832,173.333 832,157.333 880,157.333 880,141.333 816,141.333 816,157.333 736,157.333 544,157.333 544,173.333 528,173.333 528,189.333 496,189.333 496,205.333 416,205.333 304,205.333 304,221.333 128,221.333 128,205.333 64,205.333 64,173.333 -64,173.333 -64,157.333 -80,157.333 -80,93.3333 -128,93.3333 -128,61.3333 -80,61.3333 -80,45.3333 16,45.3333 16,-2.66667"/>
-  </object>
+ <objectgroup id="16" name="up_left_land">
+  <object id="32" x="0" y="224" width="112" height="16"/>
+  <object id="33" x="96" y="192" width="16" height="48"/>
+  <object id="34" x="96" y="176" width="176" height="16"/>
+  <object id="35" x="256" y="160" width="176" height="16"/>
+  <object id="36" x="416" y="96" width="16" height="80"/>
+  <object id="37" x="432" y="96" width="96" height="16"/>
+  <object id="38" x="512" y="112" width="16" height="64"/>
+  <object id="39" x="512" y="160" width="48" height="16"/>
+  <object id="40" x="544" y="128" width="16" height="48"/>
+  <object id="41" x="544" y="128" width="48" height="16"/>
+  <object id="42" x="576" y="112" width="16" height="32"/>
+  <object id="43" x="576" y="112" width="128" height="16"/>
+  <object id="44" x="688" y="96" width="32" height="16"/>
+  <object id="45" x="704" y="80" width="176" height="16"/>
+  <object id="46" x="864" y="80" width="16" height="16"/>
+  <object id="47" x="800" y="64" width="112" height="16"/>
+  <object id="48" x="800" y="0" width="16" height="80"/>
  </objectgroup>
- <objectgroup id="8" name="up_left_in_land">
-  <object id="10" x="0" y="240">
-   <polygon points="0,0 112,0 112,-48 272,-48 272,-64 432,-64 432,-128 512,-128 512,-64 560,-64 560,-96 592,-96 592,-112 704,-112 704,-128 720,-128 720,-144 880,-144 880,-160 912,-160 912,-176 816,-176 816,-240 800,-240 800,-160 704,-160 704,-144 688,-144 688,-128 576,-128 576,-112 528,-112 528,-144 416,-144 416,-112 368,-112 368,-80 256,-80 256,-64 160,-64 96,-64 96,-16 0,-16"/>
-  </object>
+ <objectgroup id="17" name="up_right_land">
+  <object id="51" x="1168" y="0" width="16" height="48"/>
+  <object id="52" x="1072" y="32" width="112" height="16"/>
+  <object id="53" x="1024" y="48" width="64" height="16"/>
+  <object id="54" x="1008" y="64" width="16" height="32"/>
+  <object id="56" x="1024" y="96" width="64" height="16"/>
+  <object id="57" x="1072" y="96" width="16" height="80"/>
+  <object id="58" x="1072" y="160" width="32" height="16"/>
+  <object id="59" x="1088" y="160" width="16" height="32"/>
+  <object id="60" x="1088" y="176" width="144" height="16"/>
+  <object id="61" x="1216" y="176" width="16" height="48"/>
+  <object id="62" x="1216" y="208" width="80" height="16"/>
+  <object id="63" x="1280" y="208" width="16" height="32"/>
+  <object id="64" x="1280" y="224" width="208" height="16"/>
+  <object id="65" x="1472" y="208" width="16" height="32"/>
+  <object id="66" x="1472" y="208" width="208" height="16"/>
+  <object id="67" x="1664" y="192" width="16" height="32"/>
+  <object id="68" x="1680" y="192" width="32" height="16"/>
+  <object id="69" x="1696" y="176" width="32" height="16"/>
+  <object id="70" x="1712" y="160" width="16" height="32"/>
+  <object id="71" x="1728" y="160" width="64" height="16"/>
+  <object id="72" x="1776" y="160" width="16" height="64"/>
+  <object id="73" x="1776" y="208" width="80" height="16"/>
+  <object id="74" x="1840" y="176" width="16" height="48"/>
+  <object id="75" x="1840" y="192" width="64" height="16"/>
+  <object id="76" x="1888" y="176" width="32" height="16"/>
+  <object id="77" x="1904" y="160" width="96" height="16"/>
+  <object id="79" x="1985" y="145.5" width="63.5" height="16"/>
  </objectgroup>
- <layer id="1" name="sea" width="128" height="128">
-  <data encoding="base64" compression="zlib">
-   eJztwwENAAAMAiCfz/59DHLY6CVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX1/QFKmwEe
-  </data>
- </layer>
- <layer id="2" name="land" width="128" height="128">
-  <data encoding="base64" compression="zlib">
-   eJztmutSIyEQRs27aZK9eI27Me//IjtWhVpqimG4N9Dnx/mjDgN9Phqing8PD+dJ+Fj4XZjLfeyjxSmBYwQp46ci7awX/28Lzw7eBfwfrWd844V8Df9hzt93xvb5d/na+rnUHhCbBY3+Xw/uPfyy4X7P+Zb/nHqXOgNi57D1HmlnUn3hEvhsqzO61dia/P9d+Fz4k+g/dZ/6zu8Yv7lZmNW78bqHy7vhuvCV6b7Efm1xlvTifO3NV3/fGD6vMVw9c0m5r7fs26M4t1mfw1s92Le/S7kPOQ9aZqCE6x6d3yz2/PvO69psZTHXRSnH0h5b+K/x+7tc/zUysee3tnO7v5Yeb82jxXpfXw9tenvoXSD2PiKxf02tv+d6cxDixq5zqtdevJXOgG+de/mo3aftu+8lwH/IXdn3Psl+3CMxZ0SNfm273PJv79mQNeE/nHV/SPn8GtNXff31ey6PDmLXpKGvt8pDjk8pnjqYA8j6JwN6wb9u8K8b/Ovm6UAGNIN/3eBfN7jXDf51g3/dcP7rBv+6wb9u8K8b/OsG97rBv27wr5u1/6cDdwJNrB3jXxf41w3+deNyjP/2DqTqveefDOjzTwZ0+Q/NgA/pGo6MZF333hWTAbIQXu/cGpeqfciz+C/v3/c7t978x2aiRG1mzVNJ15L+feupXRdph/gv67/FOnuhZ/8SdW251h4oubZae6+nOmjNgJT/2O9L+x8xH736j5nrKP57zMAM/kvUtmUGespBqbn14D+3tvjv23+rHLTIibR33zqkxop5rqda9zSX3vzHjJf7TM/+pV3X8NWD/xprmZ0aWZX0v/V+6Tr3SIteJeEf8A9z+Jeu0cy0uCfhv19a3JFy/EvXB+T8AwAAAAAAAAAAAACAHvg7gj74nz69hPyPCjmYj1Dv5GBOUv2TgznI9U8OxqaUf/IwJvjXTapL/M9BrkP8j00Jf/gfF9zpBve6wT0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAvC0833npYD4z8nPhx51fgS5sas7tsnC+89FBrUZky9s37wu3Fa+enz07qDlf+51mXtL1HIk3j7eTw73htPFMKf97mfS9z+SgxXlgeuOoZ4/dP2P9G3L9u1zvOQ7htWLdzL6xe+KoGfi0+Ar0H9MHQuqY67p1LzD7xtTBvGvUDBiuh/8ZCPW/l4GQOtbGl4OQzxDrHmUya/ufJQPGSYj/kB4QUsdWuO6urjtkyHm0ro/5+sifQ+x+fHKQ4l/Sd03WNTF1WGdolH6wdxa78hB6B5yVkDqMkIfa9zBw56GXLLS6h8F2Flr2COl7GOznopZrfI9BiXOCc30OUvsB5/o8pGSgB///AJgGCnY=
-  </data>
- </layer>
+ <objectgroup id="18" name="down_left_land">
+  <object id="82" x="0" y="1936" width="80" height="16"/>
+  <object id="83" x="64" y="1920" width="80" height="16"/>
+  <object id="84" x="128" y="1888" width="16" height="48"/>
+  <object id="85" x="144" y="1872" width="96" height="16"/>
+  <object id="86" x="224" y="1856" width="112" height="16"/>
+  <object id="87" x="336" y="1840" width="64" height="16"/>
+  <object id="88" x="384" y="1808" width="16" height="48"/>
+  <object id="89" x="400" y="1808" width="16" height="48"/>
+  <object id="90" x="416" y="1840" width="32" height="16"/>
+  <object id="92" x="432" y="1856" width="48" height="16"/>
+  <object id="93" x="480" y="1872" width="16" height="32"/>
+  <object id="94" x="480" y="1888" width="48" height="16"/>
+  <object id="95" x="512" y="1904" width="48" height="16"/>
+  <object id="98" x="560" y="1920" width="256" height="16"/>
+  <object id="99" x="656" y="1904" width="32" height="16"/>
+  <object id="100" x="800" y="1904" width="80" height="16"/>
+  <object id="101" x="864" y="1872" width="16" height="48"/>
+  <object id="102" x="880" y="1856" width="32" height="16"/>
+  <object id="103" x="912" y="1872" width="16" height="32"/>
+  <object id="104" x="928" y="1888" width="16" height="32"/>
+  <object id="105" x="944" y="1904" width="16" height="48"/>
+  <object id="106" x="960" y="1936" width="64" height="16"/>
+  <object id="107" x="1024" y="1952" width="64" height="16"/>
+  <object id="108" x="1072" y="1968" width="64" height="16"/>
+  <object id="109" x="1120" y="1984" width="112" height="16"/>
+  <object id="110" x="1232" y="2000" width="16" height="32"/>
+  <object id="111" x="1232" y="2016" width="64" height="16"/>
+  <object id="112" x="1280" y="2032" width="32" height="16"/>
+ </objectgroup>
+ <objectgroup id="19" name="down_right_land">
+  <object id="114" x="1536" y="2016" width="16" height="32"/>
+  <object id="115" x="1552" y="2000" width="96" height="16"/>
+  <object id="116" x="1632" y="1984" width="80" height="16"/>
+  <object id="117" x="1696" y="1952" width="16" height="48"/>
+  <object id="119" x="1712" y="1936" width="32" height="16"/>
+  <object id="120" x="1728" y="1920" width="32" height="16"/>
+  <object id="121" x="1744" y="1856" width="16" height="64"/>
+  <object id="122" x="1728" y="1840" width="16" height="32"/>
+  <object id="123" x="1664" y="1840" width="64" height="16"/>
+  <object id="124" x="1680" y="1824" width="128" height="16"/>
+  <object id="126" x="1792" y="1808" width="64" height="16"/>
+  <object id="127" x="1840" y="1824" width="128" height="16"/>
+  <object id="128" x="1968" y="1808" width="80" height="16"/>
+ </objectgroup>
 </map>
