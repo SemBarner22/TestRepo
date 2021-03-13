@@ -8,17 +8,18 @@ public class WorldContactListener implements ContactListener {
 
     @Override
     public void beginContact(Contact contact) {
-        Fixture fixtureA = contact.getFixtureA();
-        Fixture fixtureB = contact.getFixtureB();
-
-        if (fixtureA.getUserData().equals("playerMap") || fixtureB.getUserData().equals("playerMap")) {
-            Fixture player = fixtureA.getUserData().equals("playerMap") ? fixtureA : fixtureB;
-            Fixture object = player == fixtureA ? fixtureB : fixtureA;
-            if (object.getUserData().equals("ports")) {
-                System.out.println("koooook");
-            }
-
-        }
+        System.out.println("efwefwefwefewf");
+//        Fixture fixtureA = contact.getFixtureA();
+//        Fixture fixtureB = contact.getFixtureB();
+//
+//        if (fixtureA.getUserData().equals("playerMap") || fixtureB.getUserData().equals("playerMap")) {
+//            Fixture player = fixtureA.getUserData().equals("playerMap") ? fixtureA : fixtureB;
+//            Fixture object = player == fixtureA ? fixtureB : fixtureA;
+//            if (object.getUserData().equals("ports")) {
+//                System.out.println("koooook");
+//            }
+//
+//        }
     }
 
     @Override

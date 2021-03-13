@@ -171,16 +171,15 @@ public class MapScreen extends AbstractMechanicsScreen {
 
             Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
             bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set(rectangle.x + rectangle.width / 2, rectangle.getY() + rectangle.getHeight() / 2);
+            bdef.position.set(rectangle.x + rectangle.width / 2 / Strategy.PPM, rectangle.getY() + rectangle.getHeight() / 2 / Strategy.PPM);
 
-            sr.begin(ShapeRenderer.ShapeType.Filled);
-            sr.rect(bdef.position.x, bdef.position.y, rectangle.width, rectangle.height);
-            sr.end();
+//            sr.begin(ShapeRenderer.ShapeType.Filled);
+//            sr.rect(bdef.position.x, bdef.position.y, rectangle.width, rectangle.height);
+//            sr.end();
 
-            System.out.println("keeoeoko");
             body = world.createBody(bdef);
 
-            shape.setAsBox(rectangle.getWidth() / 2, rectangle.getHeight());
+            shape.setAsBox(rectangle.getWidth() / 2 / Strategy.PPM, rectangle.getHeight() / 2 / Strategy.PPM);
 
             fdef.shape = shape;
             body.createFixture(fdef).setUserData("ports");
@@ -189,13 +188,14 @@ public class MapScreen extends AbstractMechanicsScreen {
         for (MapLayer layer : map.getLayers()) {
             if (!layer.getName().equals("ports")) {
                 for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
+//                    System.out.println("feegregeg");
                     Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
                     bdef.type = BodyDef.BodyType.StaticBody;
-                    bdef.position.set(rectangle.x + rectangle.width / 2, rectangle.getY() + rectangle.getHeight() / 2);
-
+                    bdef.position.set((rectangle.getX() + rectangle.getWidth() / 2) / Strategy.PPM, (rectangle.getY() + rectangle.getHeight() / 2) / Strategy.PPM);
+//                    System.out.println(bdef.position.x + " " +  bdef.position.y);
                     body = world.createBody(bdef);
 
-                    shape.setAsBox(rectangle.getWidth() / 2, rectangle.getHeight());
+                    shape.setAsBox(rectangle.getWidth() / 2 / Strategy.PPM, rectangle.getHeight() / 2 / Strategy.PPM);
 
                     fdef.shape = shape;
                     body.createFixture(fdef);
