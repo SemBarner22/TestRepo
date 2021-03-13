@@ -15,22 +15,22 @@ public class ShipMachta extends Sprite {
     private TextureRegion ship;
 
     public ShipMachta(World world, FightScreen fightScreen) {
-        super(fightScreen.getAtlas().findRegion("iron"));
+        super(fightScreen.getAtlas().findRegion("wood"));
         this.world = world;
         defineShip();
-        TextureRegion iron = new TextureRegion(getTexture(), 55, 1, 16, 16);
-        setBounds(0, 0, 100, 32);
+        TextureRegion iron = new TextureRegion(getTexture(), 192, 0, 16, 32);
+        setBounds(0, 0, 16, 32);
         setRegion(iron);
     }
 
     public void defineShip() {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(32 , 32);
+        bdef.position.set(16 * 2 , 16 * 3 + 8);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(5);
+        shape.setRadius(8);
         fdef.shape = shape;
         b2body.createFixture(fdef);
         b2body.setGravityScale(0);

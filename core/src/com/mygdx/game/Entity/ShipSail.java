@@ -9,23 +9,23 @@ import com.mygdx.game.Screens.FightScreen;
 
 import java.awt.geom.RectangularShape;
 
-public class ShipCorma extends Sprite {
+public class ShipSail extends Sprite {
     public World world;
     public Body b2body;
     private TextureRegion ship;
 
-    public ShipCorma(World world, FightScreen fightScreen) {
-        super(fightScreen.getAtlas().findRegion("front_body"));
+    public ShipSail(World world, FightScreen fightScreen) {
+        super(fightScreen.getAtlas().findRegion("sail"));
         this.world = world;
         defineShip();
-        TextureRegion iron = new TextureRegion(getTexture(), 160, 0, 32, 32);
-        setBounds(0, 0, 32, 32);
+        TextureRegion iron = new TextureRegion(getTexture(), 80, 0, 48, 32);
+        setBounds(0, 0, 16 * 4, 32);
         setRegion(iron);
     }
 
     public void defineShip() {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(16 * 5 + 7 , 16 * 3 + 8);
+        bdef.position.set(16 * 2 , 16 * 5 + 8);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
         FixtureDef fdef = new FixtureDef();
