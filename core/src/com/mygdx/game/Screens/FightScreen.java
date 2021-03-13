@@ -10,16 +10,14 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.Entity.ShipBack;
 import com.mygdx.game.Entity.EmptyScreen;
-import com.mygdx.game.Entity.PlayerShipForFight;
+import com.mygdx.game.Entity.ShipBody;
 import com.mygdx.game.Scenes.FightHud;
 import com.mygdx.game.Strategy;
 
@@ -38,7 +36,8 @@ public class FightScreen extends AbstractMechanicsScreen {
     private World world;
     private Box2DDebugRenderer b2dr;
 
-    private PlayerShipForFight player;
+    private ShipBody shipBody;
+    private ShipBack shipBack;
 
     public FightScreen(Strategy strategy, int i, EmptyScreen emptyScreen) {
         super(strategy, i, emptyScreen);
@@ -54,7 +53,8 @@ public class FightScreen extends AbstractMechanicsScreen {
         gameCamera.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
         world = new World(new Vector2(0, -10), true);
         b2dr = new Box2DDebugRenderer();
-        player = new PlayerShipForFight(world, this);
+        shipBody = new ShipBody(world, this);
+        shipBack = new ShipBack(world, this);
 
         BodyDef bdef = new BodyDef();
         PolygonShape shape = new PolygonShape();
@@ -85,11 +85,13 @@ public class FightScreen extends AbstractMechanicsScreen {
     }
 
     public void handleInput(float dt) {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 10) {
-            player.b2body.applyLinearImpulse(new Vector2(10f, 0), player.b2body.getWorldCenter(), true);
+        if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT) && shipBody.b2body.getLinearVelocity().x <= 10) {
+            shipBody.b2body.applyLinearImpulse(new Vector2(10f, 0), shipBody.b2body.getWorldCenter(), true);
+            shipBack.b2body.applyLinearImpulse(new Vector2(10f, 0), shipBack.b2body.getWorldCenter(), true);
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -10) {
-            player.b2body.applyLinearImpulse(new Vector2(-10f, 0), player.b2body.getWorldCenter(), true);
+        if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT) && shipBody.b2body.getLinearVelocity().x >= -10) {
+            shipBody.b2body.applyLinearImpulse(new Vector2(-10f, 0), shipBody.b2body.getWorldCenter(), true);
+            shipBack.b2body.applyLinearImpulse(new Vector2(-10f, 0), shipBack.b2body.getWorldCenter(), true);
         }
     }
 
@@ -97,8 +99,9 @@ public class FightScreen extends AbstractMechanicsScreen {
         handleInput(dt);
         world.step(1/60f, 6, 2);
 
-        player.update(dt);
-        gameCamera.position.x = player.b2body.getPosition().x;
+        shipBody.update(dt);
+        shipBack.update(dt);
+        gameCamera.position.x = shipBody.b2body.getPosition().x;
         gameCamera.update();
         renderer.setView(gameCamera);
     }
@@ -114,7 +117,8 @@ public class FightScreen extends AbstractMechanicsScreen {
 
         game.batch.setProjectionMatrix(gameCamera.combined);
         game.batch.begin();
-        player.draw(game.batch);
+        shipBody.draw(game.batch);
+        shipBack.draw(game.batch);
         game.batch.end();
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);

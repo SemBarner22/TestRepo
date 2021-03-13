@@ -9,18 +9,18 @@ import com.mygdx.game.Screens.FightScreen;
 
 import java.awt.geom.RectangularShape;
 
-public class PlayerShipForFight extends Sprite {
+public class ShipMachta extends Sprite {
     public World world;
     public Body b2body;
     private TextureRegion ship;
 
-    public PlayerShipForFight(World world, FightScreen fightScreen) {
+    public ShipMachta(World world, FightScreen fightScreen) {
         super(fightScreen.getAtlas().findRegion("iron"));
         this.world = world;
         defineShip();
-        ship = new TextureRegion(getTexture(), 55, 1, 16, 16);
-        setBounds(0, 0, 16, 16);
-        setRegion(ship);
+        TextureRegion iron = new TextureRegion(getTexture(), 55, 1, 16, 16);
+        setBounds(0, 0, 100, 32);
+        setRegion(iron);
     }
 
     public void defineShip() {
@@ -33,6 +33,7 @@ public class PlayerShipForFight extends Sprite {
         shape.setRadius(5);
         fdef.shape = shape;
         b2body.createFixture(fdef);
+        b2body.setGravityScale(0);
     }
 
     public void update(float dt) {
