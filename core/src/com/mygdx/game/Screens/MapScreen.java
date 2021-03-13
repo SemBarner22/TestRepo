@@ -248,4 +248,5 @@ public class MapScreen extends AbstractMechanicsScreen {
         gameCamera.update();
         renderer.setView(gameCamera);
     }
+
 }
