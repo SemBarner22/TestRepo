@@ -18,14 +18,14 @@ public class ShipSail extends Sprite {
         super(fightScreen.getAtlas().findRegion("sail"));
         this.world = world;
         defineShip();
-        TextureRegion iron = new TextureRegion(getTexture(), 80, 0, 48, 32);
+        TextureRegion iron = new TextureRegion(getTexture(), 144, 0, 47, 32);
         setBounds(0, 0, 16 * 4, 32);
         setRegion(iron);
     }
 
     public void defineShip() {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(16 * 2 , 16 * 5 + 8);
+        bdef.position.set(16 * 2 , 16 * 4 + 8);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
         FixtureDef fdef = new FixtureDef();

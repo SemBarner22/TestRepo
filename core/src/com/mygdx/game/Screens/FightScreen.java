@@ -42,7 +42,7 @@ public class FightScreen extends AbstractMechanicsScreen {
 
     public FightScreen(Strategy strategy, int i, EmptyScreen emptyScreen) {
         super(strategy, i, emptyScreen);
-        atlas = new TextureAtlas("new_ship_set.txt");
+        atlas = new TextureAtlas("new_ship_set_2.txt");
         this.game = strategy;
         gameCamera = new OrthographicCamera();
         gamePort = new StretchViewport(Strategy.V_WIDTH, Strategy.V_HEIGHT, gameCamera);
@@ -130,10 +130,11 @@ public class FightScreen extends AbstractMechanicsScreen {
 
         game.batch.setProjectionMatrix(gameCamera.combined);
         game.batch.begin();
+        shipSail.draw(game.batch);
         shipBack.draw(game.batch);
         shipCorma.draw(game.batch);
-        shipSail.draw(game.batch);
         shipMachta.draw(game.batch);
+        shipSail.draw(game.batch);
         shipBody.draw(game.batch);
         game.batch.end();
 

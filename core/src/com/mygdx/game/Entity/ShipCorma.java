@@ -18,19 +18,19 @@ public class ShipCorma extends Sprite {
         super(fightScreen.getAtlas().findRegion("front_body"));
         this.world = world;
         defineShip();
-        TextureRegion iron = new TextureRegion(getTexture(), 160, 0, 32, 32);
+        TextureRegion iron = new TextureRegion(getTexture(), 32, 0, 32, 32);
         setBounds(0, 0, 32, 32);
         setRegion(iron);
     }
 
     public void defineShip() {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(16 * 5 + 7 , 16 * 3 + 8);
+        bdef.position.set(16 * 5 , 16 * 3 + 8);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(8);
+        shape.setRadius(0);
         fdef.shape = shape;
         b2body.createFixture(fdef);
         b2body.setGravityScale(0);

@@ -19,7 +19,7 @@ public class ShipMachta extends Sprite {
         this.world = world;
         defineShip();
         TextureRegion iron = new TextureRegion(getTexture(), 192, 0, 16, 32);
-        setBounds(0, 0, 16, 32);
+        setBounds(0, 0, 8, 16);
         setRegion(iron);
     }
 
@@ -30,7 +30,7 @@ public class ShipMachta extends Sprite {
         b2body = world.createBody(bdef);
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(8);
+        shape.setRadius(0);
         fdef.shape = shape;
         b2body.createFixture(fdef);
         b2body.setGravityScale(0);

@@ -18,19 +18,19 @@ public class ShipBack extends Sprite {
         super(fightScreen.getAtlas().findRegion("back_body"));
         this.world = world;
         defineShip();
-        TextureRegion iron = new TextureRegion(getTexture(), 128, 0, 32, 32);
-        setBounds(0, 0, 32, 32);
+        TextureRegion iron = new TextureRegion(getTexture(), 0, 0, 32, 30);
+        setBounds(0, 0, 20, 16);
         setRegion(iron);
     }
 
     public void defineShip() {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(-7 , 55);
+        bdef.position.set(-7 , 48);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(8);
+        shape.setRadius(0);
         fdef.shape = shape;
         b2body.createFixture(fdef);
         b2body.setGravityScale(0);
