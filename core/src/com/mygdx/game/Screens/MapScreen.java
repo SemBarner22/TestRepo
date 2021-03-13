@@ -34,6 +34,7 @@ import com.mygdx.game.Config;
 import com.mygdx.game.Entity.EmptyScreen;
 import com.mygdx.game.Entity.PlayerShipForMap;
 import com.mygdx.game.Strategy;
+import com.mygdx.game.WorldContactListener;
 
 public class MapScreen extends AbstractMechanicsScreen {
 
@@ -59,6 +60,7 @@ public class MapScreen extends AbstractMechanicsScreen {
     private PlayerShipForMap player;
     private World world;
     private Box2DDebugRenderer b2dr;
+//    private final Rectangle rectangle;
 
     public MapScreen(Strategy strategy, int i, EmptyScreen emptyScreen) {
         super(strategy, i, emptyScreen);
@@ -164,24 +166,46 @@ public class MapScreen extends AbstractMechanicsScreen {
 
         BodyDef bdef = new BodyDef();
 
-        for (MapLayer layer : map.getLayers()) {
-            for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
-                Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
-                bdef.type = BodyDef.BodyType.StaticBody;
-                bdef.position.set(rectangle.x + rectangle.width / 2, rectangle.getY() + rectangle.getHeight() / 2);
 
-                body = world.createBody(bdef);
-
-                shape.setAsBox(rectangle.getWidth() / 2, rectangle.getHeight());
-
-                fdef.shape = shape;
-                body.createFixture(fdef);
+        for (MapObject object : map.getLayers().get("ports").getObjects().getByType(RectangleMapObject.class)) {
 
 
+            Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
+            bdef.type = BodyDef.BodyType.StaticBody;
+            bdef.position.set(rectangle.x + rectangle.width / 2, rectangle.getY() + rectangle.getHeight() / 2);
 
-            }
+            sr.begin(ShapeRenderer.ShapeType.Filled);
+            sr.rect(bdef.position.x, bdef.position.y, rectangle.width, rectangle.height);
+            sr.end();
+
+            System.out.println("keeoeoko");
+            body = world.createBody(bdef);
+
+            shape.setAsBox(rectangle.getWidth() / 2, rectangle.getHeight());
+
+            fdef.shape = shape;
+            body.createFixture(fdef).setUserData("ports");
         }
 
+        for (MapLayer layer : map.getLayers()) {
+            if (!layer.getName().equals("ports")) {
+                for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
+                    Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
+                    bdef.type = BodyDef.BodyType.StaticBody;
+                    bdef.position.set(rectangle.x + rectangle.width / 2, rectangle.getY() + rectangle.getHeight() / 2);
+
+                    body = world.createBody(bdef);
+
+                    shape.setAsBox(rectangle.getWidth() / 2, rectangle.getHeight());
+
+                    fdef.shape = shape;
+                    body.createFixture(fdef);
+
+
+                }
+            }
+        }
+        world.setContactListener(new WorldContactListener());
 
 //        for (MapLayer layer : map.getLayers()) {
 //            for (MapObject object : layer.getObjects()) {
@@ -281,7 +305,8 @@ public class MapScreen extends AbstractMechanicsScreen {
         batch = game.batch;
         game.batch.setProjectionMatrix(gameCamera.combined);
         game.batch.begin();
-        renderer.render(new int[]{0, 1, 2, 3, 4, 5, 6, 7});
+//        renderer.render(new int[]{0, 1, 2, 3, 4, 5, 6, 7}
+        renderer.render();
         game.batch.end();
 
         b2dr.render(world, gameCamera.combined);
