@@ -15,22 +15,22 @@ public class ShipBack extends Sprite {
     private TextureRegion ship;
 
     public ShipBack(World world, FightScreen fightScreen) {
-        super(fightScreen.getAtlas().findRegion("iron"));
+        super(fightScreen.getAtlas().findRegion("back_body"));
         this.world = world;
         defineShip();
-        TextureRegion iron = new TextureRegion(getTexture(), 55, 1, 16, 16);
-        setBounds(100, 100, 100, 32);
+        TextureRegion iron = new TextureRegion(getTexture(), 0, 0, 32, 30);
+        setBounds(0, 0, 20, 16);
         setRegion(iron);
     }
 
     public void defineShip() {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(100 , 100);
+        bdef.position.set(-7 , 48);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(5);
+        shape.setRadius(0);
         fdef.shape = shape;
         b2body.createFixture(fdef);
         b2body.setGravityScale(0);
