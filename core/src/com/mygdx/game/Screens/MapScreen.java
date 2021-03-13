@@ -17,6 +17,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Polygon;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -106,7 +107,7 @@ public class MapScreen extends AbstractMechanicsScreen {
 //            }
 //        });
         up.addListener(new InputListener() {
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 if (player.b2body.getLinearVelocity().y == 0) {
                     player.b2body.applyLinearImpulse(new Vector2(0, 8f), player.b2body.getWorldCenter(), true);
                 }
@@ -162,21 +163,41 @@ public class MapScreen extends AbstractMechanicsScreen {
 
 
         BodyDef bdef = new BodyDef();
+
         for (MapLayer layer : map.getLayers()) {
-            for (MapObject object : layer.getObjects()) {
-                PolygonShape polygon = new PolygonShape();
-                float[] vertices = ((PolygonMapObject) object).getPolygon().getTransformedVertices();
-                float[] worldVertices = new float[vertices.length];
-
-                for (int u = 0; u < vertices.length; u++) {
-                    worldVertices[u] = vertices[u] / Strategy.PPM;
-                }
-
-                polygon.set(worldVertices);
+            for (MapObject object : layer.getObjects().getByType(RectangleMapObject.class)) {
+                Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
                 bdef.type = BodyDef.BodyType.StaticBody;
+                bdef.position.set(rectangle.x + rectangle.width / 2, rectangle.getY() + rectangle.getHeight() / 2);
+
                 body = world.createBody(bdef);
+
+                shape.setAsBox(rectangle.getWidth() / 2, rectangle.getHeight());
+
                 fdef.shape = shape;
                 body.createFixture(fdef);
+
+
+
+            }
+        }
+
+
+//        for (MapLayer layer : map.getLayers()) {
+//            for (MapObject object : layer.getObjects()) {
+//                PolygonShape polygon = new PolygonShape();
+//                float[] vertices = ((PolygonMapObject) object).getPolygon().getTransformedVertices();
+//                float[] worldVertices = new float[vertices.length];
+//
+//                for (int u = 0; u < vertices.length; u++) {
+//                    worldVertices[u] = vertices[u] / Strategy.PPM;
+//                }
+//
+//                polygon.set(worldVertices);
+//                bdef.type = BodyDef.BodyType.StaticBody;
+//                body = world.createBody(bdef);
+//                fdef.shape = shape;
+//                body.createFixture(fdef);
 
 //                Polygon polygon = ((PolygonMapObject) object).getPolygon();
 //
@@ -190,8 +211,8 @@ public class MapScreen extends AbstractMechanicsScreen {
 //                shape.set(polygon.);
 //                fdef.shape = shape;
 //                body.createFixture(fdef);
-            }
-        }
+//            }
+//        }
     }
 
     public TextureAtlas getAtlas() {
