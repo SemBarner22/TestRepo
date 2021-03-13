@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -27,6 +28,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Config;
 import com.mygdx.game.Entity.EmptyScreen;
 import com.mygdx.game.Entity.PlayerShipForFight;
+import com.mygdx.game.Entity.PlayerShipForMap;
 import com.mygdx.game.Strategy;
 
 public class MapScreen extends AbstractMechanicsScreen {
@@ -42,6 +44,7 @@ public class MapScreen extends AbstractMechanicsScreen {
     Texture texture;
     private OrthographicCamera gameCamera;
     private Viewport gamePort;
+    private TextureAtlas atlas;
 
 
 
@@ -50,13 +53,14 @@ public class MapScreen extends AbstractMechanicsScreen {
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
 
-    private PlayerShipForFight player;
+    private PlayerShipForMap player;
     private World world;
     private Box2DDebugRenderer b2dr;
 
     public MapScreen(Strategy strategy, int i, EmptyScreen emptyScreen) {
         super(strategy, i, emptyScreen);
         this.config = strategy.config;
+        atlas = new TextureAtlas("ship_set.txt");
         this.game = strategy;
         gameCamera = new OrthographicCamera();
         gamePort = new FitViewport(Strategy.V_WIDTH, Strategy.V_HEIGHT, gameCamera);
@@ -84,7 +88,7 @@ public class MapScreen extends AbstractMechanicsScreen {
 
         BodyDef bdef = new BodyDef();
 
-        player = new PlayerShipForFight(world);
+        player = new PlayerShipForMap(world, this);
         stage = new Stage();
         Skin skin = new Skin(Gdx.files.internal("uiskin.json"));
         Gdx.input.setInputProcessor(stage);
@@ -139,6 +143,10 @@ public class MapScreen extends AbstractMechanicsScreen {
             }
         });
         stage.addActor(navTable);
+    }
+
+    public TextureAtlas getAtlas() {
+        return atlas;
     }
 //
 //    @Override
