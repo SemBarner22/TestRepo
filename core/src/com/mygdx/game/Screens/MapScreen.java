@@ -279,16 +279,16 @@ public class MapScreen extends AbstractMechanicsScreen {
 //    }
     public void handleInput(float dt) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP) && player.b2body.getLinearVelocity().y == 0) {
-            player.b2body.applyLinearImpulse(new Vector2(0, 8f), player.b2body.getWorldCenter(), true);
+            player.b2body.applyLinearImpulse(new Vector2(0, 4 * 8f), player.b2body.getWorldCenter(), true);
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN) && player.b2body.getLinearVelocity().y == 0) {
-            player.b2body.applyLinearImpulse(new Vector2(0, -8f), player.b2body.getWorldCenter(), true);
+            player.b2body.applyLinearImpulse(new Vector2(0, 4 * -8f), player.b2body.getWorldCenter(), true);
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x == 0) {
-            player.b2body.applyLinearImpulse(new Vector2(8f, 0), player.b2body.getWorldCenter(), true);
+            player.b2body.applyLinearImpulse(new Vector2(4 * 8f, 0), player.b2body.getWorldCenter(), true);
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x == 0) {
-            player.b2body.applyLinearImpulse(new Vector2(-8f, 0), player.b2body.getWorldCenter(), true);
+            player.b2body.applyLinearImpulse(new Vector2(4 * -8f, 0), player.b2body.getWorldCenter(), true);
         }
     }
 
