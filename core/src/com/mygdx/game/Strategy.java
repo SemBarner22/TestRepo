@@ -30,7 +30,7 @@ public class Strategy extends Game {
 	int col_width;
 	public static int V_WIDTH;
 	public static int V_HEIGHT;
-	public static final float PPM = 100;
+	public static final float PPM = 16;
 	public SpriteBatch batch;
 
 	public Strategy(Config config) {
@@ -99,7 +99,7 @@ public class Strategy extends Game {
 
 	@Override
 	public void render () {
-		Gdx.gl.glClearColor(0, 0, 1, 1);
+		Gdx.gl.glClearColor(0.36f, 0.72f, 0.96f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		super.render();
 		batch.begin();

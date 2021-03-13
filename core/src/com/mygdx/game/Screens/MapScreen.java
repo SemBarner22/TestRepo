@@ -46,8 +46,6 @@ public class MapScreen extends AbstractMechanicsScreen {
     private Viewport gamePort;
     private TextureAtlas atlas;
 
-
-
     private ShapeRenderer sr;
     private TmxMapLoader mapLoader;
     private TiledMap map;
@@ -60,35 +58,27 @@ public class MapScreen extends AbstractMechanicsScreen {
     public MapScreen(Strategy strategy, int i, EmptyScreen emptyScreen) {
         super(strategy, i, emptyScreen);
         this.config = strategy.config;
+
         atlas = new TextureAtlas("ship_set.txt");
+
         this.game = strategy;
+
         gameCamera = new OrthographicCamera();
-        gamePort = new FitViewport(Strategy.V_WIDTH, Strategy.V_HEIGHT, gameCamera);
+
+        gamePort = new FitViewport(Strategy.V_WIDTH / Strategy.PPM, Strategy.V_HEIGHT / Strategy.PPM, gameCamera);
+
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("main_map.tmx");
-        renderer = new OrthogonalTiledMapRenderer(map, 1);
+        renderer = new OrthogonalTiledMapRenderer(map, 1 / Strategy.PPM);
         sr = new ShapeRenderer();
         sr.setColor(Color.CYAN);
-        gameCamera.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
+        gameCamera.position.set((gamePort.getWorldWidth() / 2) / Strategy.PPM, (gamePort.getWorldHeight() / 2) / Strategy.PPM, 0);
 
         row_height = Gdx.graphics.getWidth() / 12;
-//        gameCamera.translate(300, 300);
-
-//
-//        sr = new ShapeRenderer();
-//        sr.setColor(Color.CYAN);
-//        Gdx.gl.glLineWidth(3);
-//        gameCamera.translate(-300, -300);
-//        renderer.setView(gameCamera);
-//        gameCamera.translate(300, 300);
-//        gameCamera.position.set( gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
-//        gameCamera.position.set(-100, -100,0 );
         world = new World(new Vector2(0, -10), true);
         b2dr = new Box2DDebugRenderer();
 
-        BodyDef bdef = new BodyDef();
-
-        player = new PlayerShipForMap(world, this);
+        player = new PlayerShipForMap(world);
         stage = new Stage();
         Skin skin = new Skin(Gdx.files.internal("uiskin.json"));
         Gdx.input.setInputProcessor(stage);
@@ -156,7 +146,7 @@ public class MapScreen extends AbstractMechanicsScreen {
 
 
 
-//        InputListener stopTouchDown = new InputListener() {
+//        InputListener stopToucfhDown = new InputListener() {
 //            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 //                event.stop();
 //                return false;
@@ -199,39 +189,33 @@ public class MapScreen extends AbstractMechanicsScreen {
 //            gameCamera.translate(0, -10);
 //        }
 //    }
-public void handleInput(float dt) {
-    if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-        player.b2body.applyLinearImpulse(new Vector2(0, 40f), player.b2body.getWorldCenter(), true);
+    public void handleInput(float dt) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.UP) && player.b2body.getLinearVelocity().y == 0) {
+            player.b2body.applyLinearImpulse(new Vector2(0, 8f), player.b2body.getWorldCenter(), true);
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN) && player.b2body.getLinearVelocity().y == 0) {
+            player.b2body.applyLinearImpulse(new Vector2(0, -8f), player.b2body.getWorldCenter(), true);
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x == 0) {
+            player.b2body.applyLinearImpulse(new Vector2(8f, 0), player.b2body.getWorldCenter(), true);
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x == 0) {
+            player.b2body.applyLinearImpulse(new Vector2(-8f, 0), player.b2body.getWorldCenter(), true);
+        }
     }
-    if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2) {
-        player.b2body.applyLinearImpulse(new Vector2(40f, 0), player.b2body.getWorldCenter(), true);
-    }
-    if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -2) {
-        player.b2body.applyLinearImpulse(new Vector2(-40f, 0), player.b2body.getWorldCenter(), true);
-    }
-}
 
 
     @Override
     public void render(float delta) {
         update(delta);
-        Gdx.gl.glClearColor(1, 0, 0, 1);
+        Gdx.gl.glClearColor(0.36f, 0.72f, 0.96f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-//        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
-//        hud.stage.draw();
 
         renderer.render();
         b2dr.render(world, gameCamera.combined);
-
-
-//        handleInput(delta);
         renderer.setView(gameCamera);
         batch = game.batch;
         game.batch.setProjectionMatrix(gameCamera.combined);
-//        sr.setProjectionMatrix(gameCamera.combined);
-//        sr.setColor(Color.CYAN);
-//        sr.setProjectionMatrix(gameCamera.combined);
         game.batch.begin();
         renderer.render(new int[]{0, 1, 2, 3, 4, 5, 6, 7});
         game.batch.end();
@@ -259,8 +243,9 @@ public void handleInput(float dt) {
 
     public void update(float dt) {
         handleInput(dt);
-        world.step(1/60f, 6, 2);
+        world.step(1 / 60f, 6, 2);
         gameCamera.position.x = player.b2body.getPosition().x;
+        gameCamera.position.y = player.b2body.getPosition().y;
         gameCamera.update();
         renderer.setView(gameCamera);
     }
