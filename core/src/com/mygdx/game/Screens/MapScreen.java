@@ -1,7 +1,5 @@
 package com.mygdx.game.Screens;
 
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -15,8 +13,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.AbstractMechanicsScreen;
-import com.mygdx.game.EmptyScreen;
+import com.mygdx.game.Entity.EmptyScreen;
 import com.mygdx.game.Strategy;
 
 public class MapScreen extends AbstractMechanicsScreen {
