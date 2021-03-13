@@ -6,32 +6,49 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.AbstractMechanicsScreen;
 import com.mygdx.game.EmptyScreen;
+import com.mygdx.game.Scenes.FightHud;
 import com.mygdx.game.Strategy;
 
 public class FightScreen extends AbstractMechanicsScreen {
 
     private Strategy game;
-    Texture texture;
     private OrthographicCamera gameCamera;
     private Viewport gamePort;
+    private FightHud hud;
+
+    private TmxMapLoader mapLoader;
+    private TiledMap map;
+    private OrthogonalTiledMapRenderer renderer;
 
     public FightScreen(Strategy strategy, int i, EmptyScreen emptyScreen) {
         super(strategy, i, emptyScreen);
         this.game = strategy;
-        texture = new Texture("badlogic.jpg");
         gameCamera = new OrthographicCamera();
-        gamePort = new ScreenViewport(gameCamera);
+        gamePort = new FitViewport(800, 480, gameCamera);
+        hud = new FightHud(game.batch);
+        mapLoader = new TmxMapLoader();
+        map = mapLoader.load("fight.tmx");
+        renderer = new OrthogonalTiledMapRenderer(map);
+
+        gameCamera.position.set(gamePort.getScreenWidth() / 2, gamePort.getScreenHeight() / 2, 0);
     }
 
     @Override
     public void show() {
 
+    }
+
+    public void update(float dt) {
+        
     }
 
     @Override
@@ -40,7 +57,7 @@ public class FightScreen extends AbstractMechanicsScreen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.setProjectionMatrix(gameCamera.combined);
         game.batch.begin();
-        game.batch.draw(texture, 0, 0);
+        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         game.batch.end();
     }
 
