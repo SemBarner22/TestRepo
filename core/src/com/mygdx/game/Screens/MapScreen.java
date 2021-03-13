@@ -60,7 +60,6 @@ public class MapScreen extends AbstractMechanicsScreen {
     private PlayerShipForMap player;
     private World world;
     private Box2DDebugRenderer b2dr;
-//    private final Rectangle rectangle;
 
     public MapScreen(Strategy strategy, int i, EmptyScreen emptyScreen) {
         super(strategy, i, emptyScreen);
@@ -279,16 +278,16 @@ public class MapScreen extends AbstractMechanicsScreen {
 //    }
     public void handleInput(float dt) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP) && player.b2body.getLinearVelocity().y == 0) {
-            player.b2body.applyLinearImpulse(new Vector2(0, 4 * 8f), player.b2body.getWorldCenter(), true);
+            player.b2body.applyLinearImpulse(new Vector2(0, 8f), player.b2body.getWorldCenter(), true);
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN) && player.b2body.getLinearVelocity().y == 0) {
-            player.b2body.applyLinearImpulse(new Vector2(0, 4 * -8f), player.b2body.getWorldCenter(), true);
+            player.b2body.applyLinearImpulse(new Vector2(0, -8f), player.b2body.getWorldCenter(), true);
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x == 0) {
-            player.b2body.applyLinearImpulse(new Vector2(4 * 8f, 0), player.b2body.getWorldCenter(), true);
+            player.b2body.applyLinearImpulse(new Vector2(8f, 0), player.b2body.getWorldCenter(), true);
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x == 0) {
-            player.b2body.applyLinearImpulse(new Vector2(4 * -8f, 0), player.b2body.getWorldCenter(), true);
+            player.b2body.applyLinearImpulse(new Vector2(-8f, 0), player.b2body.getWorldCenter(), true);
         }
     }
 
@@ -301,15 +300,17 @@ public class MapScreen extends AbstractMechanicsScreen {
 
         renderer.render();
         b2dr.render(world, gameCamera.combined);
-        renderer.setView(gameCamera);
-        batch = game.batch;
+
         game.batch.setProjectionMatrix(gameCamera.combined);
         game.batch.begin();
-//        renderer.render(new int[]{0, 1, 2, 3, 4, 5, 6, 7}
+        player.draw(game.batch);
         renderer.render();
         game.batch.end();
 
+        renderer.setView(gameCamera);
+        batch = game.batch;
         b2dr.render(world, gameCamera.combined);
+
         stage.act();
         stage.draw();
     }
@@ -330,6 +331,7 @@ public class MapScreen extends AbstractMechanicsScreen {
     public void update(float dt) {
         handleInput(dt);
         world.step(1 / 60f, 6, 2);
+        player.update(dt);
         gameCamera.position.x = player.b2body.getPosition().x;
         gameCamera.position.y = player.b2body.getPosition().y;
         gameCamera.update();
