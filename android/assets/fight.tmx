@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="2021.02.15" orientation="orthogonal" renderorder="right-down" width="80" height="14" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="19">
+ <tileset firstgid="1" name="water_tileset" tilewidth="16" tileheight="16" tilecount="36" columns="6">
+  <image source="water_tileset.png" width="96" height="96"/>
+ </tileset>
+ <layer id="1" name="background" width="80" height="14">
+  <data encoding="base64" compression="zlib">
+   eJztzTEKACAMA0B/oIv+/6niWuhWHeQOQiFD2hoAAAD8rxdnhPs6N/5mm6efxVnhvs6Nv9nm6TcX0wtL
+  </data>
+ </layer>
+ <objectgroup id="5" name="water" visible="0">
+  <object id="17" x="0" y="192" width="1280" height="32"/>
+  <object id="18" x="999.5" y="46.5"/>
+ </objectgroup>
+</map>
