@@ -28,7 +28,6 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Config;
 import com.mygdx.game.Entity.EmptyScreen;
-import com.mygdx.game.Entity.PlayerShipForFight;
 import com.mygdx.game.Entity.PlayerShipForMap;
 import com.mygdx.game.Strategy;
 
