@@ -28,19 +28,27 @@ public class Strategy extends Game {
 	int Help_Guides = 12;
 	int row_height;
 	int col_width;
-	public static final int V_WIDTH = 400;
-	public static final int V_HEIGHT = 208;
+	public static int V_WIDTH;
+	public static int V_HEIGHT;
 	public static final float PPM = 100;
 	public SpriteBatch batch;
 
 	public Strategy(Config config) {
 		this.config = config;
+		if (config.desktop()) {
+			V_WIDTH = 456;
+			V_HEIGHT = 256;
+		} else {
+//			V_WIDTH = ;
+//			V_HEIGHT = 256;
+		}
 	}
 
 	@Override
 	public void resize(int width, int height) {
-		row_height = width / 12;
-		col_width = height / 12;
+//		row_height = width / 12;
+//		col_width = height / 12;
+		Gdx.graphics.setWindowedMode(width, height);
 		stage.getViewport().update(width, height);
 		//super.resize(width, height);
 	}
