@@ -21,6 +21,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -75,7 +76,7 @@ public class MapScreen extends AbstractMechanicsScreen {
         gameCamera.position.set((gamePort.getWorldWidth() / 2) / Strategy.PPM, (gamePort.getWorldHeight() / 2) / Strategy.PPM, 0);
 
         row_height = Gdx.graphics.getWidth() / 12;
-        world = new World(new Vector2(0, -10), true);
+        world = new World(new Vector2(0, 0), true);
         b2dr = new Box2DDebugRenderer();
 
         player = new PlayerShipForMap(world);
@@ -87,9 +88,7 @@ public class MapScreen extends AbstractMechanicsScreen {
         stage.addActor(container);
         container.setFillParent(true);
 
-
         Table navTable = new Table();
-//        table.add(new Label("wfwewe", skin));
 
         navTable.bottom().pad(100).defaults().expandX();
         TextButton up = new TextButton("Up", skin);
@@ -173,22 +172,6 @@ public class MapScreen extends AbstractMechanicsScreen {
 //        }
 
 //    }
-
-//    public void handleInput(float dt) {
-//        if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
-//            gameCamera.translate(0, 10);
-//        }
-//        if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
-//            System.out.println("ewfwfef");
-//            gameCamera.translate(10, 0);
-//        }
-//        if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
-//            gameCamera.translate(-10, 0);
-//        }
-//        if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
-//            gameCamera.translate(0, -10);
-//        }
-//    }
     public void handleInput(float dt) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP) && player.b2body.getLinearVelocity().y == 0) {
             player.b2body.applyLinearImpulse(new Vector2(0, 8f), player.b2body.getWorldCenter(), true);
@@ -227,10 +210,7 @@ public class MapScreen extends AbstractMechanicsScreen {
 
     @Override
     public void resize(int width, int height) {
-//        gameCamera.viewportWidth = width;
-//        gameCamera.viewportHeight = height;
-        gamePort.update(height, height);
-//        stage.getViewport().update(width, height, true);
+        gamePort.update(width, height);
         gameCamera.update();
     }
 

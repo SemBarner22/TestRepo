@@ -20,7 +20,7 @@ public class PlayerShipForMap extends Sprite {
 
     private void defineShip() {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(8 / Strategy.PPM, 8 / Strategy.PPM);
+        bdef.position.set((55 * 16 + 8) / Strategy.PPM, (13 * 16 + 8) / Strategy.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
