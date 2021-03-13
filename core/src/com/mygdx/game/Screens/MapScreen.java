@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Entity.EmptyScreen;
@@ -36,14 +37,13 @@ public class MapScreen extends AbstractMechanicsScreen {
         this.game = strategy;
         texture = new Texture("badlogic.jpg");
         gameCamera = new OrthographicCamera();
-        gamePort = new ScreenViewport(gameCamera);
-
+        gamePort = new FillViewport(Strategy.V_WIDTH, Strategy.V_HEIGHT, gameCamera);
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("main_map.tmx");
         renderer = new OrthogonalTiledMapRenderer(map);
         renderer.setView(gameCamera);
 
-        gameCamera.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
+        gameCamera.position.set( gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
         world = new World(new Vector2(0, 0), true);
         b2dr = new Box2DDebugRenderer();
 

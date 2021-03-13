@@ -9,10 +9,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.mygdx.game.Config;
 import com.mygdx.game.Strategy;
 
 public class AbstractMechanicsScreen implements Screen {
     Strategy strategy;
+    Config config;
     protected Screen previousScreen;
     int curPlayer;
     protected Stage stage;
@@ -24,6 +26,7 @@ public class AbstractMechanicsScreen implements Screen {
         this.strategy = strategy;
         this.curPlayer = curPlayer;
         this.previousScreen = previousScreen;
+        this.config = strategy.config;
     }
 
     @Override

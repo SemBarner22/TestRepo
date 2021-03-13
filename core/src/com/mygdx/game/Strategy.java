@@ -18,6 +18,7 @@ import com.mygdx.game.Screens.FightScreen;
 import com.mygdx.game.Screens.MapScreen;
 
 public class Strategy extends Game {
+	public Config config;
 	ImageButton start;
 	ImageButton exit;
 	Texture startButtonTexture;
@@ -30,6 +31,10 @@ public class Strategy extends Game {
 	public static final int V_WIDTH = 400;
 	public static final int V_HEIGHT = 208;
 	public SpriteBatch batch;
+
+	public Strategy(Config config) {
+		this.config = config;
+	}
 
 	@Override
 	public void resize(int width, int height) {
