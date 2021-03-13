@@ -2,11 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Screen;
 
-public class MapScreen implements Screen {
-
-    public MapScreen(Strategy strategy) {
-    }
-
+public class EmptyScreen implements Screen {
     @Override
     public void show() {
 
