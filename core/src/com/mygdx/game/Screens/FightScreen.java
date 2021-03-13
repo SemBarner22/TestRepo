@@ -10,17 +10,20 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.AbstractMechanicsScreen;
+import com.mygdx.game.EmptyScreen;
 import com.mygdx.game.Strategy;
 
-public class FightScreen implements Screen {
+public class FightScreen extends AbstractMechanicsScreen {
 
     private Strategy game;
     Texture texture;
     private OrthographicCamera gameCamera;
     private Viewport gamePort;
 
-    public FightScreen(Strategy game) {
-        this.game = game;
+    public FightScreen(Strategy strategy, int i, EmptyScreen emptyScreen) {
+        super(strategy, i, emptyScreen);
+        this.game = strategy;
         texture = new Texture("badlogic.jpg");
         gameCamera = new OrthographicCamera();
         gamePort = new ScreenViewport(gameCamera);
