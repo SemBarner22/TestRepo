@@ -6,6 +6,8 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Strategy;
@@ -21,7 +23,7 @@ public class FightScreen implements Screen {
         this.game = game;
         texture = new Texture("badlogic.jpg");
         gameCamera = new OrthographicCamera();
-        gamePort = new StretchViewport(800, 480, gameCamera);
+        gamePort = new ScreenViewport(gameCamera);
     }
 
     @Override
