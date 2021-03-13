@@ -3,9 +3,15 @@
  <tileset firstgid="1" name="water_tileset" tilewidth="16" tileheight="16" tilecount="36" columns="6">
   <image source="water_tileset.png" width="96" height="96"/>
  </tileset>
+ <tileset firstgid="37" name="horizont" tilewidth="16" tileheight="16" tilecount="1" columns="1">
+  <image source="tiles/ship/horizont.png" width="16" height="16"/>
+ </tileset>
+ <tileset firstgid="38" name="sky" tilewidth="16" tileheight="16" tilecount="1" columns="1">
+  <image source="tiles/ship/sky.png" width="16" height="16"/>
+ </tileset>
  <layer id="1" name="background" width="80" height="14">
   <data encoding="base64" compression="zlib">
-   eJztzTEKACAMA0B/oIv+/6niWuhWHeQOQiFD2hoAAAD8rxdnhPs6N/5mm6efxVnhvs6Nv9nm6TcX0wtL
+   eJztzTEOACAIQ1FuoIveQO5/RMNKwiQQhz+8NOnQqogoAAAAAOB7B09GsumyW8VvtGn9SrZddqv4jTatv42ymXs=
   </data>
  </layer>
  <objectgroup id="5" name="water" visible="0">
