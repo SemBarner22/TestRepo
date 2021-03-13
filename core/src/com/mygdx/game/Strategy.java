@@ -30,6 +30,7 @@ public class Strategy extends Game {
 	int col_width;
 	public static final int V_WIDTH = 400;
 	public static final int V_HEIGHT = 208;
+	public static final float PPM = 100;
 	public SpriteBatch batch;
 
 	public Strategy(Config config) {

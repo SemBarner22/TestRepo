@@ -1,6 +1,7 @@
 package com.mygdx.game.Screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.MapObject;
@@ -33,21 +34,22 @@ public class FightScreen extends AbstractMechanicsScreen {
     private World world;
     private Box2DDebugRenderer b2dr;
 
-    private PlayerShipForFight ship;
+    private PlayerShipForFight player;
 
     public FightScreen(Strategy strategy, int i, EmptyScreen emptyScreen) {
         super(strategy, i, emptyScreen);
         this.game = strategy;
         gameCamera = new OrthographicCamera();
-        gamePort = new FitViewport(800, 480, gameCamera);
+        gamePort = new FitViewport(Strategy.V_WIDTH / Strategy.PPM, Strategy.V_HEIGHT / Strategy.PPM, gameCamera);
         hud = new FightHud(game.batch);
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("fight.tmx");
-        renderer = new OrthogonalTiledMapRenderer(map);
+        renderer = new OrthogonalTiledMapRenderer(map, 1 / Strategy.PPM);
 
         gameCamera.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
-        world = new World(new Vector2(0, 0), true);
+        world = new World(new Vector2(0, -10), true);
         b2dr = new Box2DDebugRenderer();
+        player = new PlayerShipForFight(world);
 
         BodyDef bdef = new BodyDef();
         PolygonShape shape = new PolygonShape();
@@ -58,7 +60,7 @@ public class FightScreen extends AbstractMechanicsScreen {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set(rect.getX() + rect.getWidth() / 2, rect.getY() + rect.getHeight() / 2);
+            bdef.position.set((rect.getX() + rect.getWidth() / 2) / Strategy.PPM, (rect.getY() + rect.getHeight() / 2) / Strategy.PPM);
 
             body = world.createBody(bdef);
 
@@ -74,14 +76,21 @@ public class FightScreen extends AbstractMechanicsScreen {
     }
 
     public void handleInput(float dt) {
-        if (Gdx.input.isTouched()) {
-            gameCamera.position.x += 100 * dt;
+        if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+            player.b2body.applyLinearImpulse(new Vector2(0, 4f), player.b2body.getWorldCenter(), true);
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2) {
+            player.b2body.applyLinearImpulse(new Vector2(0.1f, 0), player.b2body.getWorldCenter(), true);
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -2) {
+            player.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), player.b2body.getWorldCenter(), true);
         }
     }
 
     public void update(float dt) {
         handleInput(dt);
         world.step(1/60f, 6, 2);
+        gameCamera.position.x = player.b2body.getPosition().x;
         gameCamera.update();
         renderer.setView(gameCamera);
     }
