@@ -45,7 +45,7 @@ public class FightScreen extends AbstractMechanicsScreen {
         map = mapLoader.load("fight.tmx");
         renderer = new OrthogonalTiledMapRenderer(map);
 
-        gameCamera.position.set(gamePort.getScreenWidth() / 2, gamePort.getScreenHeight() / 2, 0);
+        gameCamera.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
         world = new World(new Vector2(0, 0), true);
         b2dr = new Box2DDebugRenderer();
 
