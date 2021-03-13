@@ -1,8 +1,9 @@
 package com.mygdx.game.Entity;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.*;
 
-public class PlayerShipForFight {
+public class PlayerShipForFight extends Sprite {
     public World world;
     public Body b2body;
 

@@ -15,6 +15,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Entity.EmptyScreen;
+import com.mygdx.game.Entity.PlayerShipForFight;
 import com.mygdx.game.Scenes.FightHud;
 import com.mygdx.game.Strategy;
 
@@ -31,6 +32,8 @@ public class FightScreen extends AbstractMechanicsScreen {
 
     private World world;
     private Box2DDebugRenderer b2dr;
+
+    private PlayerShipForFight ship;
 
     public FightScreen(Strategy strategy, int i, EmptyScreen emptyScreen) {
         super(strategy, i, emptyScreen);
@@ -86,8 +89,11 @@ public class FightScreen extends AbstractMechanicsScreen {
     @Override
     public void render(float delta) {
         update(delta);
-        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+        hud.stage.draw();
 
         renderer.render();
         b2dr.render(world, gameCamera.combined);
