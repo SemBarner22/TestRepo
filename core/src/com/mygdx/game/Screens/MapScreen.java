@@ -9,13 +9,16 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.PolygonMapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -33,6 +36,7 @@ import com.mygdx.game.Strategy;
 
 public class MapScreen extends AbstractMechanicsScreen {
 
+    public char goal = 'O';
 
     private Stage stage;
     private Table container;
@@ -103,7 +107,6 @@ public class MapScreen extends AbstractMechanicsScreen {
 //        });
         up.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("FUK");
                 if (player.b2body.getLinearVelocity().y == 0) {
                     player.b2body.applyLinearImpulse(new Vector2(0, 8f), player.b2body.getWorldCenter(), true);
                 }
@@ -151,6 +154,44 @@ public class MapScreen extends AbstractMechanicsScreen {
             }
         });
         stage.addActor(navTable);
+
+
+        PolygonShape shape = new PolygonShape();
+        FixtureDef fdef = new FixtureDef();
+        Body body;
+
+
+        BodyDef bdef = new BodyDef();
+        for (MapLayer layer : map.getLayers()) {
+            for (MapObject object : layer.getObjects()) {
+                PolygonShape polygon = new PolygonShape();
+                float[] vertices = ((PolygonMapObject) object).getPolygon().getTransformedVertices();
+                float[] worldVertices = new float[vertices.length];
+
+                for (int u = 0; u < vertices.length; u++) {
+                    worldVertices[u] = vertices[u] / Strategy.PPM;
+                }
+
+                polygon.set(worldVertices);
+                bdef.type = BodyDef.BodyType.StaticBody;
+                body = world.createBody(bdef);
+                fdef.shape = shape;
+                body.createFixture(fdef);
+
+//                Polygon polygon = ((PolygonMapObject) object).getPolygon();
+//
+//                bdef.type = BodyDef.BodyType.StaticBody;
+////                bdef.position.;
+//
+////                bdef.position.
+//                body = world.createBody(bdef);
+//
+////                shape.set(polygon.getVertices());
+//                shape.set(polygon.);
+//                fdef.shape = shape;
+//                body.createFixture(fdef);
+            }
+        }
     }
 
     public TextureAtlas getAtlas() {
