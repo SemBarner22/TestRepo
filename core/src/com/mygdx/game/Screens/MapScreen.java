@@ -89,11 +89,25 @@ public class MapScreen extends AbstractMechanicsScreen {
 
         Table navTable = new Table();
 
-        navTable.bottom().pad(100).defaults().expandX();
+        navTable.bottom().pad(10).defaults();
+        navTable.left().pad(10).defaults();
         TextButton up = new TextButton("Up", skin);
         navTable.add(up);
-        up.addListener(new ClickListener() {
-            public void clicked(InputEvent event, float x, float y) {
+//        up.addListener(new ClickListener() {
+//            public void clicked(InputEvent event, float x, float y) {
+//                System.out.println("FUK");
+//                if (player.b2body.getLinearVelocity().y == 0) {
+//                    player.b2body.applyLinearImpulse(new Vector2(0, 8f), player.b2body.getWorldCenter(), true);
+//                }
+//            }
+//        });
+        up.addListener(new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                System.out.println("FUK");
+                if (player.b2body.getLinearVelocity().y == 0) {
+                    player.b2body.applyLinearImpulse(new Vector2(0, 8f), player.b2body.getWorldCenter(), true);
+                }
+                return true;
             }
         });
 
@@ -102,7 +116,9 @@ public class MapScreen extends AbstractMechanicsScreen {
         navTable.add(left);
         left.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-
+                if (player.b2body.getLinearVelocity().x == 0) {
+                    player.b2body.applyLinearImpulse(new Vector2(-8f, 0), player.b2body.getWorldCenter(), true);
+                }
             }
         });
 
@@ -118,7 +134,9 @@ public class MapScreen extends AbstractMechanicsScreen {
         navTable.add(right);
         right.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-
+                if (player.b2body.getLinearVelocity().x == 0) {
+                    player.b2body.applyLinearImpulse(new Vector2(8f, 0), player.b2body.getWorldCenter(), true);
+                }
             }
         });
 
@@ -127,7 +145,9 @@ public class MapScreen extends AbstractMechanicsScreen {
         navTable.add(down);
         down.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-
+                if (player.b2body.getLinearVelocity().y == 0) {
+                    player.b2body.applyLinearImpulse(new Vector2(0, -8f), player.b2body.getWorldCenter(), true);
+                }
             }
         });
         stage.addActor(navTable);
@@ -228,5 +248,4 @@ public class MapScreen extends AbstractMechanicsScreen {
         gameCamera.update();
         renderer.setView(gameCamera);
     }
-
 }
