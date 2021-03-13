@@ -1,6 +1,7 @@
-package com.mygdx.game;
+package com.mygdx.game.Screens;
 
 import com.badlogic.gdx.Screen;
+import com.mygdx.game.Strategy;
 
 public class MapScreen implements Screen {
 
