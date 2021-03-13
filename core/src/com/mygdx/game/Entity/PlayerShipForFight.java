@@ -15,12 +15,12 @@ public class PlayerShipForFight extends Sprite {
 
     public void defineShip() {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(32 / Strategy.PPM, 32 / Strategy.PPM);
+        bdef.position.set(32 , 32);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(5 / Strategy.PPM);
+        shape.setRadius(5);
 
         fdef.shape = shape;
         b2body.createFixture(fdef);

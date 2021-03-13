@@ -14,6 +14,8 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Entity.EmptyScreen;
 import com.mygdx.game.Entity.PlayerShipForFight;
@@ -40,11 +42,11 @@ public class FightScreen extends AbstractMechanicsScreen {
         super(strategy, i, emptyScreen);
         this.game = strategy;
         gameCamera = new OrthographicCamera();
-        gamePort = new FitViewport(Strategy.V_WIDTH / Strategy.PPM, Strategy.V_HEIGHT / Strategy.PPM, gameCamera);
+        gamePort = new StretchViewport(Strategy.V_WIDTH, Strategy.V_HEIGHT, gameCamera);
         hud = new FightHud(game.batch);
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("fight.tmx");
-        renderer = new OrthogonalTiledMapRenderer(map, 1 / Strategy.PPM);
+        renderer = new OrthogonalTiledMapRenderer(map, 1);
 
         gameCamera.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
         world = new World(new Vector2(0, -10), true);
@@ -60,7 +62,7 @@ public class FightScreen extends AbstractMechanicsScreen {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set((rect.getX() + rect.getWidth() / 2) / Strategy.PPM, (rect.getY() + rect.getHeight() / 2) / Strategy.PPM);
+            bdef.position.set((rect.getX() + rect.getWidth() / 2) , (rect.getY() + rect.getHeight() / 2) );
 
             body = world.createBody(bdef);
 
@@ -91,6 +93,7 @@ public class FightScreen extends AbstractMechanicsScreen {
         handleInput(dt);
         world.step(1/60f, 6, 2);
         gameCamera.position.x = player.b2body.getPosition().x;
+        gameCamera.position.y = player.b2body.getPosition().y;
         gameCamera.update();
         renderer.setView(gameCamera);
     }
