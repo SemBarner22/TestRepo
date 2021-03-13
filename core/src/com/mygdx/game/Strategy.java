@@ -67,7 +67,7 @@ public class Strategy extends Game {
 			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 				Gdx.app.log("my app", "Pressed"); //** Usually used to start Game, etc. **//
 				stage.clear();
-				setScreen(new MapScreen(Strategy.this));
+				setScreen(new MapScreen(Strategy.this, 0, new EmptyScreen()));
 				return true;
 
 			}
