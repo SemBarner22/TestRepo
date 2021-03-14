@@ -14,6 +14,8 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Entity.*;
@@ -30,6 +32,9 @@ public class FightScreen extends AbstractMechanicsScreen {
     private FightHud hud;
     private TextureAtlas atlas1;
     private TextureAtlas atlas2;
+
+    static String mission = "aaaaa";
+    public Label missionLabel;
 
     private TmxMapLoader mapLoader;
     private TiledMap map;
@@ -109,7 +114,18 @@ public class FightScreen extends AbstractMechanicsScreen {
 
     @Override
     public void show() {
+        super.show();
+        Table table = new Table();
+        table.top();
+        table.setFillParent(true);
 
+
+        missionLabel = new Label(mission, skin);
+
+        table.add(missionLabel).expandX().padTop(10);
+        table.row();
+
+        stage.addActor(table);
     }
 
     public void handleInput(float dt) {
@@ -207,6 +223,10 @@ public class FightScreen extends AbstractMechanicsScreen {
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
 
+        missionLabel.setText(mission);
+
+        stage.act();
+        stage.draw();
     }
 
     @Override

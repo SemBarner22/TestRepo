@@ -357,7 +357,6 @@ public class MapScreen extends AbstractMechanicsScreen {
         Gdx.gl.glClearColor(0.36f, 0.72f, 0.96f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-
         missionLabel.setText(mission);
         coordinateLabel.setText(formatPlayerCoordinate());
 
