@@ -211,7 +211,11 @@ public class MapScreen extends AbstractMechanicsScreen {
     }
 
     private String formatPlayerCoordinate() {
-        return String.format("X: %f, Y: %f", player.getX(), player.getY());
+        return String.format(
+                "X: %d, Y: %d",
+                Math.round(player.getX()),
+                Math.round(player.getY())
+        );
     }
 
     public TextureAtlas getAtlas() {
