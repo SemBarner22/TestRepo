@@ -2,6 +2,7 @@ package com.mygdx.game.Screens;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.Strategy;
@@ -36,14 +37,14 @@ public class ChooseGoalScreen extends AbstractMechanicsScreen {
             a = "A";
             b = "B";
         }
-        Table table = new Table();
-        final ScrollPane scroll = new ScrollPane(table, skin);
-        table.pad(100).defaults().expandX().space(4);
-        container.add(scroll).expand().fill().colspan(4);
+//        Table table = new Table();
+//        stage.addActor(table);
+//        table.pad(100).defaults().expandX().space(4);
+        container.add(new Label("Where would you go next?", skin)).center().padLeft(100).expandX();
         container.row();
-        container.add(backButton).bottom().left();
         Button investment = new TextButton(a, skin);
-        container.add(investment).bottom().padLeft(100);
+        container.add(investment).left().padLeft(100);
+//        container.add(investment).bottom().padLeft(100);
         final String finalA = a;
         final String finalB = b;
         investment.addListener(new ClickListener() {
@@ -53,7 +54,8 @@ public class ChooseGoalScreen extends AbstractMechanicsScreen {
             }
         });
         Button test = new TextButton(b, skin);
-        container.add(test).bottom().padLeft(200);
+        container.add(test).right().padRight(100);
+//        container.add(test).bottom().padLeft(200);
         test.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 strategy.goal = finalB.charAt(0) - 'A' + 1;
