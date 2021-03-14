@@ -24,11 +24,12 @@ public class EnemyStrategyPatrol implements EnemyStrategy {
     @Override
     public Vector2 nextMove(float k) {
         Vector2 ret = null;
+        k /= 2;
         switch (cur) {
             case R: {
                 ret = new Vector2(Strategy.MOVE_MUL * k, 0);
                 steps += stepCost * k;
-                if (steps == range) {
+                if (steps >= range) {
                     steps = 0;
                     cur = Direction.U;
                 }
@@ -37,7 +38,7 @@ public class EnemyStrategyPatrol implements EnemyStrategy {
             case U: {
                 ret = new Vector2(0, Strategy.MOVE_MUL * k);
                 steps += stepCost * k;
-                if (steps == range) {
+                if (steps >= range) {
                     steps = 0;
                     cur = Direction.L;
                 }
@@ -45,8 +46,8 @@ public class EnemyStrategyPatrol implements EnemyStrategy {
             }
             case L: {
                 ret = new Vector2(-Strategy.MOVE_MUL * k, 0);
-                steps += stepCost * k;;
-                if (steps == range) {
+                steps += stepCost * k;
+                if (steps >= range) {
                     steps = 0;
                     cur = Direction.D;
                 }
@@ -55,7 +56,7 @@ public class EnemyStrategyPatrol implements EnemyStrategy {
             case D: {
                 ret = new Vector2(0, -Strategy.MOVE_MUL * k);
                 steps += stepCost * k;
-                if (steps == range) {
+                if (steps >= range) {
                     steps = 0;
                     cur = Direction.R;
                 }

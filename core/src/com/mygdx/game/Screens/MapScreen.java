@@ -234,6 +234,7 @@ public class MapScreen extends AbstractMechanicsScreen {
         up.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 if (player.b2body.getLinearVelocity().y == 0) {
+                    movePlayer(new Vector2(0, Strategy.MOVE_MUL * 1f));
                     player.b2body.applyLinearImpulse(new Vector2(0, Strategy.MOVE_MUL * 1f), player.b2body.getWorldCenter(), true);
                     player.updateTexture(PlayerShipForMap.Direction.U);
                     moveEnemies();
