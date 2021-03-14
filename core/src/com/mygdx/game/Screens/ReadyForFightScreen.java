@@ -30,7 +30,7 @@ public class ReadyForFightScreen extends AbstractMechanicsScreen {
                 return true;
             }
         });
-        container.add(ready).width(150).height(150);;
+        container.add(ready).width(450).height(150);;
         if (!config.desktop()) {
             ready.scaleBy(20);
         }
