@@ -70,6 +70,9 @@ public class FightScreen extends AbstractMechanicsScreen {
     private float angleMax = (float) (Math.PI / 4);
     private float angleMin = 0;
 
+    public float timerForNextScreen = 0;
+    public Screen nextScreen = null;
+
     public FightScreen(Strategy strategy, int i, Screen emptyScreen) {
         super(strategy, i, emptyScreen);
         atlas1 = new TextureAtlas("new_ship_set_2.txt");
@@ -227,13 +230,17 @@ public class FightScreen extends AbstractMechanicsScreen {
         if (timerAngle < 0) {
             timerAngle += 90;
         }
-        if (!isFireEnemy && timer < -1) {
+        if (!isFireEnemy && timer < -1 && nextScreen != null) {
             isFireEnemy = true;
             timer = 10;
             float dist = shipBodyEnemy.b2body.getPosition().x - shipCormaPlayer.b2body.getPosition().x;
             coreEnemy = new Core(world, this, shipCormaEnemy.b2body.getPosition().x, shipCormaEnemy.b2body.getPosition().y, Math.asin(dist / 1000), atlas3, -1);
         }
-        handleInput(dt);
+        if (nextScreen != null) {
+            timerForNextScreen -= dt;
+        } else {
+            handleInput(dt);
+        }
         world.step(1/60f, 6, 2);
 
 
@@ -272,6 +279,9 @@ public class FightScreen extends AbstractMechanicsScreen {
 
     @Override
     public void render(float delta) {
+        if (nextScreen != null && timerForNextScreen < 0) {
+            strategy.setScreen(nextScreen);
+        }
         update(delta);
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -304,7 +314,11 @@ public class FightScreen extends AbstractMechanicsScreen {
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
 
-        missionLabel.setText((int)timerAngle + "");
+        if (nextScreen != null) {
+            missionLabel.setText("Watch demolishing until the next scene");
+        } else {
+            missionLabel.setText("" + (int) timerAngle);
+        }
 
         stage.act();
         stage.draw();
