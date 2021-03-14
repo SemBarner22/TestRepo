@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="left-down" width="128" height="128" tilewidth="16" tileheight="16" infinite="0" nextlayerid="21" nextobjectid="275">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="left-down" width="128" height="128" tilewidth="16" tileheight="16" infinite="0" nextlayerid="21" nextobjectid="276">
  <tileset firstgid="1" source="SeaAndForest.tsx"/>
  <tileset firstgid="324" source="all_tiles_set.tsx"/>
  <layer id="1" name="sea" width="128" height="128">
@@ -154,12 +154,6 @@
   </object>
  </objectgroup>
  <objectgroup id="15" name="ports">
-  <object id="29" x="1792" y="1792">
-   <properties>
-    <property name="port" type="int" value="2"/>
-   </properties>
-   <polygon points="0,0 64,0 64,16 0,16"/>
-  </object>
   <object id="81" x="880" y="1840" width="32" height="16">
    <properties>
     <property name="port" type="int" value="1"/>
@@ -173,6 +167,11 @@
   <object id="274" x="1776" y="224" width="80" height="16">
    <properties>
     <property name="port" type="int" value="4"/>
+   </properties>
+  </object>
+  <object id="275" x="1792" y="1792" width="64" height="16">
+   <properties>
+    <property name="port" type="int" value="2"/>
    </properties>
   </object>
  </objectgroup>
