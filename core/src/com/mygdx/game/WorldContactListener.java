@@ -21,8 +21,8 @@ public class WorldContactListener implements ContactListener {
         Fixture fixtureA = contact.getFixtureA();
         Fixture fixtureB = contact.getFixtureB();
 
-        if (fixtureA.getUserData().equals("playerMap") || fixtureB.getUserData().equals("playerMap")) {
-            Fixture player = fixtureA.getUserData().equals("playerMap") ? fixtureA : fixtureB;
+        if ("playerMap".equals(fixtureA.getUserData()) || "playerMap".equals(fixtureB.getUserData())) {
+            Fixture player = "playerMap".equals(fixtureA.getUserData()) ? fixtureA : fixtureB;
             Fixture object = player == fixtureA ? fixtureB : fixtureA;
             if (object.getUserData().equals("ports")) {
                 strategy.setScreen(new ChooseGoalScreen(strategy, 0, screen));

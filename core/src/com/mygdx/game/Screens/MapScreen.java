@@ -32,9 +32,15 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Config;
 import com.mygdx.game.Entity.EmptyScreen;
+import com.mygdx.game.Entity.EnemyShipForMap;
+import com.mygdx.game.Entity.EnemyStrategy;
+import com.mygdx.game.Entity.EnemyStrategyPatrol;
+import com.mygdx.game.Entity.EnemyStrategyTransit;
 import com.mygdx.game.Entity.PlayerShipForMap;
 import com.mygdx.game.Strategy;
 import com.mygdx.game.WorldContactListener;
+
+import java.util.ArrayList;
 
 public class MapScreen extends AbstractMechanicsScreen {
 
@@ -58,6 +64,8 @@ public class MapScreen extends AbstractMechanicsScreen {
     private OrthogonalTiledMapRenderer renderer;
 
     private PlayerShipForMap player;
+    private ArrayList<EnemyShipForMap> enemies;
+    private int enemiesCount = 0;
     private World world;
     private Box2DDebugRenderer b2dr;
 
@@ -85,6 +93,26 @@ public class MapScreen extends AbstractMechanicsScreen {
         b2dr = new Box2DDebugRenderer();
 
         player = new PlayerShipForMap(world);
+        enemies = new ArrayList<>();
+        for (int u = 0; u < enemiesCount; u++) {
+            boolean transitStrategy = Math.random() < 0.5;
+            EnemyStrategy enemyStrategy;
+            float x, y;
+            y = (float) (16 + Math.random() * 96);
+            if (transitStrategy) {
+                boolean right = Math.random() < 0.5;
+                x = right ? 128 * 16 - 1 : 0;
+                enemyStrategy = new EnemyStrategyTransit(right);
+            } else {
+                enemyStrategy = new EnemyStrategyPatrol();
+                x = (float) Math.random() * 92;
+            }
+            x = (float) Math.floor(x);
+            y = (float) Math.floor(y);
+            enemies.add(new EnemyShipForMap(world, enemyStrategy, x, y));
+            System.out.format("Spawned %s enemy at %f %f%n", transitStrategy ? "transit" : "patrol", x, y);
+        }
+
         stage = new Stage();
         Skin skin = new Skin(Gdx.files.internal("uiskin.json"));
         Gdx.input.setInputProcessor(stage);
@@ -99,14 +127,7 @@ public class MapScreen extends AbstractMechanicsScreen {
         navTable.left().pad(10).defaults();
         TextButton up = new TextButton("Up", skin);
         navTable.add(up);
-//        up.addListener(new ClickListener() {
-//            public void clicked(InputEvent event, float x, float y) {
-//                System.out.println("FUK");
-//                if (player.b2body.getLinearVelocity().y == 0) {
-//                    player.b2body.applyLinearImpulse(new Vector2(0, 8f), player.b2body.getWorldCenter(), true);
-//                }
-//            }
-//        });
+
         up.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 if (player.b2body.getLinearVelocity().y == 0) {
@@ -276,18 +297,28 @@ public class MapScreen extends AbstractMechanicsScreen {
 //        }
 
 //    }
+    public void moveEnemies() {
+        for (EnemyShipForMap enemy : enemies) {
+            enemy.b2body.applyLinearImpulse(enemy.strategy.nextMove(), enemy.b2body.getWorldCenter(), true);
+        }
+    }
+
     public void handleInput(float dt) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP) && player.b2body.getLinearVelocity().y == 0) {
             player.b2body.applyLinearImpulse(new Vector2(0, 8f), player.b2body.getWorldCenter(), true);
+            moveEnemies();
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN) && player.b2body.getLinearVelocity().y == 0) {
             player.b2body.applyLinearImpulse(new Vector2(0, -8f), player.b2body.getWorldCenter(), true);
+            moveEnemies();
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x == 0) {
             player.b2body.applyLinearImpulse(new Vector2(8f, 0), player.b2body.getWorldCenter(), true);
+            moveEnemies();
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x == 0) {
             player.b2body.applyLinearImpulse(new Vector2(-8f, 0), player.b2body.getWorldCenter(), true);
+            moveEnemies();
         }
     }
 
@@ -304,7 +335,9 @@ public class MapScreen extends AbstractMechanicsScreen {
         game.batch.setProjectionMatrix(gameCamera.combined);
         game.batch.begin();
         player.draw(game.batch);
-        renderer.render();
+        for (EnemyShipForMap enemy : enemies) {
+            enemy.draw(game.batch);
+        }
         game.batch.end();
 
         renderer.setView(gameCamera);
@@ -332,6 +365,9 @@ public class MapScreen extends AbstractMechanicsScreen {
         handleInput(dt);
         world.step(1 / 60f, 6, 2);
         player.update(dt);
+        for (EnemyShipForMap enemy : enemies) {
+            enemy.update(dt);
+        }
         gameCamera.position.x = player.b2body.getPosition().x;
         gameCamera.position.y = player.b2body.getPosition().y;
         gameCamera.update();
