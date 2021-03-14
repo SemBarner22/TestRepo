@@ -33,7 +33,7 @@ public class FightScreen extends AbstractMechanicsScreen {
     private TextureAtlas atlas1;
     private TextureAtlas atlas2;
 
-    static String mission = "aaaaa";
+    private int angle = 0;
     public Label missionLabel;
 
     private TmxMapLoader mapLoader;
@@ -59,6 +59,7 @@ public class FightScreen extends AbstractMechanicsScreen {
     private boolean isFirePlayer;
     private boolean isFireEnemy;
     private float timer = 3;
+    private float timerAngle = 0;
     private Core coreEnemy;
     private float angleMax = (float) (Math.PI / 4);
     private float angleMin = 0;
@@ -120,7 +121,7 @@ public class FightScreen extends AbstractMechanicsScreen {
         table.setFillParent(true);
 
 
-        missionLabel = new Label(mission, skin);
+        missionLabel = new Label("" + timerAngle, skin);
 
         table.add(missionLabel).expandX().padTop(10);
         table.row();
@@ -131,7 +132,7 @@ public class FightScreen extends AbstractMechanicsScreen {
     public void handleInput(float dt) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && !isFirePlayer) {
             isFirePlayer = true;
-            corePlayer = new Core(world, this, shipBodyPlayer.b2body.getPosition().x, shipBodyPlayer.b2body.getPosition().y, Math.PI / 4, new TextureAtlas("core.txt"), 1);
+            corePlayer = new Core(world, this, shipBodyPlayer.b2body.getPosition().x, shipBodyPlayer.b2body.getPosition().y, timerAngle * Math.PI / 180, new TextureAtlas("core.txt"), 1);
         }
         float move = 5f;
         if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT) && shipBodyPlayer.b2body.getLinearVelocity().x <= 50) {
@@ -151,11 +152,14 @@ public class FightScreen extends AbstractMechanicsScreen {
     }
 
     public void update(float dt) {
+        timerAngle -= dt * 50;
         timer -= dt;
-        System.out.println(timer);
+        if (timerAngle < 0) {
+            timerAngle += 90;
+        }
         if (!isFireEnemy && timer < 0) {
             isFireEnemy = true;
-            timer = 2;
+            timer = 10;
             float dist = shipBodyEnemy.b2body.getPosition().x - shipCormaPlayer.b2body.getPosition().x;
             Random rnd = new Random();
             float start = (rnd.nextInt() % 10) / 100.f;
@@ -225,7 +229,7 @@ public class FightScreen extends AbstractMechanicsScreen {
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
 
-        missionLabel.setText(mission);
+        missionLabel.setText((int)timerAngle + "");
 
         stage.act();
         stage.draw();
