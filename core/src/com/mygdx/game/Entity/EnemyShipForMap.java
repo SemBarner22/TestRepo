@@ -20,18 +20,18 @@ public class EnemyShipForMap extends Sprite {
     public EnemyShipForMap(World world, EnemyStrategy strategy, float x, float y) {
         this.world = world;
         this.strategy = strategy;
-        this.x = x;
-        this.y = y;
-        defineShip();
+//        defineShip(x, y);
         setBounds(0, 0, 16 / Strategy.PPM, 16 / Strategy.PPM);
         setRegion(new Texture("sprites/enemy_ship.png"));
     }
 
     public void update(float dt) {
-        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+        if (enabled) {
+            setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+        }
     }
 
-    private void defineShip() {
+    public void defineShip(float x, float y) {
         BodyDef bdef = new BodyDef();
         bdef.position.set((x * 16 + 8) / Strategy.PPM, (y * 16 + 8) / Strategy.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;

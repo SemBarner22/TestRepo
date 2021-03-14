@@ -446,28 +446,34 @@ public class MapScreen extends AbstractMechanicsScreen {
 
     public void rearrageEnemies() {
         for (EnemyShipForMap enemy : enemies) {
+            if (!enemy.enabled) {
+                continue;
+            }
             enemy.enabled = false;
             enemy.strategy = null;
-            enemy.x = 256 / Strategy.PPM;
-            enemy.y = 256 / Strategy.PPM;
+            world.destroyBody(enemy.b2body);
         }
         int u = 0;
         for (int i = 0; i < gameLevel.patrolCount; i++, u++) {
             EnemyShipForMap enemy = enemies.get(u);
-            enemy.x = (float) Math.floor(Math.random() * 128);
-            enemy.y = (float) Math.floor(16 + Math.random() * (128 - 16 * 2));
+            float x = (float) Math.floor(Math.random() * 128);
+            float y = (float) Math.floor(16 + Math.random() * (128 - 16 * 2));
+//            enemy.teleport(x, y);
+            enemy.defineShip(x, y);
             enemy.strategy = new EnemyStrategyPatrol();
             enemy.enabled = true;
-            System.out.format("Spawned patrol enemy at %f %f%n", enemy.x, enemy.y);
+            System.out.format("Spawned patrol enemy at %f %f%n", x, y);
         }
         for (GameLevel.TransitGroup group : gameLevel.transitGroups) {
             for (int i = 0; i < group.groupSize; i++, u++) {
                 EnemyShipForMap enemy = enemies.get(u);
-                enemy.x = group.right ? 0 : 127;
-                enemy.y = (float) Math.floor(group.groupMeanY + Math.random() * group.groupSize / 2);
+                float x = group.right ? 0 : 127;
+                float y = (float) Math.floor(group.groupMeanY + Math.random() * group.groupSize / 2);
+//                enemy.teleport(x, y);
+                enemy.defineShip(x, y);
                 enemy.strategy = new EnemyStrategyTransit(group.right);
                 enemy.enabled = true;
-                System.out.format("Spawned transit enemy at %f %f%n", enemy.x, enemy.y);
+                System.out.format("Spawned transit enemy at %f %f%n", x, y);
             }
         }
     }
