@@ -111,7 +111,7 @@ public class FightScreen extends AbstractMechanicsScreen {
             fdef.shape = shape;
             body.createFixture(fdef);
         }
-        world.setContactListener(new FightScreenContactListener(world, strategy, this));
+        world.setContactListener(new FightScreenContactListener(world, strategy, this, emptyScreen));
     }
 
     @Override
