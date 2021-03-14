@@ -40,7 +40,15 @@ public class FightScreenContactListener implements ContactListener {
             }
             //strategy.setScreen(screen2);
         } else if (("core 1".equals(fixtureA.getUserData()) || "core 1".equals(fixtureB.getUserData()))) {
-            System.out.println("no win");
+            if (("ship 1".equals(fixtureA.getUserData()) || "ship 1".equals(fixtureB.getUserData()))) {
+                System.out.println("2 win");
+                if (screen.nextScreen == null) {
+                    Strategy.manager.get("music/sounds/babax.mp3", Sound.class).play();
+                    screen.nextScreen = new GameOverScreen(strategy, 0, screen);
+                    screen.timerForNextScreen = 5;
+                    //strategy.setScreen(new GameOverScreen(strategy, 0, screen));
+                }
+            }
         } else if (("ship 1".equals(fixtureA.getUserData()) || "ship 1".equals(fixtureB.getUserData()))) {
             System.out.println("2 win");
             if (screen.nextScreen == null) {
