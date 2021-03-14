@@ -36,6 +36,7 @@ public class FightScreen extends AbstractMechanicsScreen {
     private FightHud hud;
     private TextureAtlas atlas1;
     private TextureAtlas atlas2;
+    private TextureAtlas atlas3;
 
     private int angle = 0;
     public Label missionLabel;
@@ -73,6 +74,7 @@ public class FightScreen extends AbstractMechanicsScreen {
         super(strategy, i, emptyScreen);
         atlas1 = new TextureAtlas("new_ship_set_2.txt");
         atlas2 = new TextureAtlas("new_ship_set_2_rev.txt");
+        atlas3 = new TextureAtlas("core.txt");
         this.game = strategy;
         gameCamera = new OrthographicCamera();
         gamePort = new FitViewport(Strategy.V_WIDTH, Strategy.V_HEIGHT, gameCamera);
@@ -179,9 +181,10 @@ public class FightScreen extends AbstractMechanicsScreen {
     }
 
     public void handleInput(float dt) {
+        System.out.println(isFireEnemy + " " + timer + " " + 1);
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && !isFirePlayer) {
             isFirePlayer = true;
-            corePlayer = new Core(world, this, shipBodyPlayer.b2body.getPosition().x, shipBodyPlayer.b2body.getPosition().y, timerAngle * Math.PI / 180, new TextureAtlas("core.txt"), 1);
+            corePlayer = new Core(world, this, shipBodyPlayer.b2body.getPosition().x, shipBodyPlayer.b2body.getPosition().y, timerAngle * Math.PI / 180, atlas3, 1);
         }
         float move = 5f;
         if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT) && shipBodyPlayer.b2body.getLinearVelocity().x <= 50) {
@@ -206,13 +209,12 @@ public class FightScreen extends AbstractMechanicsScreen {
         if (timerAngle < 0) {
             timerAngle += 90;
         }
+        System.out.println(isFireEnemy + " " + timer);
         if (!isFireEnemy && timer < -1) {
             isFireEnemy = true;
             timer = 10;
             float dist = shipBodyEnemy.b2body.getPosition().x - shipCormaPlayer.b2body.getPosition().x;
-            Random rnd = new Random();
-            float start = (rnd.nextInt() % 10) / 100.f;
-            coreEnemy = new Core(world, this, shipCormaEnemy.b2body.getPosition().x, shipCormaEnemy.b2body.getPosition().y, Math.asin(dist / 1000 + start), new TextureAtlas("core.txt"), -1);
+            coreEnemy = new Core(world, this, shipCormaEnemy.b2body.getPosition().x, shipCormaEnemy.b2body.getPosition().y, Math.asin(dist / 1000), atlas3, -1);
         }
         handleInput(dt);
         world.step(1/60f, 6, 2);
@@ -229,6 +231,7 @@ public class FightScreen extends AbstractMechanicsScreen {
         shipCormaEnemy.update(dt);
         if (isFireEnemy) {
             isFireEnemy = coreEnemy.update(dt);
+            coreEnemy.b2body.setActive(isFireEnemy);
             if (!isFireEnemy) {
                 world.destroyBody(coreEnemy.b2body);
             }
