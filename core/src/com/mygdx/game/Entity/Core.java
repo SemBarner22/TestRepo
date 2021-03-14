@@ -18,16 +18,16 @@ public class Core extends Sprite {
     private TextureRegion ship;
     private boolean destroyed;
 
-    public Core(World world, FightScreen fightScreen, float x, float y, double angle) {
-        super(fightScreen.getAtlas().findRegion("back_body"));
+    public Core(World world, FightScreen fightScreen, float x, float y, double angle, TextureAtlas atlas) {
+        super(atlas.findRegion("back_body"));
         this.world = world;
         destroyed = false;
         defineShip(x, y);
         TextureRegion iron = new TextureRegion(getTexture(), 0, 0, 4, 4);
         setBounds(0, 0, 4, 4);
         setRegion(iron);
-        b2body.setGravityScale(4);
-        float impulse = 100;
+        b2body.setGravityScale(2);
+        float impulse = 10000;
         this.b2body.applyLinearImpulse(new Vector2(impulse * (float) Math.cos(angle), impulse * (float) Math.sin(angle)), b2body.getWorldCenter(), true);
     }
 

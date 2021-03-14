@@ -25,7 +25,8 @@ public class FightScreen extends AbstractMechanicsScreen {
     private OrthographicCamera gameCamera;
     private Viewport gamePort;
     private FightHud hud;
-    private TextureAtlas atlas;
+    private TextureAtlas atlas1;
+    private TextureAtlas atlas2;
 
     private TmxMapLoader mapLoader;
     private TiledMap map;
@@ -51,7 +52,8 @@ public class FightScreen extends AbstractMechanicsScreen {
 
     public FightScreen(Strategy strategy, int i, EmptyScreen emptyScreen) {
         super(strategy, i, emptyScreen);
-        atlas = new TextureAtlas("new_ship_set_2.txt");
+        atlas1 = new TextureAtlas("new_ship_set_2.txt");
+        atlas2 = new TextureAtlas("new_ship_set_2_rev.txt");
         this.game = strategy;
         gameCamera = new OrthographicCamera();
         gamePort = new StretchViewport(Strategy.V_WIDTH, Strategy.V_HEIGHT, gameCamera);
@@ -63,17 +65,17 @@ public class FightScreen extends AbstractMechanicsScreen {
         gameCamera.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
         world = new World(new Vector2(0, -10), true);
         b2dr = new Box2DDebugRenderer();
-        shipBodyPlayer = new ShipBody(world, this);
-        shipBackPlayer = new ShipBack(world, this);
-        shipSailPlayer = new ShipSail(world, this);
-        shipCormaPlayer = new ShipCorma(world, this);
-        shipMachtaPlayer = new ShipMachta(world, this);
+        shipBodyPlayer = new ShipBody(world, this, 16 * 2 - 2 , 32, 1, atlas1, "main_body");
+        shipBackPlayer = new ShipBack(world, this, -7 , 48, 1, atlas1, "back_body");
+        shipSailPlayer = new ShipSail(world, this,16 * 2 , 16 * 4 + 8, 1, atlas1);
+        shipCormaPlayer = new ShipCorma(world, this, 16 * 5 + 4 , 16 * 3 + 4, 1, atlas1, "front_body");
+        shipMachtaPlayer = new ShipMachta(world, this, 16 * 2 , 16 * 3 + 8, 1, atlas1, "wood");
 
-        shipBodyEnemy = new ShipBody(world, this);
-        shipBackEnemy = new ShipBack(world, this);
-        shipSailEnemy = new ShipSail(world, this);
-        shipCormaEnemy = new ShipCorma(world, this);
-        shipMachtaEnemy = new ShipMachta(world, this);
+        shipBodyEnemy = new ShipBody(world, this, 1200 , 32, 0, atlas2, "main_body_2_rev");
+        shipBackEnemy = new ShipBack(world, this, 1237 , 48, 0, atlas2, "back_body_2_rev");
+        shipSailEnemy = new ShipSail(world, this, 1198 , 16 * 4 + 8, 0, atlas2);
+        shipCormaEnemy = new ShipCorma(world, this, 1156 , 16 * 3 + 4, 0, atlas2, "front_body_2_rev");
+        shipMachtaEnemy = new ShipMachta(world, this, 1198, 16 * 3 + 8, 0, atlas2, "wood");
 
         BodyDef bdef = new BodyDef();
         PolygonShape shape = new PolygonShape();
@@ -94,8 +96,12 @@ public class FightScreen extends AbstractMechanicsScreen {
         }
     }
 
-    public TextureAtlas getAtlas() {
-        return atlas;
+    public TextureAtlas getAtlasPlayer() {
+        return atlas1;
+    }
+
+    public TextureAtlas getAtlasEnemy() {
+        return atlas2;
     }
 
     @Override
@@ -106,7 +112,7 @@ public class FightScreen extends AbstractMechanicsScreen {
     public void handleInput(float dt) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && !isFire) {
             isFire = true;
-            core = new Core(world, this, shipBodyPlayer.b2body.getPosition().x, shipBodyPlayer.b2body.getPosition().y, Math.PI / 4);
+            core = new Core(world, this, shipBodyPlayer.b2body.getPosition().x, shipBodyPlayer.b2body.getPosition().y, Math.PI / 4, atlas1);
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT) && shipBodyPlayer.b2body.getLinearVelocity().x <= 10) {
             shipBodyPlayer.b2body.applyLinearImpulse(new Vector2(1f, 0), shipBodyPlayer.b2body.getWorldCenter(), true);

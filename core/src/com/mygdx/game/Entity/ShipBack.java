@@ -14,18 +14,23 @@ public class ShipBack extends Sprite {
     public Body b2body;
     private TextureRegion ship;
 
-    public ShipBack(World world, FightScreen fightScreen) {
-        super(fightScreen.getAtlas().findRegion("back_body"));
+    public ShipBack(World world, FightScreen fightScreen, int x, int y, int player, TextureAtlas atlas, String name) {
+        super(atlas.findRegion(name));
         this.world = world;
-        defineShip();
-        TextureRegion iron = new TextureRegion(getTexture(), 0, 0, 32, 30);
+        defineShip(x, y);
+        TextureRegion iron;
+        if (player == 1) {
+            iron = new TextureRegion(getTexture(), 0, 0, 32, 30);
+        } else {
+            iron = new TextureRegion(getTexture(), 0, 0, 32, 30);
+        }
         setBounds(0, 0, 20, 16);
         setRegion(iron);
     }
 
-    public void defineShip() {
+    public void defineShip(int x, int y) {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(-7 , 48);
+        bdef.position.set(x, y);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
         FixtureDef fdef = new FixtureDef();

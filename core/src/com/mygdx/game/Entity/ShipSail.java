@@ -14,18 +14,23 @@ public class ShipSail extends Sprite {
     public Body b2body;
     private TextureRegion ship;
 
-    public ShipSail(World world, FightScreen fightScreen) {
-        super(fightScreen.getAtlas().findRegion("sail"));
+    public ShipSail(World world, FightScreen fightScreen, int x, int y, int player, TextureAtlas atlas) {
+        super(atlas.findRegion("sail"));
         this.world = world;
-        defineShip();
-        TextureRegion iron = new TextureRegion(getTexture(), 176, 0, 47, 32);
+        defineShip(x, y);
+        TextureRegion iron;
+        if (player == 1) {
+            iron = new TextureRegion(getTexture(), 176, 0, 47, 32);
+        } else {
+            iron = new TextureRegion(getTexture(), 176, 0, 47, 32);
+        }
         setBounds(0, 0, 16 * 4, 32);
         setRegion(iron);
     }
 
-    public void defineShip() {
+    public void defineShip(int x, int y) {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(16 * 2 , 16 * 4 + 8);
+        bdef.position.set(x, y);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
         FixtureDef fdef = new FixtureDef();

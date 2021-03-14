@@ -14,18 +14,23 @@ public class ShipMachta extends Sprite {
     public Body b2body;
     private TextureRegion ship;
 
-    public ShipMachta(World world, FightScreen fightScreen) {
-        super(fightScreen.getAtlas().findRegion("wood"));
+    public ShipMachta(World world, FightScreen fightScreen, int x, int y, int player, TextureAtlas atlas, String name) {
+        super(atlas.findRegion(name));
         this.world = world;
-        defineShip();
-        TextureRegion iron = new TextureRegion(getTexture(), 224, 0, 16, 32);
+        defineShip(x, y);
+        TextureRegion iron;
+        if (player == 1) {
+            iron = new TextureRegion(getTexture(), 224, 0, 16, 32);
+        } else {
+            iron = new TextureRegion(getTexture(), 224, 0, 16, 32);
+        }
         setBounds(0, 0, 8, 16);
         setRegion(iron);
     }
 
-    public void defineShip() {
+    public void defineShip(int x, int y) {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(16 * 2 , 16 * 3 + 8);
+        bdef.position.set(x, y);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
         FixtureDef fdef = new FixtureDef();

@@ -14,18 +14,23 @@ public class ShipCorma extends Sprite {
     public Body b2body;
     private TextureRegion ship;
 
-    public ShipCorma(World world, FightScreen fightScreen) {
-        super(fightScreen.getAtlas().findRegion("front_body"));
+    public ShipCorma(World world, FightScreen fightScreen, int x, int y, int player, TextureAtlas atlas, String name) {
+        super(atlas.findRegion(name));
         this.world = world;
-        defineShip();
-        TextureRegion iron = new TextureRegion(getTexture(), 145, 0, 30, 32);
+        defineShip(x, y);
+        TextureRegion iron;
+        if (player == 1) {
+            iron = new TextureRegion(getTexture(), 145, 0, 30, 32);
+        } else {
+            iron = new TextureRegion(getTexture(), 32, 0, 32, 32);
+        }
         setBounds(0, 0, 30, 20);
         setRegion(iron);
     }
 
-    public void defineShip() {
+    public void defineShip(int x, int y) {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(16 * 5 + 4 , 16 * 3 + 4);
+        bdef.position.set(x, y);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
         FixtureDef fdef = new FixtureDef();
