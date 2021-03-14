@@ -3,6 +3,8 @@ package com.mygdx.game.Screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -69,6 +71,7 @@ public class FightScreen extends AbstractMechanicsScreen {
     private Core coreEnemy;
     private float angleMax = (float) (Math.PI / 4);
     private float angleMin = 0;
+    private Music music;
 
     public float timerForNextScreen = 0;
     public Screen nextScreen = null;
@@ -96,6 +99,9 @@ public class FightScreen extends AbstractMechanicsScreen {
         shipCormaPlayer = new ShipCorma(world, this, start + 44 , 16 * 3 + 4, 1, atlas1, "front_body");
         shipMachtaPlayer = new ShipMachta(world, this, start + 2, 16 * 3 + 8, 1, atlas1, "wood");
 
+        music = Strategy.manager.get("music/audio/mario_music.ogg", Music.class);
+        music.setLooping(true);
+        music.play();
         Random rnd = new Random();
         start = 450 + (rnd.nextInt() % 450 + 450) % 450;
         shipBodyEnemy = new ShipBody(world, this, start, 32, 0, atlas2, "main_body_2_rev");
@@ -205,6 +211,7 @@ public class FightScreen extends AbstractMechanicsScreen {
     public void handleInput(float dt) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && !isFirePlayer) {
             isFirePlayer = true;
+            Strategy.manager.get("music/sounds/bump.wav", Sound.class);
             corePlayer = new Core(world, this, shipBodyPlayer.b2body.getPosition().x, shipBodyPlayer.b2body.getPosition().y, timerAngle * Math.PI / 180, atlas3, 1);
         }
         float move = 5f;
@@ -232,6 +239,9 @@ public class FightScreen extends AbstractMechanicsScreen {
         }
         if (!isFireEnemy && timer < -1 && nextScreen == null) {
             isFireEnemy = true;
+            Strategy.manager.get("music/sounds/bump.wav", Sound.class);
+            music.setLooping(true);
+            music.play();
             timer = 10;
             float dist = shipBodyEnemy.b2body.getPosition().x - shipCormaPlayer.b2body.getPosition().x;
             coreEnemy = new Core(world, this, shipCormaEnemy.b2body.getPosition().x, shipCormaEnemy.b2body.getPosition().y, Math.asin(dist / 1000), atlas3, -1);

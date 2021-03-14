@@ -2,6 +2,9 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -34,6 +37,7 @@ public class Strategy extends Game {
 	public static int V_HEIGHT;
 	public static final float PPM = 16;
 	public SpriteBatch batch;
+	public static AssetManager manager;
 
 	public static float MOVE_MUL = 64 * 64;
 
@@ -59,7 +63,11 @@ public class Strategy extends Game {
 
 	@Override
 	public void create () {
-		batch = new SpriteBatch();
+	    manager = new AssetManager();
+	    manager.load("music/audio/mario_music.ogg", Music.class);
+	    manager.load("music/sounds/bump.wav", Sound.class);
+		manager.finishLoading();
+	    batch = new SpriteBatch();
 		startButtonTexture = new Texture(Gdx.files.internal("Interface\\start_button.png"));
 		exitButtonTexture = new Texture(Gdx.files.internal("Interface\\exit_button.png"));
 		start = new ImageButton(new TextureRegionDrawable(new TextureRegion(startButtonTexture)));
