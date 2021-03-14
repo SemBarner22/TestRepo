@@ -26,14 +26,14 @@ public class Core extends Sprite {
         TextureRegion iron = new TextureRegion(getTexture(), 0, 0, 16, 16);
         setBounds(0, 0, 8, 8);
         setRegion(iron);
-        b2body.setGravityScale(2);
-        float impulse = 100000;
+        b2body.setGravityScale(3);
+        float impulse = 1000;
         this.b2body.applyLinearImpulse(new Vector2(impulse * (float) Math.cos(angle), impulse * (float) Math.sin(angle)), b2body.getWorldCenter(), true);
     }
 
     public void defineShip(float x, float y) {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(x + 30, y);
+        bdef.position.set(x + 30, y + 20);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
         FixtureDef fdef = new FixtureDef();

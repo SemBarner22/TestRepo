@@ -14,6 +14,8 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Entity.*;
@@ -59,7 +61,7 @@ public class FightScreen extends AbstractMechanicsScreen {
         atlas2 = new TextureAtlas("new_ship_set_2_rev.txt");
         this.game = strategy;
         gameCamera = new OrthographicCamera();
-        gamePort = new StretchViewport(Strategy.V_WIDTH, Strategy.V_HEIGHT, gameCamera);
+        gamePort = new FitViewport(Strategy.V_WIDTH, Strategy.V_HEIGHT, gameCamera);
         hud = new FightHud(game.batch);
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("fight.tmx");
@@ -68,14 +70,15 @@ public class FightScreen extends AbstractMechanicsScreen {
         gameCamera.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
         world = new World(new Vector2(0, -10), true);
         b2dr = new Box2DDebugRenderer();
-        shipBodyPlayer = new ShipBody(world, this, 16 * 2 - 2 , 32, 1, atlas1, "main_body");
-        shipBackPlayer = new ShipBack(world, this, -7 , 48, 1, atlas1, "back_body");
-        shipSailPlayer = new ShipSail(world, this,16 * 2 , 16 * 4 + 8, 1, atlas1);
-        shipCormaPlayer = new ShipCorma(world, this, 16 * 5 + 4 , 16 * 3 + 4, 1, atlas1, "front_body");
-        shipMachtaPlayer = new ShipMachta(world, this, 16 * 2 , 16 * 3 + 8, 1, atlas1, "wood");
+        int start = 50;
+        shipBodyPlayer = new ShipBody(world, this, start , 32, 1, atlas1, "main_body");
+        shipBackPlayer = new ShipBack(world, this, start - 37 , 48, 1, atlas1, "back_body");
+        shipSailPlayer = new ShipSail(world, this,start + 2, 16 * 4 + 8, 1, atlas1);
+        shipCormaPlayer = new ShipCorma(world, this, start + 44 , 16 * 3 + 4, 1, atlas1, "front_body");
+        shipMachtaPlayer = new ShipMachta(world, this, start + 2, 16 * 3 + 8, 1, atlas1, "wood");
 
         Random rnd = new Random();
-        int start = 450 + (rnd.nextInt() % 450 + 450) % 450;
+        start = 450 + (rnd.nextInt() % 450 + 450) % 450;
         shipBodyEnemy = new ShipBody(world, this, start, 32, 0, atlas2, "main_body_2_rev");
         shipBackEnemy = new ShipBack(world, this, start + 37, 48, 0, atlas2, "back_body_2_rev");
         shipSailEnemy = new ShipSail(world, this, start - 2 , 16 * 4 + 8, 0, atlas2);
@@ -99,14 +102,6 @@ public class FightScreen extends AbstractMechanicsScreen {
             fdef.shape = shape;
             body.createFixture(fdef);
         }
-    }
-
-    public TextureAtlas getAtlasPlayer() {
-        return atlas1;
-    }
-
-    public TextureAtlas getAtlasEnemy() {
-        return atlas2;
     }
 
     @Override
@@ -161,6 +156,8 @@ public class FightScreen extends AbstractMechanicsScreen {
         } else {
             gameCamera.position.x = Math.max(shipBodyPlayer.b2body.getPosition().x, gameCamera.position.x - 10);
         }
+        gameCamera.position.x = Math.max(gameCamera.position.x, Strategy.V_WIDTH / 2);
+        gameCamera.position.x = Math.min(gameCamera.position.x, 730);
         gameCamera.update();
         renderer.setView(gameCamera);
     }
