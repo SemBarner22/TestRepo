@@ -26,6 +26,7 @@ public class GameOverScreen extends AbstractMechanicsScreen {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 stage.clear();
                 strategy.setScreen(new MapScreen(strategy, 0, new EmptyScreen()));
+                ChooseGoalScreen.level = 1;
                 return true;
             }
         });
