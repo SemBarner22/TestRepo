@@ -80,7 +80,7 @@ public class FightScreen extends AbstractMechanicsScreen {
         gameCamera.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
         world = new World(new Vector2(0, -10), true);
         b2dr = new Box2DDebugRenderer();
-        int start = 50;
+        int start = 70;
         shipBodyPlayer = new ShipBody(world, this, start , 32, 1, atlas1, "main_body");
         shipBackPlayer = new ShipBack(world, this, start - 37 , 48, 1, atlas1, "back_body");
         shipSailPlayer = new ShipSail(world, this,start + 2, 16 * 4 + 8, 1, atlas1);
@@ -99,7 +99,6 @@ public class FightScreen extends AbstractMechanicsScreen {
         PolygonShape shape = new PolygonShape();
         FixtureDef fdef = new FixtureDef();
         Body body;
-
         for (MapObject object : map.getLayers().get(1).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
@@ -112,7 +111,7 @@ public class FightScreen extends AbstractMechanicsScreen {
             fdef.shape = shape;
             body.createFixture(fdef);
         }
-        world.setContactListener(new FightScreenContactListener(world, strategy, this));
+        world.setContactListener(new FightScreenContactListener(world, strategy, this, emptyScreen));
     }
 
     @Override

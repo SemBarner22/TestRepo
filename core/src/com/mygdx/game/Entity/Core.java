@@ -40,7 +40,7 @@ public class Core extends Sprite {
         CircleShape shape = new CircleShape();
         shape.setRadius(4);
         fdef.shape = shape;
-        b2body.createFixture(fdef);
+        b2body.createFixture(fdef).setUserData("core " + plus);
     }
 
     public boolean update(float dt) {
