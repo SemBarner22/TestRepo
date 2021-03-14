@@ -224,22 +224,21 @@ public class MapScreen extends AbstractMechanicsScreen {
         Table navTable = new Table();
 
         navTable.bottom().pad(10).defaults();
-        navTable.left().pad(10).defaults();
-        TextButton up = new TextButton("Up", skin);
-        navTable.add(up);
+        navTable.left().pad(100).defaults();
+        TextButton up = new TextButton("U", skin);
+        navTable.add(up).width(50).height(50);
 
-        up.addListener(new InputListener() {
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+        up.addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
                 if (player.b2body.getLinearVelocity().y == 0) {
-                    player.b2body.applyLinearImpulse(new Vector2(0, 64f), player.b2body.getWorldCenter(), true);
+                    player.b2body.applyLinearImpulse(new Vector2(0, Strategy.MOVE_MUL * 1f), player.b2body.getWorldCenter(), true);
                 }
-                return true;
             }
         });
 
         navTable.row();
-        TextButton left = new TextButton("left", skin);
-        navTable.add(left);
+        TextButton left = new TextButton("L", skin);
+        navTable.add(left).width(50).height(50).padLeft(-100);
         left.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 if (player.b2body.getLinearVelocity().x == 0) {
@@ -248,16 +247,16 @@ public class MapScreen extends AbstractMechanicsScreen {
             }
         });
 
-        TextButton ok = new TextButton("ok", skin);
-        navTable.add(ok);
-        ok.addListener(new ClickListener() {
-            public void clicked(InputEvent event, float x, float y) {
+//        TextButton ok = new TextButton("ok", skin);
+//        navTable.add(ok);
+//        ok.addListener(new ClickListener() {
+//            public void clicked(InputEvent event, float x, float y) {
+//
+//            }
+//        });
 
-            }
-        });
-
-        TextButton right = new TextButton("right", skin);
-        navTable.add(right);
+        TextButton right = new TextButton("R", skin);
+        navTable.add(right).width(50).height(50);
         right.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 if (player.b2body.getLinearVelocity().x == 0) {
@@ -267,8 +266,8 @@ public class MapScreen extends AbstractMechanicsScreen {
         });
 
         navTable.row();
-        TextButton down = new TextButton("down", skin);
-        navTable.add(down);
+        TextButton down = new TextButton("D", skin);
+        navTable.add(down).width(50).height(50);
         down.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 if (player.b2body.getLinearVelocity().y == 0) {
@@ -397,6 +396,7 @@ public class MapScreen extends AbstractMechanicsScreen {
     public void resize(int width, int height) {
         gamePort.update(width, height);
         gameCamera.update();
+        stage.getViewport().update(width, height, true);
     }
 
     @Override
