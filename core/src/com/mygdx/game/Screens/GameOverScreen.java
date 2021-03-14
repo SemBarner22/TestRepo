@@ -18,7 +18,7 @@ public class GameOverScreen extends AbstractMechanicsScreen {
 
     public GameOverScreen(Strategy strategy, int i, AbstractMechanicsScreen screen) {
         super(strategy, i, screen);
-        Strategy.manager.get("music/sounds/death.mp3", Music.class).play();
+        Strategy.manager.get("music/audio/death.mp3", Music.class).play();
     }
 
     @Override
