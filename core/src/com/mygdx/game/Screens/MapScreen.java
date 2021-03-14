@@ -3,6 +3,7 @@ package com.mygdx.game.Screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -69,6 +70,7 @@ public class MapScreen extends AbstractMechanicsScreen {
     public Label missionLabel;
     public Label levelLabel;
     public Label coordinateLabel;
+    private Music music;
 
     public GameLevel level = new GameLevel(1);
 
@@ -85,6 +87,9 @@ public class MapScreen extends AbstractMechanicsScreen {
 
         gamePort = new FitViewport(Strategy.V_WIDTH / Strategy.PPM, Strategy.V_HEIGHT / Strategy.PPM, gameCamera);
 
+        music = Strategy.manager.get("music/audio/mainTheme.mp3", Music.class);
+        music.setLooping(true);
+        music.play();
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("main_map.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1 / Strategy.PPM);
