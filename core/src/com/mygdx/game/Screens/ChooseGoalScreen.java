@@ -48,7 +48,7 @@ public class ChooseGoalScreen extends AbstractMechanicsScreen {
         final String finalB = b;
         investment.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                strategy.goal = finalA.charAt(0);
+                strategy.goal = finalA.charAt(0) - 'A' + 1;
                 strategy.setScreen(previousScreen);
             }
         });
@@ -56,7 +56,7 @@ public class ChooseGoalScreen extends AbstractMechanicsScreen {
         container.add(test).bottom().padLeft(200);
         test.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                strategy.goal = finalB.charAt(0);
+                strategy.goal = finalB.charAt(0) - 'A' + 1;
                 strategy.setScreen(previousScreen);
             }
         });

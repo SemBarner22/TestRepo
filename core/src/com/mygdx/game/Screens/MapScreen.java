@@ -188,15 +188,10 @@ public class MapScreen extends AbstractMechanicsScreen {
 
 
         for (MapObject object : map.getLayers().get("ports").getObjects().getByType(RectangleMapObject.class)) {
-
             int aaa = (int) object.getProperties().get("port");
             Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
             bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set((rectangle.x + rectangle.width / 2) / Strategy.PPM, (rectangle.getY() + rectangle.getHeight() / 2) / Strategy.PPM);
-
-//            sr.begin(ShapeRenderer.ShapeType.Filled);
-//            sr.rect(bdef.position.x, bdef.position.y, rectangle.width, rectangle.height);
-//            sr.end();
+            bdef.position.set((rectangle.getX() + rectangle.getWidth() / 2) / Strategy.PPM, (rectangle.getY() + rectangle.getHeight() / 2) / Strategy.PPM);
 
             body = world.createBody(bdef);
 
