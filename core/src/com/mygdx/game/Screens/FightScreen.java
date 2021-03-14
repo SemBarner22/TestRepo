@@ -133,15 +133,15 @@ public class FightScreen extends AbstractMechanicsScreen {
             isFirePlayer = true;
             corePlayer = new Core(world, this, shipBodyPlayer.b2body.getPosition().x, shipBodyPlayer.b2body.getPosition().y, Math.PI / 4, new TextureAtlas("core.txt"), 1);
         }
-        float move = 1f;
-        if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT) && shipBodyPlayer.b2body.getLinearVelocity().x <= 100) {
+        float move = 5f;
+        if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT) && shipBodyPlayer.b2body.getLinearVelocity().x <= 50) {
             shipBodyPlayer.b2body.applyLinearImpulse(new Vector2(move, 0), shipBodyPlayer.b2body.getWorldCenter(), true);
             shipBackPlayer.b2body.applyLinearImpulse(new Vector2(move, 0), shipBackPlayer.b2body.getWorldCenter(), true);
             shipSailPlayer.b2body.applyLinearImpulse(new Vector2(move, 0), shipCormaPlayer.b2body.getWorldCenter(), true);
             shipCormaPlayer.b2body.applyLinearImpulse(new Vector2(move, 0), shipCormaPlayer.b2body.getWorldCenter(), true);
             shipMachtaPlayer.b2body.applyLinearImpulse(new Vector2(move, 0), shipMachtaPlayer.b2body.getWorldCenter(), true);
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT) && shipBodyPlayer.b2body.getLinearVelocity().x >= -100) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT) && shipBodyPlayer.b2body.getLinearVelocity().x >= -50) {
             shipBodyPlayer.b2body.applyLinearImpulse(new Vector2(-move, 0), shipBodyPlayer.b2body.getWorldCenter(), true);
             shipSailPlayer.b2body.applyLinearImpulse(new Vector2(-move, 0), shipBackPlayer.b2body.getWorldCenter(), true);
             shipBackPlayer.b2body.applyLinearImpulse(new Vector2(-move, 0), shipBackPlayer.b2body.getWorldCenter(), true);
@@ -157,7 +157,9 @@ public class FightScreen extends AbstractMechanicsScreen {
             isFireEnemy = true;
             timer = 2;
             float dist = shipBodyEnemy.b2body.getPosition().x - shipCormaPlayer.b2body.getPosition().x;
-            coreEnemy = new Core(world, this, shipCormaEnemy.b2body.getPosition().x, shipCormaEnemy.b2body.getPosition().y, Math.asin(dist / 1000), new TextureAtlas("core.txt"), -1);
+            Random rnd = new Random();
+            float start = (rnd.nextInt() % 10) / 100.f;
+            coreEnemy = new Core(world, this, shipCormaEnemy.b2body.getPosition().x, shipCormaEnemy.b2body.getPosition().y, Math.asin(dist / 1000 + start), new TextureAtlas("core.txt"), -1);
         }
         handleInput(dt);
         world.step(1/60f, 6, 2);
