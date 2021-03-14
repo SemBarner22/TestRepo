@@ -234,9 +234,10 @@ public class MapScreen extends AbstractMechanicsScreen {
         up.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 if (player.b2body.getLinearVelocity().y == 0) {
-                    player.b2body.applyLinearImpulse(new Vector2(0, Strategy.MOVE_MUL * 1f), player.b2body.getWorldCenter(), true);
+                    movePlayer(new Vector2(0, Strategy.MOVE_MUL * 2f));
+//                    player.b2body.applyLinearImpulse(new Vector2(0, Strategy.MOVE_MUL * 1f), player.b2body.getWorldCenter(), true);
                     player.updateTexture(PlayerShipForMap.Direction.U);
-                    moveEnemies();
+                    moveEnemies(2f);
                 }
             }
         });
@@ -247,9 +248,10 @@ public class MapScreen extends AbstractMechanicsScreen {
         left.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 if (player.b2body.getLinearVelocity().x == 0) {
-                    player.b2body.applyLinearImpulse(new Vector2(-Strategy.MOVE_MUL * 1f, 0), player.b2body.getWorldCenter(), true);
+                    movePlayer(new Vector2(-Strategy.MOVE_MUL * 2f, 0));
+//                    player.b2body.applyLinearImpulse(new Vector2(-Strategy.MOVE_MUL * 1f, 0), player.b2body.getWorldCenter(), true);
                     player.updateTexture(PlayerShipForMap.Direction.L);
-                    moveEnemies();
+                    moveEnemies(2f);
                 }
             }
         });
@@ -267,9 +269,10 @@ public class MapScreen extends AbstractMechanicsScreen {
         right.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 if (player.b2body.getLinearVelocity().x == 0) {
-                    player.b2body.applyLinearImpulse(new Vector2(Strategy.MOVE_MUL * 1f, 0), player.b2body.getWorldCenter(), true);
+                    movePlayer(new Vector2(Strategy.MOVE_MUL * 2f, 0));
+//                    player.b2body.applyLinearImpulse(new Vector2(Strategy.MOVE_MUL * 1f, 0), player.b2body.getWorldCenter(), true);
                     player.updateTexture(PlayerShipForMap.Direction.R);
-                    moveEnemies();
+                    moveEnemies(2f);
                 }
             }
         });
@@ -280,9 +283,10 @@ public class MapScreen extends AbstractMechanicsScreen {
         down.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 if (player.b2body.getLinearVelocity().y == 0) {
-                    player.b2body.applyLinearImpulse(new Vector2(0, -Strategy.MOVE_MUL * 1f), player.b2body.getWorldCenter(), true);
+                    movePlayer(new Vector2(0, -Strategy.MOVE_MUL * 2f));
+//                    player.b2body.applyLinearImpulse(new Vector2(0, -Strategy.MOVE_MUL * 1f), player.b2body.getWorldCenter(), true);
                     player.updateTexture(PlayerShipForMap.Direction.D);
-                    moveEnemies();
+                    moveEnemies(2f);
                 }
             }
         });
