@@ -14,8 +14,8 @@ import java.util.Map;
 
 public class ChooseGoalScreen extends AbstractMechanicsScreen {
 
+    public static int level = 1;
     public static String labelText = "Where would you go next?";
-    static GameLevel gameLevel;
     public Label label;
     private char goal;
     private Map<String, String> portToCoordinate = new HashMap<>();
@@ -27,7 +27,7 @@ public class ChooseGoalScreen extends AbstractMechanicsScreen {
         portToCoordinate.put("B", "X: 114, Y: 16");
         portToCoordinate.put("C", "X: 25, Y: 114");
         portToCoordinate.put("D", "X: 113, Y: 111");
-        gameLevel = new GameLevel(1);
+        MapScreen.gameLevel = new GameLevel(level);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class ChooseGoalScreen extends AbstractMechanicsScreen {
 //        stage.addActor(table);
 //        table.pad(100).defaults().expandX().space(4);
         label = new Label(labelText, skin);
-        container.add().center().padLeft(100).expandX();
+        container.add(label).center().padLeft(100).expandX();
         container.row();
         Button investment = new TextButton(a, skin);
         container.add(investment).left().padLeft(100);
@@ -70,6 +70,7 @@ public class ChooseGoalScreen extends AbstractMechanicsScreen {
                         finalA,
                         portToCoordinate.get(finalA)
                 );
+                level++;
                 strategy.setScreen(previousScreen);
             }
         });
@@ -84,6 +85,7 @@ public class ChooseGoalScreen extends AbstractMechanicsScreen {
                         finalB,
                         portToCoordinate.get(finalB)
                 );
+                level++;
                 strategy.setScreen(previousScreen);
             }
         });

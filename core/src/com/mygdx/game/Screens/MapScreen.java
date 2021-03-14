@@ -33,6 +33,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Config;
 import com.mygdx.game.Entity.*;
+import com.mygdx.game.Levels.GameLevel;
 import com.mygdx.game.Scenes.MapHud;
 import com.mygdx.game.Strategy;
 import com.mygdx.game.WorldContactListener;
@@ -41,6 +42,7 @@ import java.util.ArrayList;
 
 public class MapScreen extends AbstractMechanicsScreen {
 
+    static GameLevel gameLevel;
     public char goal = 'O';
     private int row_height;
 
