@@ -37,11 +37,11 @@ public class EnemyShipForMap extends Sprite {
         b2body = world.createBody(bdef);
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(5 / Strategy.PPM);
+        shape.setRadius(8 / Strategy.PPM);
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData("enemyMap");
         b2body.setGravityScale(0);
-        b2body.setLinearDamping(8f);
+        b2body.setLinearDamping(Strategy.MOVE_MUL * 1f);
     }
 }

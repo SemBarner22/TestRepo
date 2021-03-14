@@ -38,6 +38,8 @@ public class Strategy extends Game {
 	public static final float PPM = 16;
 	public SpriteBatch batch;
 
+	public static float MOVE_MUL = 64 * 64;
+
 	public Strategy(Config config) {
 		this.config = config;
 //		if (config.desktop()) {

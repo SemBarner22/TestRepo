@@ -1,6 +1,7 @@
 package com.mygdx.game.Entity;
 
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.Strategy;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -24,7 +25,7 @@ public class EnemyStrategyPatrol implements EnemyStrategy {
         Vector2 ret = null;
         switch (cur) {
             case R: {
-                ret = new Vector2(8f, 0);
+                ret = new Vector2(Strategy.MOVE_MUL * 1f, 0);
                 steps++;
                 if (steps == range) {
                     steps = 0;
@@ -33,7 +34,7 @@ public class EnemyStrategyPatrol implements EnemyStrategy {
                 break;
             }
             case U: {
-                ret = new Vector2(0, 8f);
+                ret = new Vector2(0, Strategy.MOVE_MUL * 1f);
                 steps++;
                 if (steps == range) {
                     steps = 0;
@@ -42,7 +43,7 @@ public class EnemyStrategyPatrol implements EnemyStrategy {
                 break;
             }
             case L: {
-                ret = new Vector2(-8f, 0);
+                ret = new Vector2(-Strategy.MOVE_MUL * 1f, 0);
                 steps++;
                 if (steps == range) {
                     steps = 0;
@@ -51,7 +52,7 @@ public class EnemyStrategyPatrol implements EnemyStrategy {
                 break;
             }
             case D: {
-                ret = new Vector2(0, -8f);
+                ret = new Vector2(0, -Strategy.MOVE_MUL * 1f);
                 steps++;
                 if (steps == range) {
                     steps = 0;

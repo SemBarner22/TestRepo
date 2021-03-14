@@ -1,6 +1,7 @@
 package com.mygdx.game.Entity;
 
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.Strategy;
 
 public class EnemyStrategyTransit implements EnemyStrategy {
     private final boolean right;
@@ -11,6 +12,6 @@ public class EnemyStrategyTransit implements EnemyStrategy {
 
     @Override
     public Vector2 nextMove() {
-        return new Vector2(right ? 8f : -8f, 0);
+        return new Vector2(right ? Strategy.MOVE_MUL * 1f : -Strategy.MOVE_MUL * 1f, 0);
     }
 }
