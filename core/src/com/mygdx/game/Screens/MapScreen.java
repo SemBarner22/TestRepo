@@ -87,8 +87,8 @@ public class MapScreen extends AbstractMechanicsScreen {
 
         gamePort = new FitViewport(Strategy.V_WIDTH / Strategy.PPM, Strategy.V_HEIGHT / Strategy.PPM, gameCamera);
 
-        music = Strategy.manager.get("music/audio/mainTheme.mp3", Music.class);
-        music.setLooping(true);
+        music = Strategy.manager.get("music/audio/mapMusic.mp3", Music.class);
+        music.setLooping(false);
         music.play();
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("main_map.tmx");
@@ -443,6 +443,7 @@ public class MapScreen extends AbstractMechanicsScreen {
             }
             if ((enemyShipForMap.b2body.getPosition().x - player.getX()) * (enemyShipForMap.b2body.getPosition().x - player.getX()) + (enemyShipForMap.b2body.getPosition().y - player.getY()) * (enemyShipForMap.b2body.getPosition().y - player.getY()) < 20) {
                 toKill = enemyShipForMap;
+                music.pause();
                 strategy.setScreen(new ReadyForFightScreen(strategy, 0, this));
                 break;
             }
@@ -497,6 +498,9 @@ public class MapScreen extends AbstractMechanicsScreen {
     }
 
     public void update(float dt) {
+        if (!music.isPlaying()) {
+            music.play();
+        }
         handleInput(dt);
         world.step(1 / 60f, 6, 2);
         player.update(dt);
