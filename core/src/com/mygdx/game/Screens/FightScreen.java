@@ -19,6 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Entity.*;
+import com.mygdx.game.FightScreenContactListener;
 import com.mygdx.game.Scenes.FightHud;
 import com.mygdx.game.Strategy;
 
@@ -111,6 +112,7 @@ public class FightScreen extends AbstractMechanicsScreen {
             fdef.shape = shape;
             body.createFixture(fdef);
         }
+        world.setContactListener(new FightScreenContactListener(world, strategy, this));
     }
 
     @Override
