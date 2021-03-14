@@ -171,7 +171,7 @@ public class MapScreen extends AbstractMechanicsScreen {
 
             Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
             bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set(rectangle.x + rectangle.width / 2 / Strategy.PPM, rectangle.getY() + rectangle.getHeight() / 2 / Strategy.PPM);
+            bdef.position.set((rectangle.x + rectangle.width / 2) / Strategy.PPM, (rectangle.getY() + rectangle.getHeight() / 2) / Strategy.PPM);
 
 //            sr.begin(ShapeRenderer.ShapeType.Filled);
 //            sr.rect(bdef.position.x, bdef.position.y, rectangle.width, rectangle.height);
@@ -204,7 +204,7 @@ public class MapScreen extends AbstractMechanicsScreen {
                 }
             }
         }
-        world.setContactListener(new WorldContactListener());
+        world.setContactListener(new WorldContactListener(world, strategy, this));
 
 //        for (MapLayer layer : map.getLayers()) {
 //            for (MapObject object : layer.getObjects()) {
