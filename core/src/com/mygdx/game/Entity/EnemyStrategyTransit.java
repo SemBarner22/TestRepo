@@ -14,4 +14,9 @@ public class EnemyStrategyTransit implements EnemyStrategy {
     public Vector2 nextMove() {
         return new Vector2(right ? Strategy.MOVE_MUL * 1f : -Strategy.MOVE_MUL * 1f, 0);
     }
+
+    @Override
+    public EnemyStrategyPatrol.Direction getDirection() {
+        return right ? EnemyStrategyPatrol.Direction.R : EnemyStrategyPatrol.Direction.L;
+    }
 }

@@ -9,7 +9,9 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.Strategy;
 
-public class PlayerShipForMap extends ShipForMap {
+public class PlayerShipForMap extends Sprite {
+    public enum Direction {L, R, U, D}
+
     public World world;
     public Body b2body;
 //    public static Sprite sprite = new Sprite(new Texture("sprites/player_ship.png"));
@@ -25,7 +27,6 @@ public class PlayerShipForMap extends ShipForMap {
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
     }
 
-    @Override
     public void updateTexture(Direction dir) {
         switch (dir) {
             case L: {

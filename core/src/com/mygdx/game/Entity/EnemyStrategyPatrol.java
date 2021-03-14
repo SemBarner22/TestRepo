@@ -63,4 +63,9 @@ public class EnemyStrategyPatrol implements EnemyStrategy {
         }
         return ret;
     }
+
+    @Override
+    public Direction getDirection() {
+        return cur;
+    }
 }
