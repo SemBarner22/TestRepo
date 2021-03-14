@@ -71,7 +71,7 @@ public class MapScreen extends AbstractMechanicsScreen {
 
     public MapScreen(Strategy strategy, int i, Screen emptyScreen) {
         super(strategy, i, emptyScreen);
-        mission = "Go to port A";
+        mission = "Go to port A[ X: 56, Y: 13]";
         this.config = strategy.config;
 
         atlas = new TextureAtlas("ship_set.txt");
