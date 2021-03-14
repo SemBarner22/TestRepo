@@ -95,7 +95,7 @@ public class MapScreen extends AbstractMechanicsScreen {
         player = new PlayerShipForMap(world);
         enemies = new ArrayList<>();
         for (int u = 0; u < enemiesCount; u++) {
-            boolean transitStrategy = Math.random() < 0.9;
+            boolean transitStrategy = Math.random() < 0.5;
             EnemyStrategy enemyStrategy;
             float x, y;
             y = (float) (16 + Math.random() * 96);
