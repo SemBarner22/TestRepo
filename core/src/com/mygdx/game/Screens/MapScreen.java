@@ -380,7 +380,10 @@ public class MapScreen extends AbstractMechanicsScreen {
 
         EnemyShipForMap toKill = null;
         for (EnemyShipForMap enemyShipForMap: enemies) {
-            if ((enemyShipForMap.x - player.getX()) * (enemyShipForMap.x - player.getX()) + (enemyShipForMap.y - player.getY()) * (enemyShipForMap.y - player.getY()) < 20) {
+            if (!enemyShipForMap.enabled) {
+                continue;
+            }
+            if ((enemyShipForMap.b2body.getPosition().x - player.getX()) * (enemyShipForMap.b2body.getPosition().x - player.getX()) + (enemyShipForMap.b2body.getPosition().y - player.getY()) * (enemyShipForMap.b2body.getPosition().y - player.getY()) < 20) {
                 toKill = enemyShipForMap;
                 strategy.setScreen(new ReadyForFightScreen(strategy, 0, this));
                 break;
@@ -399,6 +402,9 @@ public class MapScreen extends AbstractMechanicsScreen {
         game.batch.begin();
         player.draw(game.batch);
         for (EnemyShipForMap enemy : enemies) {
+            if (!enemy.enabled) {
+                continue;
+            }
             enemy.draw(game.batch);
         }
 
