@@ -20,6 +20,8 @@ import com.mygdx.game.Entity.*;
 import com.mygdx.game.Scenes.FightHud;
 import com.mygdx.game.Strategy;
 
+import java.util.Random;
+
 public class FightScreen extends AbstractMechanicsScreen {
 
     private Strategy game;
@@ -72,11 +74,13 @@ public class FightScreen extends AbstractMechanicsScreen {
         shipCormaPlayer = new ShipCorma(world, this, 16 * 5 + 4 , 16 * 3 + 4, 1, atlas1, "front_body");
         shipMachtaPlayer = new ShipMachta(world, this, 16 * 2 , 16 * 3 + 8, 1, atlas1, "wood");
 
-        shipBodyEnemy = new ShipBody(world, this, 1200 , 32, 0, atlas2, "main_body_2_rev");
-        shipBackEnemy = new ShipBack(world, this, 1237 , 48, 0, atlas2, "back_body_2_rev");
-        shipSailEnemy = new ShipSail(world, this, 1198 , 16 * 4 + 8, 0, atlas2);
-        shipCormaEnemy = new ShipCorma(world, this, 1156 , 16 * 3 + 4, 0, atlas2, "front_body_2_rev");
-        shipMachtaEnemy = new ShipMachta(world, this, 1198, 16 * 3 + 8, 0, atlas2, "wood");
+        Random rnd = new Random();
+        int start = 450 + (rnd.nextInt() % 450 + 450) % 450;
+        shipBodyEnemy = new ShipBody(world, this, start, 32, 0, atlas2, "main_body_2_rev");
+        shipBackEnemy = new ShipBack(world, this, start + 37, 48, 0, atlas2, "back_body_2_rev");
+        shipSailEnemy = new ShipSail(world, this, start - 2 , 16 * 4 + 8, 0, atlas2);
+        shipCormaEnemy = new ShipCorma(world, this, start - 44, 16 * 3 + 4, 0, atlas2, "front_body_2_rev");
+        shipMachtaEnemy = new ShipMachta(world, this, start - 2, 16 * 3 + 8, 0, atlas2, "wood");
 
         BodyDef bdef = new BodyDef();
         PolygonShape shape = new PolygonShape();

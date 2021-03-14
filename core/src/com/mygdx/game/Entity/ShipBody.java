@@ -22,7 +22,7 @@ public class ShipBody extends Sprite {
         if (player == 1) {
             iron = new TextureRegion(getTexture(), 64, 0, 80, 32);
         } else {
-            iron = new TextureRegion(getTexture(), 64, 0, 80, 32);
+            iron = new TextureRegion(getTexture(), 65, 0, 79, 32);
         }
         setBounds(0, 0, 80, 20);
         setRegion(iron);
