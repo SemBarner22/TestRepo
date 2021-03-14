@@ -15,8 +15,6 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Entity.*;
 import com.mygdx.game.Scenes.FightHud;
@@ -52,8 +50,13 @@ public class FightScreen extends AbstractMechanicsScreen {
     private ShipSail shipSailEnemy;
     private ShipMachta shipMachtaEnemy;
 
-    private Core core;
-    private boolean isFire;
+    private Core corePlayer;
+    private boolean isFirePlayer;
+    private boolean isFireEnemy;
+    private float timer = 3;
+    private Core coreEnemy;
+    private float angleMax = (float) (Math.PI / 4);
+    private float angleMin = 0;
 
     public FightScreen(Strategy strategy, int i, Screen emptyScreen) {
         super(strategy, i, emptyScreen);
@@ -110,11 +113,11 @@ public class FightScreen extends AbstractMechanicsScreen {
     }
 
     public void handleInput(float dt) {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && !isFire) {
-            isFire = true;
-            core = new Core(world, this, shipBodyPlayer.b2body.getPosition().x, shipBodyPlayer.b2body.getPosition().y, Math.PI / 4, new TextureAtlas("core.txt"));
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && !isFirePlayer) {
+            isFirePlayer = true;
+            corePlayer = new Core(world, this, shipBodyPlayer.b2body.getPosition().x, shipBodyPlayer.b2body.getPosition().y, Math.PI / 4, new TextureAtlas("core.txt"), 1);
         }
-        float move = 10f;
+        float move = 1f;
         if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT) && shipBodyPlayer.b2body.getLinearVelocity().x <= 100) {
             shipBodyPlayer.b2body.applyLinearImpulse(new Vector2(move, 0), shipBodyPlayer.b2body.getWorldCenter(), true);
             shipBackPlayer.b2body.applyLinearImpulse(new Vector2(move, 0), shipBackPlayer.b2body.getWorldCenter(), true);
@@ -132,6 +135,14 @@ public class FightScreen extends AbstractMechanicsScreen {
     }
 
     public void update(float dt) {
+        timer -= dt;
+        System.out.println(timer);
+        if (!isFireEnemy && timer < 0) {
+            isFireEnemy = true;
+            timer = 2;
+            float dist = shipBodyEnemy.b2body.getPosition().x - shipCormaPlayer.b2body.getPosition().x;
+            coreEnemy = new Core(world, this, shipCormaEnemy.b2body.getPosition().x, shipCormaEnemy.b2body.getPosition().y, Math.asin(dist / 1000), new TextureAtlas("core.txt"), -1);
+        }
         handleInput(dt);
         world.step(1/60f, 6, 2);
 
@@ -145,14 +156,14 @@ public class FightScreen extends AbstractMechanicsScreen {
         shipSailEnemy.update(dt);
         shipMachtaEnemy.update(dt);
         shipCormaEnemy.update(dt);
-        if (isFire) {
-            gameCamera.position.x = core.b2body.getPosition().x;
-            isFire = core.update(dt);
-            if (isFire) {
-                core.b2body.setActive(true);
-            } else {
-                core.b2body.setActive(false);
-            }
+        if (isFireEnemy) {
+            isFireEnemy = coreEnemy.update(dt);
+            coreEnemy.b2body.setActive(isFireEnemy);
+        }
+        if (isFirePlayer) {
+            gameCamera.position.x = corePlayer.b2body.getPosition().x;
+            isFirePlayer = corePlayer.update(dt);
+            corePlayer.b2body.setActive(isFirePlayer);
         } else {
             gameCamera.position.x = Math.max(shipBodyPlayer.b2body.getPosition().x, gameCamera.position.x - 10);
         }
@@ -185,8 +196,11 @@ public class FightScreen extends AbstractMechanicsScreen {
         shipMachtaEnemy.draw(game.batch);
         shipSailEnemy.draw(game.batch);
         shipBodyEnemy.draw(game.batch);
-        if (isFire) {
-            core.draw(game.batch);
+        if (isFirePlayer) {
+            corePlayer.draw(game.batch);
+        }
+        if (coreEnemy != null) {
+            coreEnemy.draw(game.batch);
         }
         game.batch.end();
 
