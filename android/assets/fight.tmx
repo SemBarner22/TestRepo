@@ -14,7 +14,7 @@
  <tileset firstgid="46" source="rock.tsx"/>
  <layer id="1" name="background" width="40" height="14">
   <data encoding="base64" compression="zlib">
-   eJzTZGBg0BzFZGP1QY61RjFFWGOQY+1RPIpHMU5sAMSqVMJqVDQLhnUHOdYZ5BgAUFdbnQ==
+   eJztkTsSwCAIBblNYn5Kcv+7hUJmGApFTWYoLLbzLU8IABAm3SzO2SZDrM7Zf+Jx4pBcRCQScRM44GLHV93Zp8Hcu5aPAukqzcL8nvfS2k337MnzXfRtrDMs3WSed2TNt/jlvWp/sXgs+dM5h3NenldfdA==
   </data>
  </layer>
  <objectgroup id="5" name="water" visible="0">
