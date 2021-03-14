@@ -12,9 +12,10 @@
  <tileset firstgid="39" source="sky_set.tsx"/>
  <tileset firstgid="44" source="water.tsx"/>
  <tileset firstgid="46" source="rock.tsx"/>
+ <tileset firstgid="52" source="all_tiles_set.tsx"/>
  <layer id="1" name="background" width="60" height="14">
   <data encoding="base64" compression="zlib">
-   eJztkt0OgCAIRnmbsh/Jev93y4vYiOUSza2pF+fKcfhADACYTrUMjTF1qmZsjLkQx08cJbEe9Gye3eMyXF84NLvT7pbySdy1h7d6ZEgXObDQ7vg7RvQKzSoz59Rzj2Zu6aY7lLcYmzklKybWh/7cwv0+aJ4nt7Yf75OalTw59amsjbE0xgnMFY8h
+   eJztkksOgCAMBbmN4oeKhvtfzS5sUhuJfCQxwGJWpNPXUq2U0p1qGRpj6lTN2BhzIY6fOEpiEEA2ZEdshusLR8zuYndL+ST22sNbPTCkixxQaHf8HQJ6+WaVmXPquSdmbummO5S3GJo5JSsk1vv+3Kj7fdA8T+7YfrxPalby5NSn4hhrpTgPS6XwGU8pwI+H
   </data>
  </layer>
  <objectgroup id="5" name="water" visible="0">
