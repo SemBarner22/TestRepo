@@ -244,6 +244,8 @@ public class FightScreen extends AbstractMechanicsScreen {
             Strategy.manager.get("music/sounds/bump.mp3", Sound.class).play();
             timer = 5;
             float dist = shipBodyEnemy.b2body.getPosition().x - shipCormaPlayer.b2body.getPosition().x;
+            Random rnd = new Random();
+            int start = (rnd.nextInt() % 10) / 100;
             coreEnemy = new Core(world, this, shipCormaEnemy.b2body.getPosition().x, shipCormaEnemy.b2body.getPosition().y, Math.asin(dist / 1000), atlas3, -1);
         }
         if (nextScreen != null) {
