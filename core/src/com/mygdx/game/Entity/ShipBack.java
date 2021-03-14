@@ -17,7 +17,7 @@ public class ShipBack extends Sprite {
     public ShipBack(World world, FightScreen fightScreen, int x, int y, int player, TextureAtlas atlas, String name) {
         super(atlas.findRegion(name));
         this.world = world;
-        defineShip(x, y);
+        defineShip(x, y, player);
         TextureRegion iron;
         if (player == 1) {
             iron = new TextureRegion(getTexture(), 0, 0, 32, 30);
@@ -28,7 +28,7 @@ public class ShipBack extends Sprite {
         setRegion(iron);
     }
 
-    public void defineShip(int x, int y) {
+    public void defineShip(int x, int y, int player) {
         BodyDef bdef = new BodyDef();
         bdef.position.set(x, y);
         bdef.type = BodyDef.BodyType.DynamicBody;
@@ -37,7 +37,7 @@ public class ShipBack extends Sprite {
         CircleShape shape = new CircleShape();
         shape.setRadius(4);
         fdef.shape = shape;
-        b2body.createFixture(fdef);
+        b2body.createFixture(fdef).setUserData("ship " + player);
         b2body.setGravityScale(0);
     }
 

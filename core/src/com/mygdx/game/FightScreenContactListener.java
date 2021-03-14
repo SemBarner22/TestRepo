@@ -19,8 +19,23 @@ public class FightScreenContactListener implements ContactListener {
 
     @Override
     public void beginContact(Contact contact) {
-//        Fixture fixtureA = contact.getFixtureA();
-//        Fixture fixtureB = contact.getFixtureB();
+        Fixture fixtureA = contact.getFixtureA();
+        Fixture fixtureB = contact.getFixtureB();
+        if (fixtureA.getUserData() == null || fixtureB.getUserData() == null) {
+            System.out.println("null");
+        } else if (fixtureA.getUserData() != null && fixtureA.getUserData().equals(fixtureB.getUserData())) {
+            System.out.println("lol");
+        } else if (("core 1".equals(fixtureA.getUserData()) && "ship 0".equals(fixtureB.getUserData())) ||
+                ("core 1".equals(fixtureB.getUserData()) && "ship 0".equals(fixtureA.getUserData()))) {
+            System.out.println("1 win");
+            //strategy.setScreen(new ChooseGoalScreen(strategy, 0, screen, (((String) object.getUserData()).charAt(5))));
+        } else if (("core 1".equals(fixtureA.getUserData()) && "core -1".equals(fixtureB.getUserData())) ||
+                ("core 1".equals(fixtureB.getUserData()) && "core -1".equals(fixtureA.getUserData()))) {
+            System.out.println("no win");
+        } else {
+            System.out.println("2 win");
+            //strategy.setScreen(new ChooseGoalScreen(strategy, 0, screen, (((String) object.getUserData()).charAt(5))));
+        }
 //
 //        if ("playerShip".equals(fixtureA.getUserData()) || "playerShip".equals(fixtureB.getUserData())) {
 //            Fixture player = "playerShip".equals(fixtureA.getUserData()) ? fixtureA : fixtureB;

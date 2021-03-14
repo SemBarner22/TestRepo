@@ -17,7 +17,7 @@ public class ShipSail extends Sprite {
     public ShipSail(World world, FightScreen fightScreen, int x, int y, int player, TextureAtlas atlas) {
         super(atlas.findRegion("sail"));
         this.world = world;
-        defineShip(x, y);
+        defineShip(x, y, player);
         TextureRegion iron;
         if (player == 1) {
             iron = new TextureRegion(getTexture(), 176, 0, 47, 32);
@@ -28,7 +28,7 @@ public class ShipSail extends Sprite {
         setRegion(iron);
     }
 
-    public void defineShip(int x, int y) {
+    public void defineShip(int x, int y, int player) {
         BodyDef bdef = new BodyDef();
         bdef.position.set(x, y);
         bdef.type = BodyDef.BodyType.DynamicBody;
@@ -37,7 +37,7 @@ public class ShipSail extends Sprite {
         CircleShape shape = new CircleShape();
         shape.setRadius(8);
         fdef.shape = shape;
-        b2body.createFixture(fdef);
+        b2body.createFixture(fdef).setUserData("ship " + player);
         b2body.setGravityScale(0);
     }
 
