@@ -157,7 +157,7 @@ public class FightScreen extends AbstractMechanicsScreen {
         if (timerAngle < 0) {
             timerAngle += 90;
         }
-        if (!isFireEnemy && timer < 0) {
+        if (!isFireEnemy && timer < -1) {
             isFireEnemy = true;
             timer = 10;
             float dist = shipBodyEnemy.b2body.getPosition().x - shipCormaPlayer.b2body.getPosition().x;
@@ -221,7 +221,7 @@ public class FightScreen extends AbstractMechanicsScreen {
         if (isFirePlayer) {
             corePlayer.draw(game.batch);
         }
-        if (coreEnemy != null) {
+        if (isFireEnemy) {
             coreEnemy.draw(game.batch);
         }
         game.batch.end();
