@@ -36,7 +36,7 @@ public class PlayerShipForMap extends Sprite {
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData("playerMap");
-        b2body.setGravityScale(0);
+        b2body.setGravityScale(1);
         b2body.setLinearDamping(8f);
     }
 }

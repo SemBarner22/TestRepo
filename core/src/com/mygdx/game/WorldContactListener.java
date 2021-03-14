@@ -1,9 +1,19 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.physics.box2d.*;
+import com.mygdx.game.Screens.AbstractMechanicsScreen;
+import com.mygdx.game.Screens.ChooseGoalScreen;
 
 public class WorldContactListener implements ContactListener {
 
+    World world;
+    Strategy strategy;
+    AbstractMechanicsScreen screen;
+    public WorldContactListener(World world, Strategy strategy, AbstractMechanicsScreen screen) {
+        this.world = world;
+        this.strategy = strategy;
+        this.screen = screen;
+    }
 
 
     @Override
@@ -15,9 +25,8 @@ public class WorldContactListener implements ContactListener {
             Fixture player = fixtureA.getUserData().equals("playerMap") ? fixtureA : fixtureB;
             Fixture object = player == fixtureA ? fixtureB : fixtureA;
             if (object.getUserData().equals("ports")) {
-                System.out.println("koooook");
+                strategy.setScreen(new ChooseGoalScreen(strategy, 0, screen));
             }
-
         }
     }
 
