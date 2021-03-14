@@ -3,9 +3,8 @@ package com.mygdx.game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mygdx.game.Screens.AbstractMechanicsScreen;
-import com.mygdx.game.Screens.ChooseGoalScreen;
 import com.mygdx.game.Screens.FightScreen;
-import com.mygdx.game.Strategy;
+import com.mygdx.game.Screens.GameOverScreen;
 
 public class FightScreenContactListener implements ContactListener {
 
@@ -37,7 +36,7 @@ public class FightScreenContactListener implements ContactListener {
             System.out.println("no win");
         } else {
             System.out.println("2 win");
-            //strategy.setScreen(new ChooseGoalScreen(strategy, 0, screen, (((String) object.getUserData()).charAt(5))));
+            strategy.setScreen(new GameOverScreen(strategy, 0, screen));
         }
 //
 
