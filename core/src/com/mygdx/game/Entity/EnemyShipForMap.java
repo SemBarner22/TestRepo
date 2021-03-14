@@ -10,7 +10,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.Strategy;
 
-public class EnemyShipForMap extends ShipForMap {
+public class EnemyShipForMap extends Sprite {
     public World world;
     public Body b2body;
     public EnemyStrategy strategy;
@@ -45,9 +45,8 @@ public class EnemyShipForMap extends ShipForMap {
         b2body.setLinearDamping(Strategy.MOVE_MUL * 1f);
     }
 
-    @Override
-    public void updateTexture(Direction dir) {
-        switch (dir) {
+    public void updateTexture() {
+        switch (strategy.getDirection()) {
             case L: {
                 setRegion(new Texture("sprites/enemy_ship_to_right.png"));
                 break;
