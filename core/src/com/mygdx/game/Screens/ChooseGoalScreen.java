@@ -64,8 +64,11 @@ public class ChooseGoalScreen extends AbstractMechanicsScreen {
 //        label.pack();
         container.add(label).width(Strategy.V_WIDTH * 0.8f).center().expandX();
         container.row();
+        if (!config.desktop()) {
+            label.setFontScale(1.5f);
+        }
         Button investment = new TextButton(a, skin);
-        container.add(investment).left().padLeft(100);
+        container.add(investment).left().padLeft(100).width(150).height(150);;
 //        container.add(investment).bottom().padLeft(100);
         final String finalA = a;
         final String finalB = b;
@@ -83,7 +86,7 @@ public class ChooseGoalScreen extends AbstractMechanicsScreen {
             }
         });
         Button test = new TextButton(b, skin);
-        container.add(test).right().padRight(100);
+        container.add(test).right().padRight(100).width(150).height(150);
 //        container.add(test).bottom().padLeft(200);
         test.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {

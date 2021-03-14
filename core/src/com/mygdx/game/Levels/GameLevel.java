@@ -19,6 +19,7 @@ public class GameLevel {
     public String intel;
     public String briefing;
     public int patrolCount;
+    public static int finalLevel = 9;
 
     public TransitGroup[] transitGroups;
 
@@ -33,7 +34,7 @@ public class GameLevel {
             }
             case 2: {
                 briefing = "Glad you've made it here! We may survive one more day here. Return to base ASAP! Choose the one you are going to return to.";
-                patrolCount = 25;
+                patrolCount = 100;
                 transitGroups = new TransitGroup[0];
                 intel = intelFormatNone;
                 break;

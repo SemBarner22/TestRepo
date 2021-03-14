@@ -224,37 +224,37 @@ public class MapScreen extends AbstractMechanicsScreen {
     @Override
     public void show() {
         super.show();
-        Table navTable = new Table();
 
-        navTable.bottom().pad(10).defaults();
-        navTable.left().pad(100).defaults();
-        TextButton up = new TextButton("U", skin);
-        navTable.add(up).width(50).height(50);
+        if (!config.desktop()) {
+            Table navTable = new Table();
 
-        up.addListener(new ClickListener() {
-            public void clicked(InputEvent event, float x, float y) {
-                if (player.b2body.getLinearVelocity().y == 0) {
-                    movePlayer(new Vector2(0, Strategy.MOVE_MUL * 2f));
-//                    player.b2body.applyLinearImpulse(new Vector2(0, Strategy.MOVE_MUL * 1f), player.b2body.getWorldCenter(), true);
-                    player.updateTexture(PlayerShipForMap.Direction.U);
-                    moveEnemies(2f);
+            navTable.bottom().pad(10).defaults();
+            navTable.left().pad(200).defaults();
+            TextButton up = new TextButton("U", skin);
+            navTable.add(up).width(150).height(150);
+
+            up.addListener(new ClickListener() {
+                public void clicked(InputEvent event, float x, float y) {
+                    if (player.b2body.getLinearVelocity().y == 0) {
+                        player.b2body.applyLinearImpulse(new Vector2(0, Strategy.MOVE_MUL * 2f), player.b2body.getWorldCenter(), true);
+                        player.updateTexture(PlayerShipForMap.Direction.U);
+                        moveEnemies(2f);
+                    }
                 }
-            }
-        });
+            });
 
-        navTable.row();
-        TextButton left = new TextButton("L", skin);
-        navTable.add(left).width(50).height(50).padLeft(-100);
-        left.addListener(new ClickListener() {
-            public void clicked(InputEvent event, float x, float y) {
-                if (player.b2body.getLinearVelocity().x == 0) {
-                    movePlayer(new Vector2(-Strategy.MOVE_MUL * 2f, 0));
-//                    player.b2body.applyLinearImpulse(new Vector2(-Strategy.MOVE_MUL * 1f, 0), player.b2body.getWorldCenter(), true);
-                    player.updateTexture(PlayerShipForMap.Direction.L);
-                    moveEnemies(2f);
+            navTable.row();
+            TextButton left = new TextButton("L", skin);
+            navTable.add(left).width(150).height(150).padLeft(-300);
+            left.addListener(new ClickListener() {
+                public void clicked(InputEvent event, float x, float y) {
+                    if (player.b2body.getLinearVelocity().x == 0) {
+                        player.b2body.applyLinearImpulse(new Vector2(-Strategy.MOVE_MUL * 2f, 0), player.b2body.getWorldCenter(), true);
+                        player.updateTexture(PlayerShipForMap.Direction.L);
+                        moveEnemies(2f);
+                    }
                 }
-            }
-        });
+            });
 
 //        TextButton ok = new TextButton("ok", skin);
 //        navTable.add(ok);
@@ -264,34 +264,33 @@ public class MapScreen extends AbstractMechanicsScreen {
 //            }
 //        });
 
-        TextButton right = new TextButton("R", skin);
-        navTable.add(right).width(50).height(50);
-        right.addListener(new ClickListener() {
-            public void clicked(InputEvent event, float x, float y) {
-                if (player.b2body.getLinearVelocity().x == 0) {
-                    movePlayer(new Vector2(Strategy.MOVE_MUL * 2f, 0));
-//                    player.b2body.applyLinearImpulse(new Vector2(Strategy.MOVE_MUL * 1f, 0), player.b2body.getWorldCenter(), true);
-                    player.updateTexture(PlayerShipForMap.Direction.R);
-                    moveEnemies(2f);
+            TextButton right = new TextButton("R", skin);
+            navTable.add(right).width(150).height(150);
+            right.addListener(new ClickListener() {
+                public void clicked(InputEvent event, float x, float y) {
+                    if (player.b2body.getLinearVelocity().x == 0) {
+                        player.b2body.applyLinearImpulse(new Vector2(Strategy.MOVE_MUL * 2f, 0), player.b2body.getWorldCenter(), true);
+                        player.updateTexture(PlayerShipForMap.Direction.R);
+                        moveEnemies(2f);
+                    }
                 }
-            }
-        });
+            });
 
-        navTable.row();
-        TextButton down = new TextButton("D", skin);
-        navTable.add(down).width(50).height(50);
-        down.addListener(new ClickListener() {
-            public void clicked(InputEvent event, float x, float y) {
-                if (player.b2body.getLinearVelocity().y == 0) {
-                    movePlayer(new Vector2(0, -Strategy.MOVE_MUL * 2f));
-//                    player.b2body.applyLinearImpulse(new Vector2(0, -Strategy.MOVE_MUL * 1f), player.b2body.getWorldCenter(), true);
-                    player.updateTexture(PlayerShipForMap.Direction.D);
-                    moveEnemies(2f);
+            navTable.row();
+            TextButton down = new TextButton("D", skin);
+            navTable.add(down).width(150).height(150);
+            down.addListener(new ClickListener() {
+                public void clicked(InputEvent event, float x, float y) {
+                    if (player.b2body.getLinearVelocity().y == 0) {
+                        player.b2body.applyLinearImpulse(new Vector2(0, -Strategy.MOVE_MUL * 2f), player.b2body.getWorldCenter(), true);
+                        player.updateTexture(PlayerShipForMap.Direction.D);
+                        moveEnemies(2f);
+                    }
                 }
-            }
-        });
-        stage.addActor(navTable);
+            });
+            stage.addActor(navTable);
 
+        }
         Table table = new Table();
         table.top();
         table.setFillParent(true);
@@ -300,9 +299,14 @@ public class MapScreen extends AbstractMechanicsScreen {
         levelLabel = new Label("Level: " + (ChooseGoalScreen.level - 1), skin);
         coordinateLabel = new Label(formatPlayerCoordinate(), skin);
 
-        table.add(missionLabel).expandX().padTop(10);
-        table.add(levelLabel).expandX().padTop(10);
-        table.add(coordinateLabel).expandX().padTop(10);
+        if (!config.desktop()) {
+            missionLabel.setFontScale(3);
+            levelLabel.setFontScale(3);
+            coordinateLabel.setFontScale(3);
+        }
+        table.add(missionLabel).expandX().padTop(10).height(200);
+        table.add(levelLabel).expandX().padTop(10).height(200);
+        table.add(coordinateLabel).expandX().padTop(10).height(200);
         table.row();
 
         stage.addActor(table);
@@ -341,7 +345,7 @@ public class MapScreen extends AbstractMechanicsScreen {
 //            table.add(new Label(i + "tres long0 long1 long2 long3 long4 long5 long6 long7 long8 long9 long10 long11 long12", skin));
 //        }
 
-//    }
+    //    }
     private void movePlayer(Vector2 vec) {
         if (player != null) {
             player.b2body.applyLinearImpulse(vec, player.b2body.getWorldCenter(), true);
