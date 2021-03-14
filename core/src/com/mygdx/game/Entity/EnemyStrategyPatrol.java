@@ -2,6 +2,9 @@ package com.mygdx.game.Entity;
 
 import com.badlogic.gdx.math.Vector2;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 public class EnemyStrategyPatrol implements EnemyStrategy {
     enum Direction {
         R, U, L, D;
@@ -10,6 +13,11 @@ public class EnemyStrategyPatrol implements EnemyStrategy {
     private final int range = 4;
     private Direction cur = Direction.R;
     private int steps = 0;
+
+    public EnemyStrategyPatrol() {
+        steps = (int) (Math.random() * range);
+        cur = Collections.unmodifiableList(Arrays.asList(Direction.values())).get((int) (Math.random() * (4 - 1e-5)));
+    }
 
     @Override
     public Vector2 nextMove() {
