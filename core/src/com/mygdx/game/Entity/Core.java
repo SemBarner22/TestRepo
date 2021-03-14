@@ -47,7 +47,8 @@ public class Core extends Sprite {
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
         if (b2body.getPosition().y < 37) {
             destroyed = true;
-            world.destroyBody(b2body);
+            b2body.applyLinearImpulse(new Vector2(0, 1000000), b2body.getWorldCenter(), true);
+            b2body.setGravityScale(0);
             return false;
         }
         return true;
