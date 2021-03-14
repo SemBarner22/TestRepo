@@ -6,11 +6,13 @@ import com.mygdx.game.Screens.AbstractMechanicsScreen;
 import com.mygdx.game.Screens.FightScreen;
 import com.mygdx.game.Screens.GameOverScreen;
 
+import java.sql.Time;
+
 public class FightScreenContactListener implements ContactListener {
 
     World world;
     Strategy strategy;
-    AbstractMechanicsScreen screen;
+    FightScreen screen;
     Screen screen2;
     public FightScreenContactListener(World world, Strategy strategy, FightScreen fightScreen, Screen emptyScreen) {
         this.world = world;
@@ -30,12 +32,13 @@ public class FightScreenContactListener implements ContactListener {
         } else if (("core 1".equals(fixtureA.getUserData()) && "ship 0".equals(fixtureB.getUserData())) ||
                 ("core 1".equals(fixtureB.getUserData()) && "ship 0".equals(fixtureA.getUserData()))) {
             System.out.println("1 win");
+
             strategy.setScreen(screen2);
         } else if (("core 1".equals(fixtureA.getUserData()) && "core -1".equals(fixtureB.getUserData())) ||
                 ("core 1".equals(fixtureB.getUserData()) && "core -1".equals(fixtureA.getUserData()))) {
             System.out.println("no win");
         } else {
-            System.out.println("2 win");
+
             strategy.setScreen(new GameOverScreen(strategy, 0, screen));
         }
 //

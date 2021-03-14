@@ -117,6 +117,18 @@ public class FightScreen extends AbstractMechanicsScreen {
             fdef.shape = shape;
             body.createFixture(fdef);
         }
+        for (MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+            bdef.type = BodyDef.BodyType.StaticBody;
+            bdef.position.set((rect.getX() + rect.getWidth() / 2) , (rect.getY() + rect.getHeight() / 2) );
+
+            body = world.createBody(bdef);
+
+            shape.setAsBox(rect.getWidth() / 2, rect.getHeight() / 2);
+            fdef.shape = shape;
+            body.createFixture(fdef).setUserData("dead");
+        }
         world.setContactListener(new FightScreenContactListener(world, strategy, this, emptyScreen));
     }
 
@@ -181,7 +193,6 @@ public class FightScreen extends AbstractMechanicsScreen {
     }
 
     public void handleInput(float dt) {
-        System.out.println(isFireEnemy + " " + timer + " " + 1);
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && !isFirePlayer) {
             isFirePlayer = true;
             corePlayer = new Core(world, this, shipBodyPlayer.b2body.getPosition().x, shipBodyPlayer.b2body.getPosition().y, timerAngle * Math.PI / 180, atlas3, 1);
@@ -196,7 +207,7 @@ public class FightScreen extends AbstractMechanicsScreen {
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT) && shipBodyPlayer.b2body.getLinearVelocity().x >= -50) {
             shipBodyPlayer.b2body.applyLinearImpulse(new Vector2(-move, 0), shipBodyPlayer.b2body.getWorldCenter(), true);
-            shipSailPlayer.b2body.applyLinearImpulse(new Vector2(-move, 0), shipBackPlayer.b2body.getWorldCenter(), true);
+            shipSailPlayer.b2body.applyLinearImpulse(new Vector2(-move, 0), shipSailPlayer.b2body.getWorldCenter(), true);
             shipBackPlayer.b2body.applyLinearImpulse(new Vector2(-move, 0), shipBackPlayer.b2body.getWorldCenter(), true);
             shipCormaPlayer.b2body.applyLinearImpulse(new Vector2(-move, 0), shipCormaPlayer.b2body.getWorldCenter(), true);
             shipMachtaPlayer.b2body.applyLinearImpulse(new Vector2(-move, 0), shipMachtaPlayer.b2body.getWorldCenter(), true);
@@ -209,7 +220,6 @@ public class FightScreen extends AbstractMechanicsScreen {
         if (timerAngle < 0) {
             timerAngle += 90;
         }
-        System.out.println(isFireEnemy + " " + timer);
         if (!isFireEnemy && timer < -1) {
             isFireEnemy = true;
             timer = 10;
@@ -235,13 +245,14 @@ public class FightScreen extends AbstractMechanicsScreen {
             coreEnemy.b2body.setActive(isFireEnemy);
             if (!isFireEnemy) {
                 //world.destroyBody(coreEnemy.b2body);
+                coreEnemy = null;
             }
         }
         if (isFirePlayer) {
             gameCamera.position.x = corePlayer.b2body.getPosition().x;
             isFirePlayer = corePlayer.update(dt);
             if (!isFirePlayer) {
-               // world.destroyBody(corePlayer.b2body);
+                //world.destroyBody(corePlayer.b2body);
             }
         } else {
             gameCamera.position.x = Math.max(shipBodyPlayer.b2body.getPosition().x, gameCamera.position.x - 10);
