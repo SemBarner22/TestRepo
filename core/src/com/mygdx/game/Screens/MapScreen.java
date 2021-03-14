@@ -88,7 +88,7 @@ public class MapScreen extends AbstractMechanicsScreen {
         gamePort = new FitViewport(Strategy.V_WIDTH / Strategy.PPM, Strategy.V_HEIGHT / Strategy.PPM, gameCamera);
 
         music = Strategy.manager.get("music/audio/mapMusic.mp3", Music.class);
-        music.setLooping(false);
+        music.setLooping(true);
         music.play();
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("main_map.tmx");
