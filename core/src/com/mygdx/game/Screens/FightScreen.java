@@ -140,6 +140,11 @@ public class FightScreen extends AbstractMechanicsScreen {
         shipSailPlayer.update(dt);
         shipMachtaPlayer.update(dt);
         shipCormaPlayer.update(dt);
+        shipBodyEnemy.update(dt);
+        shipBackEnemy.update(dt);
+        shipSailEnemy.update(dt);
+        shipMachtaEnemy.update(dt);
+        shipCormaEnemy.update(dt);
         if (isFire) {
             gameCamera.position.x = core.b2body.getPosition().x;
             isFire = core.update(dt);

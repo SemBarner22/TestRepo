@@ -22,7 +22,7 @@ public class ShipCorma extends Sprite {
         if (player == 1) {
             iron = new TextureRegion(getTexture(), 145, 0, 30, 32);
         } else {
-            iron = new TextureRegion(getTexture(), 32, 0, 32, 32);
+            iron = new TextureRegion(getTexture(), 145, 0, 32, 32);
         }
         setBounds(0, 0, 30, 20);
         setRegion(iron);
