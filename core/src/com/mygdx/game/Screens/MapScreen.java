@@ -234,7 +234,6 @@ public class MapScreen extends AbstractMechanicsScreen {
         up.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 if (player.b2body.getLinearVelocity().y == 0) {
-                    movePlayer(new Vector2(0, Strategy.MOVE_MUL * 1f));
                     player.b2body.applyLinearImpulse(new Vector2(0, Strategy.MOVE_MUL * 1f), player.b2body.getWorldCenter(), true);
                     player.updateTexture(PlayerShipForMap.Direction.U);
                     moveEnemies();
@@ -371,10 +370,10 @@ public class MapScreen extends AbstractMechanicsScreen {
             player.updateTexture(PlayerShipForMap.Direction.U);
             moveEnemies();
         } else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            movePlayer(new Vector2(0, Strategy.MOVE_MUL * 0.25f));
+            movePlayer(new Vector2(0, Strategy.MOVE_MUL * 0.125f));
 //            player.b2body.applyLinearImpulse(new Vector2(0, Strategy.MOVE_MUL * 0.25f), player.b2body.getWorldCenter(), true);
             player.updateTexture(PlayerShipForMap.Direction.U);
-            moveEnemies(0.25f);
+            moveEnemies(0.125f);
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
             movePlayer(new Vector2(0, -Strategy.MOVE_MUL * 1f));
@@ -382,9 +381,9 @@ public class MapScreen extends AbstractMechanicsScreen {
             player.updateTexture(PlayerShipForMap.Direction.D);
             moveEnemies();
         } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            movePlayer(new Vector2(0, -Strategy.MOVE_MUL * 0.25f));
+            movePlayer(new Vector2(0, -Strategy.MOVE_MUL * 0.125f));
             player.updateTexture(PlayerShipForMap.Direction.D);
-            moveEnemies(0.25f);
+            moveEnemies(0.125f);
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
             movePlayer(new Vector2(Strategy.MOVE_MUL * 1f, 0));
@@ -392,9 +391,9 @@ public class MapScreen extends AbstractMechanicsScreen {
             player.updateTexture(PlayerShipForMap.Direction.R);
             moveEnemies();
         } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            movePlayer(new Vector2(Strategy.MOVE_MUL * 0.25f, 0));
+            movePlayer(new Vector2(Strategy.MOVE_MUL * 0.125f, 0));
             player.updateTexture(PlayerShipForMap.Direction.R);
-            moveEnemies();
+            moveEnemies(0.125f);
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
             movePlayer(new Vector2(-Strategy.MOVE_MUL * 1f, 0));
@@ -402,9 +401,9 @@ public class MapScreen extends AbstractMechanicsScreen {
             player.updateTexture(PlayerShipForMap.Direction.L);
             moveEnemies();
         } else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            movePlayer(new Vector2(-Strategy.MOVE_MUL * 0.25f, 0));
+            movePlayer(new Vector2(-Strategy.MOVE_MUL * 0.125f, 0));
             player.updateTexture(PlayerShipForMap.Direction.L);
-            moveEnemies();
+            moveEnemies(0.125f);
         }
     }
 

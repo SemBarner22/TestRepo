@@ -11,7 +11,7 @@ public class EnemyStrategyPatrol implements EnemyStrategy {
         R, U, L, D;
     }
 
-    private final int range = 32;
+    private final int range = 16;
     private final int stepCost = 4;
     private Direction cur = Direction.R;
     private int steps = 0;
@@ -24,7 +24,6 @@ public class EnemyStrategyPatrol implements EnemyStrategy {
     @Override
     public Vector2 nextMove(float k) {
         Vector2 ret = null;
-        k /= 2;
         switch (cur) {
             case R: {
                 ret = new Vector2(Strategy.MOVE_MUL * k, 0);
