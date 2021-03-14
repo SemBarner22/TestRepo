@@ -67,6 +67,7 @@ public class MapScreen extends AbstractMechanicsScreen {
 
     static String mission = "aaaaa";
     public Label missionLabel;
+    public Label levelLabel;
     public Label coordinateLabel;
 
     public GameLevel level = new GameLevel(1);
@@ -292,9 +293,11 @@ public class MapScreen extends AbstractMechanicsScreen {
         table.setFillParent(true);
 
         missionLabel = new Label(mission, skin);
+        levelLabel = new Label("Level: " + (ChooseGoalScreen.level - 1), skin);
         coordinateLabel = new Label(formatPlayerCoordinate(), skin);
 
         table.add(missionLabel).expandX().padTop(10);
+        table.add(levelLabel).expandX().padTop(10);
         table.add(coordinateLabel).expandX().padTop(10);
         table.row();
 
