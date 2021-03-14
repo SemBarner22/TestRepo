@@ -11,7 +11,8 @@ public class EnemyStrategyPatrol implements EnemyStrategy {
         R, U, L, D;
     }
 
-    private final int range = 4;
+    private final int range = 32;
+    private final int stepCost = 4;
     private Direction cur = Direction.R;
     private int steps = 0;
 
@@ -26,7 +27,7 @@ public class EnemyStrategyPatrol implements EnemyStrategy {
         switch (cur) {
             case R: {
                 ret = new Vector2(Strategy.MOVE_MUL * k, 0);
-                steps++;
+                steps += stepCost * k;
                 if (steps == range) {
                     steps = 0;
                     cur = Direction.U;
@@ -35,7 +36,7 @@ public class EnemyStrategyPatrol implements EnemyStrategy {
             }
             case U: {
                 ret = new Vector2(0, Strategy.MOVE_MUL * k);
-                steps++;
+                steps += stepCost * k;
                 if (steps == range) {
                     steps = 0;
                     cur = Direction.L;
@@ -44,7 +45,7 @@ public class EnemyStrategyPatrol implements EnemyStrategy {
             }
             case L: {
                 ret = new Vector2(-Strategy.MOVE_MUL * k, 0);
-                steps++;
+                steps += stepCost * k;;
                 if (steps == range) {
                     steps = 0;
                     cur = Direction.D;
@@ -53,7 +54,7 @@ public class EnemyStrategyPatrol implements EnemyStrategy {
             }
             case D: {
                 ret = new Vector2(0, -Strategy.MOVE_MUL * k);
-                steps++;
+                steps += stepCost * k;
                 if (steps == range) {
                     steps = 0;
                     cur = Direction.R;
