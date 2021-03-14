@@ -152,9 +152,11 @@ public class FightScreen extends AbstractMechanicsScreen {
 
         missionLabel = new Label("" + timerAngle, skin);
 
-        table.add(missionLabel).expandX().padTop(10).width(150).height(150);
         if (!config.desktop()) {
             missionLabel.setFontScale(3);
+            table.add(missionLabel).expandX().padTop(10).width(150).height(150);
+        } else {
+            table.add(missionLabel).expandX().padTop(5).center();
         }
         table.row();
 

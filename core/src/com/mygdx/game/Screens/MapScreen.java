@@ -308,10 +308,14 @@ public class MapScreen extends AbstractMechanicsScreen {
             missionLabel.setFontScale(3);
             levelLabel.setFontScale(3);
             coordinateLabel.setFontScale(3);
+            table.add(missionLabel).expandX().padTop(10).height(200);
+            table.add(levelLabel).expandX().padTop(10).height(200);
+            table.add(coordinateLabel).expandX().padTop(10).height(200);
+        } else {
+            table.add(missionLabel).expandX().left().padLeft(5).top();
+            table.add(levelLabel).expandX().center().top();
+            table.add(coordinateLabel).expandX().right().padRight(5).top();
         }
-        table.add(missionLabel).expandX().padTop(10).height(200);
-        table.add(levelLabel).expandX().padTop(10).height(200);
-        table.add(coordinateLabel).expandX().padTop(10).height(200);
         table.row();
 
         stage.addActor(table);
