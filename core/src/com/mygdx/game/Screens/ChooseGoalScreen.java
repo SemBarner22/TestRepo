@@ -105,10 +105,10 @@ public class ChooseGoalScreen extends AbstractMechanicsScreen {
     }
 
     private void triggerNextLevel() {
+        mapScreen.rearrageEnemies();
         level++;
         mapScreen.gameLevel = new GameLevel(level);
         labelText = mapScreen.gameLevel.getBriefing();
-        mapScreen.rearrageEnemies();
         strategy.setScreen(previousScreen);
     }
 }
