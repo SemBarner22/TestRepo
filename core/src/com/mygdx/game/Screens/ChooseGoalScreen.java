@@ -73,7 +73,11 @@ public class ChooseGoalScreen extends AbstractMechanicsScreen {
         test.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 strategy.goal = finalB.charAt(0) - 'A' + 1;
-                MapScreen.mission = "Go to port " + finalB;
+                MapScreen.mission = String.format(
+                        "Go to port %s [%s]",
+                        finalB,
+                        portToCoordinate.get(finalB)
+                );
                 strategy.setScreen(previousScreen);
             }
         });
