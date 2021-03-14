@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.mygdx.game.Levels.GameLevel;
 import com.mygdx.game.Strategy;
 
 import java.util.HashMap;
@@ -13,8 +14,12 @@ import java.util.Map;
 
 public class ChooseGoalScreen extends AbstractMechanicsScreen {
 
+    public static int level = 1;
+    public static String labelText = "Where would you go next?";
+    public Label label;
     private char goal;
     private Map<String, String> portToCoordinate = new HashMap<>();
+    public MapScreen mapScreen;
 
     public ChooseGoalScreen(Strategy strategy, int curPlayer, Screen previousScreen, char goal) {
         super(strategy, curPlayer, previousScreen);
@@ -23,6 +28,8 @@ public class ChooseGoalScreen extends AbstractMechanicsScreen {
         portToCoordinate.put("B", "X: 114, Y: 16");
         portToCoordinate.put("C", "X: 25, Y: 114");
         portToCoordinate.put("D", "X: 113, Y: 111");
+        mapScreen = (MapScreen) previousScreen;
+        mapScreen.gameLevel = new GameLevel(level);
     }
 
     @Override
@@ -49,7 +56,8 @@ public class ChooseGoalScreen extends AbstractMechanicsScreen {
 //        Table table = new Table();
 //        stage.addActor(table);
 //        table.pad(100).defaults().expandX().space(4);
-        container.add(new Label("Where would you go next?", skin)).center().padLeft(100).expandX();
+        label = new Label(labelText, skin);
+        container.add(label).center().padLeft(100).expandX();
         container.row();
         Button investment = new TextButton(a, skin);
         container.add(investment).left().padLeft(100);
@@ -64,7 +72,9 @@ public class ChooseGoalScreen extends AbstractMechanicsScreen {
                         finalA,
                         portToCoordinate.get(finalA)
                 );
-                strategy.setScreen(previousScreen);
+                triggerNextLevel();
+
+
             }
         });
         Button test = new TextButton(b, skin);
@@ -78,6 +88,7 @@ public class ChooseGoalScreen extends AbstractMechanicsScreen {
                         finalB,
                         portToCoordinate.get(finalB)
                 );
+                level++;
                 strategy.setScreen(previousScreen);
             }
         });
@@ -85,8 +96,15 @@ public class ChooseGoalScreen extends AbstractMechanicsScreen {
 
     @Override
     public void render(float delta) {
-
         super.render(delta);
+        label.setText(labelText);
     }
 
+    private void triggerNextLevel() {
+        level++;
+        mapScreen.gameLevel = new GameLevel(level);
+        labelText = mapScreen.gameLevel.briefing + String.format("%n%n") + mapScreen.gameLevel.intel;
+        mapScreen.rearrageEnemies();
+        strategy.setScreen(previousScreen);
+    }
 }

@@ -33,6 +33,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Config;
 import com.mygdx.game.Entity.*;
+import com.mygdx.game.Levels.GameLevel;
 import com.mygdx.game.Scenes.MapHud;
 import com.mygdx.game.Strategy;
 import com.mygdx.game.WorldContactListener;
@@ -41,6 +42,7 @@ import java.util.ArrayList;
 
 public class MapScreen extends AbstractMechanicsScreen {
 
+    public GameLevel gameLevel;
     public char goal = 'O';
     private int row_height;
 
@@ -59,13 +61,15 @@ public class MapScreen extends AbstractMechanicsScreen {
 
     private PlayerShipForMap player;
     private ArrayList<EnemyShipForMap> enemies;
-    private int enemiesCount = 100;
+    private int enemiesCount = 256;
     private World world;
     private Box2DDebugRenderer b2dr;
 
     static String mission = "aaaaa";
     public Label missionLabel;
     public Label coordinateLabel;
+
+    public GameLevel level = new GameLevel(1);
 
     public MapScreen(Strategy strategy, int i, Screen emptyScreen) {
         super(strategy, i, emptyScreen);
@@ -94,22 +98,23 @@ public class MapScreen extends AbstractMechanicsScreen {
         player = new PlayerShipForMap(world);
         enemies = new ArrayList<>();
         for (int u = 0; u < enemiesCount; u++) {
-            boolean transitStrategy = Math.random() < 0.5;
-            EnemyStrategy enemyStrategy;
-            float x, y;
-            y = (float) (16 + Math.random() * 96);
-            if (transitStrategy) {
-                boolean right = Math.random() < 0.5;
-                x = right ? 0 : 128 * 16 - 1;
-                enemyStrategy = new EnemyStrategyTransit(right);
-            } else {
-                enemyStrategy = new EnemyStrategyPatrol();
-                x = (float) Math.random() * 92;
-            }
-            x = (float) Math.floor(x);
-            y = (float) Math.floor(y);
-            enemies.add(new EnemyShipForMap(world, enemyStrategy, x, y));
-            System.out.format("Spawned %s enemy at %f %f%n", transitStrategy ? "transit" : "patrol", x, y);
+//            boolean transitStrategy = Math.random() < 0.5;
+//            EnemyStrategy enemyStrategy;
+//            float x, y;
+//            y = (float) (16 + Math.random() * 96);
+//            if (transitStrategy) {
+//                boolean right = Math.random() < 0.5;
+//                x = right ? 0 : 128 * 16 - 1;
+//                enemyStrategy = new EnemyStrategyTransit(right);
+//            } else {
+//                enemyStrategy = new EnemyStrategyPatrol();
+//                x = (float) Math.random() * 92;
+//            }
+//            x = (float) Math.floor(x);
+//            y = (float) Math.floor(y);
+
+            enemies.add(new EnemyShipForMap(world, null, 256 / Strategy.PPM, 256 / Strategy.PPM));
+//            System.out.format("Spawned %s enemy at %f %f%n", transitStrategy ? "transit" : "patrol", x, y);
         }
 
 //        stage = new Stage();
@@ -332,6 +337,9 @@ public class MapScreen extends AbstractMechanicsScreen {
 //    }
     public void moveEnemies() {
         for (EnemyShipForMap enemy : enemies) {
+            if (!enemy.enabled) {
+                continue;
+            }
             enemy.b2body.applyLinearImpulse(enemy.strategy.nextMove(), enemy.b2body.getWorldCenter(), true);
             enemy.updateTexture();
         }
@@ -436,4 +444,31 @@ public class MapScreen extends AbstractMechanicsScreen {
         renderer.setView(gameCamera);
     }
 
+    public void rearrageEnemies() {
+        for (EnemyShipForMap enemy : enemies) {
+            enemy.enabled = false;
+            enemy.strategy = null;
+            enemy.x = 256 / Strategy.PPM;
+            enemy.y = 256 / Strategy.PPM;
+        }
+        int u = 0;
+        for (int i = 0; i < gameLevel.patrolCount; i++, u++) {
+            EnemyShipForMap enemy = enemies.get(u);
+            enemy.x = (float) Math.floor(Math.random() * 128);
+            enemy.y = (float) Math.floor(16 + Math.random() * (128 - 16 * 2));
+            enemy.strategy = new EnemyStrategyPatrol();
+            enemy.enabled = true;
+            System.out.format("Spawned patrol enemy at %f %f%n", enemy.x, enemy.y);
+        }
+        for (GameLevel.TransitGroup group : gameLevel.transitGroups) {
+            for (int i = 0; i < group.groupSize; i++, u++) {
+                EnemyShipForMap enemy = enemies.get(u);
+                enemy.x = group.right ? 0 : 127;
+                enemy.y = (float) Math.floor(group.groupMeanY + Math.random() * group.groupSize / 2);
+                enemy.strategy = new EnemyStrategyTransit(group.right);
+                enemy.enabled = true;
+                System.out.format("Spawned transit enemy at %f %f%n", enemy.x, enemy.y);
+            }
+        }
+    }
 }
