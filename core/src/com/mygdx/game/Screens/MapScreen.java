@@ -53,7 +53,6 @@ public class MapScreen extends AbstractMechanicsScreen {
     private Viewport gamePort;
     private TextureAtlas atlas;
 
-    private ShapeRenderer sr;
     private TmxMapLoader mapLoader;
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
@@ -63,7 +62,6 @@ public class MapScreen extends AbstractMechanicsScreen {
     private int enemiesCount = 100;
     private World world;
     private Box2DDebugRenderer b2dr;
-
 
     static String mission = "aaaaa";
     public Label missionLabel;
