@@ -14,18 +14,18 @@ public class ShipBody extends Sprite {
     public Body b2body;
     private TextureRegion ship;
 
-    public ShipBody(World world, FightScreen fightScreen) {
+    public ShipBody(World world, FightScreen fightScreen, int x, int y) {
         super(fightScreen.getAtlas().findRegion("main_body"));
         this.world = world;
-        defineShip();
+        defineShip(x, y);
         TextureRegion iron = new TextureRegion(getTexture(), 64, 0, 80, 32);
         setBounds(0, 0, 80, 20);
         setRegion(iron);
     }
 
-    public void defineShip() {
+    public void defineShip(int x, int y) {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(16 * 2 - 2 , 32);
+        bdef.position.set(x, y);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
         FixtureDef fdef = new FixtureDef();
