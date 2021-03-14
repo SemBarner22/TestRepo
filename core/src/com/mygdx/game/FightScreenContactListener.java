@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mygdx.game.Screens.AbstractMechanicsScreen;
 import com.mygdx.game.Screens.FightScreen;
@@ -33,6 +34,7 @@ public class FightScreenContactListener implements ContactListener {
                 ("core 1".equals(fixtureB.getUserData()) && "ship 0".equals(fixtureA.getUserData()))) {
             System.out.println("1 win");
             if (screen.nextScreen == null) {
+                Strategy.manager.get("music/sounds/babax.mp3", Sound.class).play();
                 screen.nextScreen = screen2;
                 screen.timerForNextScreen = 5;
             }
@@ -42,6 +44,7 @@ public class FightScreenContactListener implements ContactListener {
         } else if (("ship 1".equals(fixtureA.getUserData()) || "ship 1".equals(fixtureB.getUserData()))) {
             System.out.println("2 win");
             if (screen.nextScreen == null) {
+                Strategy.manager.get("music/sounds/babax.mp3", Sound.class).play();
                 screen.nextScreen = new GameOverScreen(strategy, 0, screen);
                 screen.timerForNextScreen = 5;
                 //strategy.setScreen(new GameOverScreen(strategy, 0, screen));

@@ -99,7 +99,7 @@ public class FightScreen extends AbstractMechanicsScreen {
         shipCormaPlayer = new ShipCorma(world, this, start + 44 , 16 * 3 + 4, 1, atlas1, "front_body");
         shipMachtaPlayer = new ShipMachta(world, this, start + 2, 16 * 3 + 8, 1, atlas1, "wood");
 
-        music = Strategy.manager.get("music/audio/mario_music.ogg", Music.class);
+        music = Strategy.manager.get("music/audio/mainTheme.mp3", Music.class);
         music.setLooping(true);
         music.play();
         Random rnd = new Random();
@@ -213,7 +213,7 @@ public class FightScreen extends AbstractMechanicsScreen {
     public void handleInput(float dt) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && !isFirePlayer) {
             isFirePlayer = true;
-            Strategy.manager.get("music/sounds/bump.wav", Sound.class);
+            Strategy.manager.get("music/sounds/bump.mp3", Sound.class).play();
             corePlayer = new Core(world, this, shipBodyPlayer.b2body.getPosition().x, shipBodyPlayer.b2body.getPosition().y, timerAngle * Math.PI / 180, atlas3, 1);
         }
         float move = 5f;
@@ -241,9 +241,7 @@ public class FightScreen extends AbstractMechanicsScreen {
         }
         if (!isFireEnemy && timer < -1 && nextScreen == null) {
             isFireEnemy = true;
-            Strategy.manager.get("music/sounds/bump.wav", Sound.class);
-            music.setLooping(true);
-            music.play();
+            Strategy.manager.get("music/sounds/bump.mp3", Sound.class).play();
             timer = 10;
             float dist = shipBodyEnemy.b2body.getPosition().x - shipCormaPlayer.b2body.getPosition().x;
             coreEnemy = new Core(world, this, shipCormaEnemy.b2body.getPosition().x, shipCormaEnemy.b2body.getPosition().y, Math.asin(dist / 1000), atlas3, -1);
@@ -292,6 +290,7 @@ public class FightScreen extends AbstractMechanicsScreen {
     @Override
     public void render(float delta) {
         if (nextScreen != null && timerForNextScreen < 0) {
+            music.stop();
             strategy.setScreen(nextScreen);
         }
         update(delta);

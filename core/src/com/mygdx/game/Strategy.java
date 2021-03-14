@@ -65,8 +65,10 @@ public class Strategy extends Game {
 	@Override
 	public void create () {
 	    manager = new AssetManager();
-	    manager.load("music/audio/mario_music.ogg", Music.class);
-	    manager.load("music/sounds/bump.wav", Sound.class);
+	    manager.load("music/audio/mainTheme.mp3", Music.class);
+	    manager.load("music/audio/mapMusic.mp3", Music.class);
+	    manager.load("music/sounds/bump.mp3", Sound.class);
+	    manager.load("music/sounds/babax.mp3", Sound.class);
 		manager.finishLoading();
 	    batch = new SpriteBatch();
 		startButtonTexture = new Texture(Gdx.files.internal("Interface/start_button.png"));
