@@ -63,14 +63,14 @@ public class FightScreen extends AbstractMechanicsScreen {
         gameCamera.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
         world = new World(new Vector2(0, -10), true);
         b2dr = new Box2DDebugRenderer();
-        shipBodyPlayer = new ShipBody(world, this, 16 * 2 - 2 , 32, 1);
-        shipBackPlayer = new ShipBack(world, this, -7 , 48, 1);
+        shipBodyPlayer = new ShipBody(world, this);
+        shipBackPlayer = new ShipBack(world, this);
         shipSailPlayer = new ShipSail(world, this);
         shipCormaPlayer = new ShipCorma(world, this);
         shipMachtaPlayer = new ShipMachta(world, this);
 
-        shipBodyEnemy = new ShipBody(world, this, 1200 , 32, 0);
-        shipBackEnemy = new ShipBack(world, this, 1239 , 48, 0);
+        shipBodyEnemy = new ShipBody(world, this);
+        shipBackEnemy = new ShipBack(world, this);
         shipSailEnemy = new ShipSail(world, this);
         shipCormaEnemy = new ShipCorma(world, this);
         shipMachtaEnemy = new ShipMachta(world, this);
