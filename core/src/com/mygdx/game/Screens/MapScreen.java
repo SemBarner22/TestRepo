@@ -38,6 +38,7 @@ import com.mygdx.game.Entity.EnemyStrategy;
 import com.mygdx.game.Entity.EnemyStrategyPatrol;
 import com.mygdx.game.Entity.EnemyStrategyTransit;
 import com.mygdx.game.Entity.PlayerShipForMap;
+import com.mygdx.game.Scenes.MapHud;
 import com.mygdx.game.Strategy;
 import com.mygdx.game.WorldContactListener;
 
@@ -48,6 +49,7 @@ public class MapScreen extends AbstractMechanicsScreen {
     public char goal = 'O';
     private int row_height;
 
+//    private MapHud hud;
     private Config config;
     private Batch batch;
     private Strategy game;
@@ -67,8 +69,13 @@ public class MapScreen extends AbstractMechanicsScreen {
     private World world;
     private Box2DDebugRenderer b2dr;
 
+
+    static String mission = "aaaaa";
+    public Label missionLabel;
+
     public MapScreen(Strategy strategy, int i, Screen emptyScreen) {
         super(strategy, i, emptyScreen);
+        mission = "Go to port A";
         this.config = strategy.config;
 
         atlas = new TextureAtlas("ship_set.txt");
@@ -82,8 +89,8 @@ public class MapScreen extends AbstractMechanicsScreen {
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("main_map.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1 / Strategy.PPM);
-        sr = new ShapeRenderer();
-        sr.setColor(Color.CYAN);
+//        sr = new ShapeRenderer();
+//        sr.setColor(Color.CYAN);
         gameCamera.position.set((gamePort.getWorldWidth() / 2) / Strategy.PPM, (gamePort.getWorldHeight() / 2) / Strategy.PPM, 0);
 
         row_height = Gdx.graphics.getWidth() / 12;
@@ -111,71 +118,21 @@ public class MapScreen extends AbstractMechanicsScreen {
             System.out.format("Spawned %s enemy at %f %f%n", transitStrategy ? "transit" : "patrol", x, y);
         }
 
-        stage = new Stage();
-        Skin skin = new Skin(Gdx.files.internal("uiskin.json"));
-        Gdx.input.setInputProcessor(stage);
+//        stage = new Stage();
 
-        container = new Table();
-        stage.addActor(container);
-        container.setFillParent(true);
 
-        Table navTable = new Table();
-
-        navTable.bottom().pad(10).defaults();
-        navTable.left().pad(10).defaults();
-        TextButton up = new TextButton("Up", skin);
-        navTable.add(up);
-
-        up.addListener(new InputListener() {
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                if (player.b2body.getLinearVelocity().y == 0) {
-                    player.b2body.applyLinearImpulse(new Vector2(0, 64f), player.b2body.getWorldCenter(), true);
-                }
-                return true;
-            }
-        });
-
-        navTable.row();
-        TextButton left = new TextButton("left", skin);
-        navTable.add(left);
-        left.addListener(new ClickListener() {
-            public void clicked(InputEvent event, float x, float y) {
-                if (player.b2body.getLinearVelocity().x == 0) {
-                    player.b2body.applyLinearImpulse(new Vector2(-Strategy.MOVE_MUL * 1f, 0), player.b2body.getWorldCenter(), true);
-                }
-            }
-        });
-
-        TextButton ok = new TextButton("ok", skin);
-        navTable.add(ok);
-        ok.addListener(new ClickListener() {
-            public void clicked(InputEvent event, float x, float y) {
-
-            }
-        });
-
-        TextButton right = new TextButton("right", skin);
-        navTable.add(right);
-        right.addListener(new ClickListener() {
-            public void clicked(InputEvent event, float x, float y) {
-                if (player.b2body.getLinearVelocity().x == 0) {
-                    player.b2body.applyLinearImpulse(new Vector2(Strategy.MOVE_MUL * 1f, 0), player.b2body.getWorldCenter(), true);
-                }
-            }
-        });
-
-        navTable.row();
-        TextButton down = new TextButton("down", skin);
-        navTable.add(down);
-        down.addListener(new ClickListener() {
-            public void clicked(InputEvent event, float x, float y) {
-                if (player.b2body.getLinearVelocity().y == 0) {
-                    player.b2body.applyLinearImpulse(new Vector2(0, -Strategy.MOVE_MUL * 1f), player.b2body.getWorldCenter(), true);
-                }
-            }
-        });
-        stage.addActor(navTable);
-
+//        Table table = new Table();
+//        table.top();
+//        table.setFillParent(true);
+//
+//
+//        missionLabel = new Label(mission, skin);
+//
+//        table.add(missionLabel).expandX().padTop(10);
+//
+//        stage.addActor(table);
+//        hud = new MapHud(game.batch);
+//        hud.setNewMission("Get to Port A");
 
         PolygonShape shape = new PolygonShape();
         FixtureDef fdef = new FixtureDef();
@@ -255,6 +212,77 @@ public class MapScreen extends AbstractMechanicsScreen {
     public TextureAtlas getAtlas() {
         return atlas;
     }
+
+    @Override
+    public void show() {
+        super.show();
+        Table navTable = new Table();
+
+        navTable.bottom().pad(10).defaults();
+        navTable.left().pad(10).defaults();
+        TextButton up = new TextButton("Up", skin);
+        navTable.add(up);
+
+        up.addListener(new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                if (player.b2body.getLinearVelocity().y == 0) {
+                    player.b2body.applyLinearImpulse(new Vector2(0, 64f), player.b2body.getWorldCenter(), true);
+                }
+                return true;
+            }
+        });
+
+        navTable.row();
+        TextButton left = new TextButton("left", skin);
+        navTable.add(left);
+        left.addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                if (player.b2body.getLinearVelocity().x == 0) {
+                    player.b2body.applyLinearImpulse(new Vector2(-Strategy.MOVE_MUL * 1f, 0), player.b2body.getWorldCenter(), true);
+                }
+            }
+        });
+
+        TextButton ok = new TextButton("ok", skin);
+        navTable.add(ok);
+        ok.addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+
+            }
+        });
+
+        TextButton right = new TextButton("right", skin);
+        navTable.add(right);
+        right.addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                if (player.b2body.getLinearVelocity().x == 0) {
+                    player.b2body.applyLinearImpulse(new Vector2(Strategy.MOVE_MUL * 1f, 0), player.b2body.getWorldCenter(), true);
+                }
+            }
+        });
+
+        navTable.row();
+        TextButton down = new TextButton("down", skin);
+        navTable.add(down);
+        down.addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                if (player.b2body.getLinearVelocity().y == 0) {
+                    player.b2body.applyLinearImpulse(new Vector2(0, -Strategy.MOVE_MUL * 1f), player.b2body.getWorldCenter(), true);
+                }
+            }
+        });
+        stage.addActor(navTable);
+
+        Table table = new Table();
+        table.top();
+        table.setFillParent(true);
+
+        missionLabel = new Label(mission, skin);
+
+        table.add(missionLabel).expandX().padTop(10);
+
+        stage.addActor(table);
+    }
 //
 //    @Override
 //    public void show() {
@@ -323,6 +351,8 @@ public class MapScreen extends AbstractMechanicsScreen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 
+        missionLabel.setText(mission);
+
         for (EnemyShipForMap enemyShipForMap: enemies) {
             if ((enemyShipForMap.x - player.getX()) * (enemyShipForMap.x - player.getX()) + (enemyShipForMap.y - player.getY()) * (enemyShipForMap.y - player.getY()) < 20) {
                 strategy.setScreen(new FightScreen(strategy, 0, this));
@@ -338,14 +368,20 @@ public class MapScreen extends AbstractMechanicsScreen {
         for (EnemyShipForMap enemy : enemies) {
             enemy.draw(game.batch);
         }
-        game.batch.end();
 
+        game.batch.end();
         renderer.setView(gameCamera);
         batch = game.batch;
         b2dr.render(world, gameCamera.combined);
 
+
+//        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+//        hud.stage.draw();
+
         stage.act();
         stage.draw();
+
+
     }
 
     @Override
