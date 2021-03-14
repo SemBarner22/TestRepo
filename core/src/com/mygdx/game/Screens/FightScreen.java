@@ -94,7 +94,7 @@ public class FightScreen extends AbstractMechanicsScreen {
     public void handleInput(float dt) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && !isFire) {
             isFire = true;
-            core = new Core(world, this, shipBody.b2body.getPosition().x, shipBody.b2body.getPosition().y);
+            core = new Core(world, this, shipBody.b2body.getPosition().x, shipBody.b2body.getPosition().y, Math.PI / 4);
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT) && shipBody.b2body.getLinearVelocity().x <= 10) {
             shipBody.b2body.applyLinearImpulse(new Vector2(1f, 0), shipBody.b2body.getWorldCenter(), true);
@@ -125,6 +125,8 @@ public class FightScreen extends AbstractMechanicsScreen {
             isFire = core.update(dt);
             if (isFire) {
                 core.b2body.setActive(true);
+            } else {
+                core.b2body.setActive(false);
             }
         }
         gameCamera.position.x = shipBody.b2body.getPosition().x;
