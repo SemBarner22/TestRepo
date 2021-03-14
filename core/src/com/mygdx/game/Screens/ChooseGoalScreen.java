@@ -30,6 +30,7 @@ public class ChooseGoalScreen extends AbstractMechanicsScreen {
         portToCoordinate.put("D", "X: 113, Y: 111");
         mapScreen = (MapScreen) previousScreen;
         mapScreen.gameLevel = new GameLevel(level);
+        labelText = mapScreen.gameLevel.getBriefing();
     }
 
     @Override
@@ -57,7 +58,11 @@ public class ChooseGoalScreen extends AbstractMechanicsScreen {
 //        stage.addActor(table);
 //        table.pad(100).defaults().expandX().space(4);
         label = new Label(labelText, skin);
-        container.add(label).center().padLeft(100).expandX();
+        label.setWrap(true);
+//        label.pack();
+//        label.setWidth(200);
+//        label.pack();
+        container.add(label).width(Strategy.V_WIDTH * 0.8f).center().expandX();
         container.row();
         Button investment = new TextButton(a, skin);
         container.add(investment).left().padLeft(100);
@@ -88,8 +93,7 @@ public class ChooseGoalScreen extends AbstractMechanicsScreen {
                         finalB,
                         portToCoordinate.get(finalB)
                 );
-                level++;
-                strategy.setScreen(previousScreen);
+                triggerNextLevel();
             }
         });
     }
@@ -103,7 +107,7 @@ public class ChooseGoalScreen extends AbstractMechanicsScreen {
     private void triggerNextLevel() {
         level++;
         mapScreen.gameLevel = new GameLevel(level);
-        labelText = mapScreen.gameLevel.briefing + String.format("%n%n") + mapScreen.gameLevel.intel;
+        labelText = mapScreen.gameLevel.getBriefing();
         mapScreen.rearrageEnemies();
         strategy.setScreen(previousScreen);
     }

@@ -109,4 +109,8 @@ public class GameLevel {
         }
         intel = intelBuilder.toString();
     }
+
+    public String getBriefing() {
+        return this.briefing + String.format("%n%n") + this.intel;
+    }
 }
