@@ -181,12 +181,16 @@ public class FightScreen extends AbstractMechanicsScreen {
         shipCormaEnemy.update(dt);
         if (isFireEnemy) {
             isFireEnemy = coreEnemy.update(dt);
-            coreEnemy.b2body.setActive(isFireEnemy);
+            if (!isFireEnemy) {
+                world.destroyBody(coreEnemy.b2body);
+            }
         }
         if (isFirePlayer) {
             gameCamera.position.x = corePlayer.b2body.getPosition().x;
             isFirePlayer = corePlayer.update(dt);
-            corePlayer.b2body.setActive(isFirePlayer);
+            if (!isFirePlayer) {
+                world.destroyBody(corePlayer.b2body);
+            }
         } else {
             gameCamera.position.x = Math.max(shipBodyPlayer.b2body.getPosition().x, gameCamera.position.x - 10);
         }
