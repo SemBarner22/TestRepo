@@ -15,6 +15,7 @@ public class EnemyShipForMap extends Sprite {
     public Body b2body;
     public EnemyStrategy strategy;
     public float x, y;
+    public boolean enabled = false;
 
     public EnemyShipForMap(World world, EnemyStrategy strategy, float x, float y) {
         this.world = world;
