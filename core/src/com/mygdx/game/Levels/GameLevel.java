@@ -19,6 +19,7 @@ public class GameLevel {
     public String intel;
     public String briefing;
     public int patrolCount;
+    public static int finalLevel = 9;
 
     public TransitGroup[] transitGroups;
 

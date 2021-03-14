@@ -1,8 +1,10 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.physics.box2d.*;
+import com.mygdx.game.Levels.GameLevel;
 import com.mygdx.game.Screens.AbstractMechanicsScreen;
 import com.mygdx.game.Screens.ChooseGoalScreen;
+import com.mygdx.game.Screens.WinScreen;
 
 public class WorldContactListener implements ContactListener {
 
@@ -25,7 +27,11 @@ public class WorldContactListener implements ContactListener {
             Fixture player = "playerMap".equals(fixtureA.getUserData()) ? fixtureA : fixtureB;
             Fixture object = player == fixtureA ? fixtureB : fixtureA;
             if (object.getUserData() != null && ((String) object.getUserData()).contains("port") && ((((String) object.getUserData()).charAt(5)) - '0') == strategy.goal) {
-                strategy.setScreen(new ChooseGoalScreen(strategy, 0, screen, (((String) object.getUserData()).charAt(5))));
+                if (ChooseGoalScreen.level == GameLevel.finalLevel) {
+                    strategy.setScreen(new WinScreen(strategy, 0, screen));
+                } else {
+                    strategy.setScreen(new ChooseGoalScreen(strategy, 0, screen, (((String) object.getUserData()).charAt(5))));
+                }
             }
         }
     }
