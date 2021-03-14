@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -68,8 +69,8 @@ public class Strategy extends Game {
 	    manager.load("music/sounds/bump.wav", Sound.class);
 		manager.finishLoading();
 	    batch = new SpriteBatch();
-		startButtonTexture = new Texture(Gdx.files.internal("Interface\\start_button.png"));
-		exitButtonTexture = new Texture(Gdx.files.internal("Interface\\exit_button.png"));
+		startButtonTexture = new Texture(Gdx.files.internal("Interface/start_button.png"));
+		exitButtonTexture = new Texture(Gdx.files.internal("Interface/exit.png"));
 		start = new ImageButton(new TextureRegionDrawable(new TextureRegion(startButtonTexture)));
 		exit = new ImageButton(new TextureRegionDrawable(new TextureRegion(exitButtonTexture)));
 		stage = new Stage(new ScreenViewport()); //Set up a stage for the ui
@@ -77,16 +78,25 @@ public class Strategy extends Game {
 		table.center();
 		row_height = Gdx.graphics.getWidth() / 12;
 		col_width = Gdx.graphics.getWidth() / 12;
-		start.setSize(col_width*4,row_height);
-		start.setPosition(col_width,Gdx.graphics.getHeight()-row_height*3);
+		if (config.desktop()) {
+			start.setSize(col_width * 2, row_height);
+			start.scaleBy(2.5f);
+		} else {
+			start.setSize(col_width * 4, row_height);
+			start.scaleBy(1.5f);
+		}
+		start.setPosition(col_width / 2,Gdx.graphics.getHeight()-row_height*2.7f);
 		start.setTransform(true);
-		start.scaleBy(0.5f);
-		exit.setSize(col_width*4,row_height);
-		exit.setPosition(col_width*7,Gdx.graphics.getHeight()-row_height*3);
+		exit.setSize(col_width*3,row_height);
+		exit.setPosition(col_width*6,Gdx.graphics.getHeight()-row_height*3.7f);
 		exit.setTransform(true);
 		exit.scaleBy(0.5f);
 		stage.addActor(start);
 		stage.addActor(exit);
+//		Table table = new Table();
+//		stage.addActor(table);
+//		table.addActor(new Label("LifeLine", exit.getSkin()));
+//		stage.addActor(new Label("LifeLine", exit.getSkin()));
 		//table.add(exit).size(150, 200).center();
 		//table.add(start).size(200, 400).center(); //Add the button to the stage to perform rendering and take input.
 		Gdx.input.setInputProcessor(stage); //Start taking input from the ui
@@ -102,7 +112,7 @@ public class Strategy extends Game {
 			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 				Gdx.app.log("scroll", "Pressed"); //** Usually used to start Game, etc. **//
 				stage.clear();
-                setScreen(new FightScreen(Strategy.this, 0, new EmptyScreen()));
+                Gdx.app.exit();
 				return true;
 			}
 		});
