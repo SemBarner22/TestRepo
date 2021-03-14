@@ -33,7 +33,7 @@ public class GameLevel {
             }
             case 2: {
                 briefing = "Glad you've made it here! We may survive one more day here. Return to base ASAP! Choose the one you are going to return to.";
-                patrolCount = 25;
+                patrolCount = 100;
                 transitGroups = new TransitGroup[0];
                 intel = intelFormatNone;
                 break;

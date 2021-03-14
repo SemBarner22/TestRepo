@@ -143,53 +143,60 @@ public class FightScreen extends AbstractMechanicsScreen {
 
         missionLabel = new Label("" + timerAngle, skin);
 
-        table.add(missionLabel).expandX().padTop(10);
+        table.add(missionLabel).expandX().padTop(10).width(150).height(150);
+        if (!config.desktop()) {
+            missionLabel.setFontScale(3);
+        }
         table.row();
 
-        table2 = new Table();
+        if (!config.desktop()) {
+            table2 = new Table();
 
-        table2.bottom().left();
-        TextButton left = new TextButton("left", skin);
-        left.addListener(new ClickListener() {
-            public void clicked(InputEvent event, float x, float y) {
-                if (shipBodyPlayer.b2body.getLinearVelocity().x >= -50) {
-                    float move = 5f;
-                    shipBodyPlayer.b2body.applyLinearImpulse(new Vector2(-move, 0), shipBodyPlayer.b2body.getWorldCenter(), true);
-                    shipSailPlayer.b2body.applyLinearImpulse(new Vector2(-move, 0), shipBackPlayer.b2body.getWorldCenter(), true);
-                    shipBackPlayer.b2body.applyLinearImpulse(new Vector2(-move, 0), shipBackPlayer.b2body.getWorldCenter(), true);
-                    shipCormaPlayer.b2body.applyLinearImpulse(new Vector2(-move, 0), shipCormaPlayer.b2body.getWorldCenter(), true);
-                    shipMachtaPlayer.b2body.applyLinearImpulse(new Vector2(-move, 0), shipMachtaPlayer.b2body.getWorldCenter(), true);
+            table2.bottom().left();
+            TextButton left = new TextButton("left", skin);
+            left.addListener(new ClickListener() {
+                public void clicked(InputEvent event, float x, float y) {
+                    if (shipBodyPlayer.b2body.getLinearVelocity().x >= -50) {
+                        float move = 5f;
+                        shipBodyPlayer.b2body.applyLinearImpulse(new Vector2(-move, 0), shipBodyPlayer.b2body.getWorldCenter(), true);
+                        shipSailPlayer.b2body.applyLinearImpulse(new Vector2(-move, 0), shipBackPlayer.b2body.getWorldCenter(), true);
+                        shipBackPlayer.b2body.applyLinearImpulse(new Vector2(-move, 0), shipBackPlayer.b2body.getWorldCenter(), true);
+                        shipCormaPlayer.b2body.applyLinearImpulse(new Vector2(-move, 0), shipCormaPlayer.b2body.getWorldCenter(), true);
+                        shipMachtaPlayer.b2body.applyLinearImpulse(new Vector2(-move, 0), shipMachtaPlayer.b2body.getWorldCenter(), true);
+                    }
                 }
-            }
-        });
-        table2.add(left).padLeft(50);
-        TextButton right = new TextButton("right", skin);
-        right.addListener(new ClickListener() {
-            public void clicked(InputEvent event, float x, float y) {
-                if (shipBodyPlayer.b2body.getLinearVelocity().x <= 50) {
-                    float move = 5f;
-                    shipBodyPlayer.b2body.applyLinearImpulse(new Vector2(move, 0), shipBodyPlayer.b2body.getWorldCenter(), true);
-                    shipBackPlayer.b2body.applyLinearImpulse(new Vector2(move, 0), shipBackPlayer.b2body.getWorldCenter(), true);
-                    shipSailPlayer.b2body.applyLinearImpulse(new Vector2(move, 0), shipCormaPlayer.b2body.getWorldCenter(), true);
-                    shipCormaPlayer.b2body.applyLinearImpulse(new Vector2(move, 0), shipCormaPlayer.b2body.getWorldCenter(), true);
-                    shipMachtaPlayer.b2body.applyLinearImpulse(new Vector2(move, 0), shipMachtaPlayer.b2body.getWorldCenter(), true);
+            });
+            table2.add(left).padLeft(50).width(150).height(150);
+            ;
+            TextButton right = new TextButton("right", skin);
+            right.addListener(new ClickListener() {
+                public void clicked(InputEvent event, float x, float y) {
+                    if (shipBodyPlayer.b2body.getLinearVelocity().x <= 50) {
+                        float move = 5f;
+                        shipBodyPlayer.b2body.applyLinearImpulse(new Vector2(move, 0), shipBodyPlayer.b2body.getWorldCenter(), true);
+                        shipBackPlayer.b2body.applyLinearImpulse(new Vector2(move, 0), shipBackPlayer.b2body.getWorldCenter(), true);
+                        shipSailPlayer.b2body.applyLinearImpulse(new Vector2(move, 0), shipCormaPlayer.b2body.getWorldCenter(), true);
+                        shipCormaPlayer.b2body.applyLinearImpulse(new Vector2(move, 0), shipCormaPlayer.b2body.getWorldCenter(), true);
+                        shipMachtaPlayer.b2body.applyLinearImpulse(new Vector2(move, 0), shipMachtaPlayer.b2body.getWorldCenter(), true);
+                    }
                 }
-            }
-        });
-        table2.add(right).pad(50);
-        TextButton shoot = new TextButton("shoot", skin);
-        shoot.addListener(new ClickListener() {
-            public void clicked(InputEvent event, float x, float y) {
-                if (!isFirePlayer) {
-                    isFirePlayer = true;
-                    corePlayer = new Core(world, FightScreen.this, shipBodyPlayer.b2body.getPosition().x, shipBodyPlayer.b2body.getPosition().y, timerAngle * Math.PI / 180, new TextureAtlas("core.txt"), 1);
+            });
+            table2.add(right).pad(50).width(150).height(150);
+            ;
+            TextButton shoot = new TextButton("shoot", skin);
+            shoot.addListener(new ClickListener() {
+                public void clicked(InputEvent event, float x, float y) {
+                    if (!isFirePlayer) {
+                        isFirePlayer = true;
+                        corePlayer = new Core(world, FightScreen.this, shipBodyPlayer.b2body.getPosition().x, shipBodyPlayer.b2body.getPosition().y, timerAngle * Math.PI / 180, new TextureAtlas("core.txt"), 1);
+                    }
                 }
-            }
-        });
-        table2.add(shoot).right().expandX();
-
+            });
+            table2.add(shoot).right().expandX().width(150).height(150).padLeft(400);
+            ;
+            stage.addActor(table2);
+        }
         stage.addActor(table);
-        stage.addActor(table2);
     }
 
     public void handleInput(float dt) {

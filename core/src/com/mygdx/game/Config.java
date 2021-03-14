@@ -7,7 +7,7 @@ public class Config {
         this.isDesktop = isDesktop;
     }
 
-    boolean desktop() {
+    public boolean desktop() {
         return isDesktop;
     }
 }

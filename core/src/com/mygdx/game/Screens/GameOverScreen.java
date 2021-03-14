@@ -20,7 +20,10 @@ public class GameOverScreen extends AbstractMechanicsScreen {
     @Override
     public void show() {
         super.show();
-        container.add(new Label("YOU DIED!", skin));
+        Label label = new Label("YOU DIED!", skin);
+        label.setFontScale(1.5f);
+        container.add(label);
+
         TextButton restart = new TextButton("restart", skin);
         restart.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -31,7 +34,7 @@ public class GameOverScreen extends AbstractMechanicsScreen {
             }
         });
         container.row();
-        container.add(restart);
+        container.add(restart).width(150).height(150);;
         TextButton exit = new TextButton("exit", skin);
         exit.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -40,7 +43,7 @@ public class GameOverScreen extends AbstractMechanicsScreen {
                 return true;
             }
         });
-        container.add(exit);
+        container.add(exit).width(150).height(150);;
     }
 
 }
