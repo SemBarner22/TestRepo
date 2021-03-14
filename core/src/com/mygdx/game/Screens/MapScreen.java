@@ -2,6 +2,7 @@ package com.mygdx.game.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -65,11 +66,11 @@ public class MapScreen extends AbstractMechanicsScreen {
 
     private PlayerShipForMap player;
     private ArrayList<EnemyShipForMap> enemies;
-    private int enemiesCount = 500;
+    private int enemiesCount = 100;
     private World world;
     private Box2DDebugRenderer b2dr;
 
-    public MapScreen(Strategy strategy, int i, EmptyScreen emptyScreen) {
+    public MapScreen(Strategy strategy, int i, Screen emptyScreen) {
         super(strategy, i, emptyScreen);
         this.config = strategy.config;
 
@@ -323,6 +324,13 @@ public class MapScreen extends AbstractMechanicsScreen {
         update(delta);
         Gdx.gl.glClearColor(0.36f, 0.72f, 0.96f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+
+        for (EnemyShipForMap enemyShipForMap: enemies) {
+            if ((enemyShipForMap.x - player.getX()) * (enemyShipForMap.x - player.getX()) + (enemyShipForMap.y - player.getY()) * (enemyShipForMap.y - player.getY()) < 10) {
+                strategy.setScreen(new FightScreen(strategy, 0, this));
+            }
+        }
 
         renderer.render();
         b2dr.render(world, gameCamera.combined);
