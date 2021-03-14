@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.mygdx.game.Levels.GameLevel;
 import com.mygdx.game.Strategy;
 
 import java.util.HashMap;
@@ -13,6 +14,9 @@ import java.util.Map;
 
 public class ChooseGoalScreen extends AbstractMechanicsScreen {
 
+    public static String labelText = "Where would you go next?";
+    static GameLevel gameLevel;
+    public Label label;
     private char goal;
     private Map<String, String> portToCoordinate = new HashMap<>();
 
@@ -23,6 +27,7 @@ public class ChooseGoalScreen extends AbstractMechanicsScreen {
         portToCoordinate.put("B", "X: 114, Y: 16");
         portToCoordinate.put("C", "X: 25, Y: 114");
         portToCoordinate.put("D", "X: 113, Y: 111");
+        gameLevel = new GameLevel(1);
     }
 
     @Override
@@ -49,7 +54,8 @@ public class ChooseGoalScreen extends AbstractMechanicsScreen {
 //        Table table = new Table();
 //        stage.addActor(table);
 //        table.pad(100).defaults().expandX().space(4);
-        container.add(new Label("Where would you go next?", skin)).center().padLeft(100).expandX();
+        label = new Label(labelText, skin);
+        container.add().center().padLeft(100).expandX();
         container.row();
         Button investment = new TextButton(a, skin);
         container.add(investment).left().padLeft(100);
@@ -85,8 +91,8 @@ public class ChooseGoalScreen extends AbstractMechanicsScreen {
 
     @Override
     public void render(float delta) {
-
         super.render(delta);
+        label.setText(labelText);
     }
 
 }
