@@ -27,16 +27,16 @@ public class PlayerShipForMap extends Sprite {
 
     private void defineShip() {
         BodyDef bdef = new BodyDef();
-        bdef.position.set((56 * 16 + 8) / Strategy.PPM, (14 * 16 + 8) / Strategy.PPM);
+        bdef.position.set((25 * 16 + 8) / Strategy.PPM, ((128 - 15) * 16 + 8) / Strategy.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(5 / Strategy.PPM);
+        shape.setRadius(8 / Strategy.PPM);
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData("playerMap");
         b2body.setGravityScale(1);
-        b2body.setLinearDamping(8f);
+        b2body.setLinearDamping(Strategy.MOVE_MUL * 1f);
     }
 }

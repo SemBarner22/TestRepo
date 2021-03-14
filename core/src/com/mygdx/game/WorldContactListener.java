@@ -24,8 +24,8 @@ public class WorldContactListener implements ContactListener {
         if ("playerMap".equals(fixtureA.getUserData()) || "playerMap".equals(fixtureB.getUserData())) {
             Fixture player = "playerMap".equals(fixtureA.getUserData()) ? fixtureA : fixtureB;
             Fixture object = player == fixtureA ? fixtureB : fixtureA;
-            if ("ports".equals(object.getUserData())) {
-                strategy.setScreen(new ChooseGoalScreen(strategy, 0, screen));
+            if (object.getUserData() != null && ((String) object.getUserData()).contains("port") && ((((String) object.getUserData()).charAt(5)) - '0') == strategy.goal) {
+                strategy.setScreen(new ChooseGoalScreen(strategy, 0, screen, (((String) object.getUserData()).charAt(5))));
             }
         }
     }

@@ -17,10 +17,12 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.mygdx.game.Entity.EmptyScreen;
+import com.mygdx.game.Screens.ChooseGoalScreen;
 import com.mygdx.game.Screens.FightScreen;
 import com.mygdx.game.Screens.MapScreen;
 
 public class Strategy extends Game {
+	public int goal = 1;
 	public Config config;
 	ImageButton start;
 	ImageButton exit;
@@ -35,6 +37,8 @@ public class Strategy extends Game {
 	public static int V_HEIGHT;
 	public static final float PPM = 16;
 	public SpriteBatch batch;
+
+	public static float MOVE_MUL = 64 * 64;
 
 	public Strategy(Config config) {
 		this.config = config;
