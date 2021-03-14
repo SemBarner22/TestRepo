@@ -327,7 +327,7 @@ public class MapScreen extends AbstractMechanicsScreen {
 
 
         for (EnemyShipForMap enemyShipForMap: enemies) {
-            if ((enemyShipForMap.x - player.getX()) * (enemyShipForMap.x - player.getX()) + (enemyShipForMap.y - player.getY()) * (enemyShipForMap.y - player.getY()) < 10) {
+            if ((enemyShipForMap.x - player.getX()) * (enemyShipForMap.x - player.getX()) + (enemyShipForMap.y - player.getY()) * (enemyShipForMap.y - player.getY()) < 20) {
                 strategy.setScreen(new FightScreen(strategy, 0, this));
             }
         }
