@@ -65,7 +65,7 @@ public class MapScreen extends AbstractMechanicsScreen {
 
     private PlayerShipForMap player;
     private ArrayList<EnemyShipForMap> enemies;
-    private int enemiesCount = 0;
+    private int enemiesCount = 500;
     private World world;
     private Box2DDebugRenderer b2dr;
 
@@ -95,13 +95,13 @@ public class MapScreen extends AbstractMechanicsScreen {
         player = new PlayerShipForMap(world);
         enemies = new ArrayList<>();
         for (int u = 0; u < enemiesCount; u++) {
-            boolean transitStrategy = Math.random() < 0.5;
+            boolean transitStrategy = Math.random() < 0.9;
             EnemyStrategy enemyStrategy;
             float x, y;
             y = (float) (16 + Math.random() * 96);
             if (transitStrategy) {
                 boolean right = Math.random() < 0.5;
-                x = right ? 128 * 16 - 1 : 0;
+                x = right ? 0 : 128 * 16 - 1;
                 enemyStrategy = new EnemyStrategyTransit(right);
             } else {
                 enemyStrategy = new EnemyStrategyPatrol();

@@ -26,6 +26,7 @@ public class Core extends Sprite {
         TextureRegion iron = new TextureRegion(getTexture(), 0, 0, 4, 4);
         setBounds(0, 0, 4, 4);
         setRegion(iron);
+        b2body.setGravityScale(4);
         float impulse = 100;
         this.b2body.applyLinearImpulse(new Vector2(impulse * (float) Math.cos(angle), impulse * (float) Math.sin(angle)), b2body.getWorldCenter(), true);
     }

@@ -34,11 +34,17 @@ public class FightScreen extends AbstractMechanicsScreen {
     private World world;
     private Box2DDebugRenderer b2dr;
 
-    private ShipBody shipBody;
-    private ShipBack shipBack;
-    private ShipCorma shipCorma;
-    private ShipSail shipSail;
-    private ShipMachta shipMachta;
+    private ShipBody shipBodyPlayer;
+    private ShipBack shipBackPlayer;
+    private ShipCorma shipCormaPlayer;
+    private ShipSail shipSailPlayer;
+    private ShipMachta shipMachtaPlayer;
+
+    private ShipBody shipBodyEnemy;
+    private ShipBack shipBackEnemy;
+    private ShipCorma shipCormaEnemy;
+    private ShipSail shipSailEnemy;
+    private ShipMachta shipMachtaEnemy;
 
     private Core core;
     private boolean isFire;
@@ -57,11 +63,17 @@ public class FightScreen extends AbstractMechanicsScreen {
         gameCamera.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
         world = new World(new Vector2(0, -10), true);
         b2dr = new Box2DDebugRenderer();
-        shipBody = new ShipBody(world, this);
-        shipBack = new ShipBack(world, this);
-        shipSail = new ShipSail(world, this);
-        shipCorma = new ShipCorma(world, this);
-        shipMachta = new ShipMachta(world, this);
+        shipBodyPlayer = new ShipBody(world, this);
+        shipBackPlayer = new ShipBack(world, this);
+        shipSailPlayer = new ShipSail(world, this);
+        shipCormaPlayer = new ShipCorma(world, this);
+        shipMachtaPlayer = new ShipMachta(world, this);
+
+        shipBodyEnemy = new ShipBody(world, this);
+        shipBackEnemy = new ShipBack(world, this);
+        shipSailEnemy = new ShipSail(world, this);
+        shipCormaEnemy = new ShipCorma(world, this);
+        shipMachtaEnemy = new ShipMachta(world, this);
 
         BodyDef bdef = new BodyDef();
         PolygonShape shape = new PolygonShape();
@@ -94,21 +106,21 @@ public class FightScreen extends AbstractMechanicsScreen {
     public void handleInput(float dt) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && !isFire) {
             isFire = true;
-            core = new Core(world, this, shipBody.b2body.getPosition().x, shipBody.b2body.getPosition().y, Math.PI / 4);
+            core = new Core(world, this, shipBodyPlayer.b2body.getPosition().x, shipBodyPlayer.b2body.getPosition().y, Math.PI / 4);
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT) && shipBody.b2body.getLinearVelocity().x <= 10) {
-            shipBody.b2body.applyLinearImpulse(new Vector2(1f, 0), shipBody.b2body.getWorldCenter(), true);
-            shipBack.b2body.applyLinearImpulse(new Vector2(1f, 0), shipBack.b2body.getWorldCenter(), true);
-            shipSail.b2body.applyLinearImpulse(new Vector2(1f, 0), shipCorma.b2body.getWorldCenter(), true);
-            shipCorma.b2body.applyLinearImpulse(new Vector2(1f, 0), shipCorma.b2body.getWorldCenter(), true);
-            shipMachta.b2body.applyLinearImpulse(new Vector2(1f, 0), shipMachta.b2body.getWorldCenter(), true);
+        if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT) && shipBodyPlayer.b2body.getLinearVelocity().x <= 10) {
+            shipBodyPlayer.b2body.applyLinearImpulse(new Vector2(1f, 0), shipBodyPlayer.b2body.getWorldCenter(), true);
+            shipBackPlayer.b2body.applyLinearImpulse(new Vector2(1f, 0), shipBackPlayer.b2body.getWorldCenter(), true);
+            shipSailPlayer.b2body.applyLinearImpulse(new Vector2(1f, 0), shipCormaPlayer.b2body.getWorldCenter(), true);
+            shipCormaPlayer.b2body.applyLinearImpulse(new Vector2(1f, 0), shipCormaPlayer.b2body.getWorldCenter(), true);
+            shipMachtaPlayer.b2body.applyLinearImpulse(new Vector2(1f, 0), shipMachtaPlayer.b2body.getWorldCenter(), true);
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT) && shipBody.b2body.getLinearVelocity().x >= -10) {
-            shipBody.b2body.applyLinearImpulse(new Vector2(-1f, 0), shipBody.b2body.getWorldCenter(), true);
-            shipSail.b2body.applyLinearImpulse(new Vector2(-1f, 0), shipBack.b2body.getWorldCenter(), true);
-            shipBack.b2body.applyLinearImpulse(new Vector2(-1f, 0), shipBack.b2body.getWorldCenter(), true);
-            shipCorma.b2body.applyLinearImpulse(new Vector2(-1f, 0), shipCorma.b2body.getWorldCenter(), true);
-            shipMachta.b2body.applyLinearImpulse(new Vector2(-1f, 0), shipMachta.b2body.getWorldCenter(), true);
+        if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT) && shipBodyPlayer.b2body.getLinearVelocity().x >= -10) {
+            shipBodyPlayer.b2body.applyLinearImpulse(new Vector2(-1f, 0), shipBodyPlayer.b2body.getWorldCenter(), true);
+            shipSailPlayer.b2body.applyLinearImpulse(new Vector2(-1f, 0), shipBackPlayer.b2body.getWorldCenter(), true);
+            shipBackPlayer.b2body.applyLinearImpulse(new Vector2(-1f, 0), shipBackPlayer.b2body.getWorldCenter(), true);
+            shipCormaPlayer.b2body.applyLinearImpulse(new Vector2(-1f, 0), shipCormaPlayer.b2body.getWorldCenter(), true);
+            shipMachtaPlayer.b2body.applyLinearImpulse(new Vector2(-1f, 0), shipMachtaPlayer.b2body.getWorldCenter(), true);
         }
     }
 
@@ -116,20 +128,22 @@ public class FightScreen extends AbstractMechanicsScreen {
         handleInput(dt);
         world.step(1/60f, 6, 2);
 
-        shipBody.update(dt);
-        shipBack.update(dt);
-        shipSail.update(dt);
-        shipMachta.update(dt);
-        shipCorma.update(dt);
+        shipBodyPlayer.update(dt);
+        shipBackPlayer.update(dt);
+        shipSailPlayer.update(dt);
+        shipMachtaPlayer.update(dt);
+        shipCormaPlayer.update(dt);
         if (isFire) {
+            gameCamera.position.x = core.b2body.getPosition().x;
             isFire = core.update(dt);
             if (isFire) {
                 core.b2body.setActive(true);
             } else {
                 core.b2body.setActive(false);
             }
+        } else {
+            gameCamera.position.x = Math.max(shipBodyPlayer.b2body.getPosition().x, gameCamera.position.x - 10);
         }
-        gameCamera.position.x = shipBody.b2body.getPosition().x;
         gameCamera.update();
         renderer.setView(gameCamera);
     }
@@ -145,12 +159,12 @@ public class FightScreen extends AbstractMechanicsScreen {
 
         game.batch.setProjectionMatrix(gameCamera.combined);
         game.batch.begin();
-        shipSail.draw(game.batch);
-        shipBack.draw(game.batch);
-        shipCorma.draw(game.batch);
-        shipMachta.draw(game.batch);
-        shipSail.draw(game.batch);
-        shipBody.draw(game.batch);
+        shipSailPlayer.draw(game.batch);
+        shipBackPlayer.draw(game.batch);
+        shipCormaPlayer.draw(game.batch);
+        shipMachtaPlayer.draw(game.batch);
+        shipSailPlayer.draw(game.batch);
+        shipBodyPlayer.draw(game.batch);
         if (isFire) {
             core.draw(game.batch);
         }
