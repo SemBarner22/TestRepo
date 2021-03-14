@@ -2,6 +2,7 @@ package com.mygdx.game.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -50,7 +51,7 @@ public class FightScreen extends AbstractMechanicsScreen {
     private Core core;
     private boolean isFire;
 
-    public FightScreen(Strategy strategy, int i, EmptyScreen emptyScreen) {
+    public FightScreen(Strategy strategy, int i, Screen emptyScreen) {
         super(strategy, i, emptyScreen);
         atlas1 = new TextureAtlas("new_ship_set_2.txt");
         atlas2 = new TextureAtlas("new_ship_set_2_rev.txt");
