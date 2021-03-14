@@ -422,6 +422,8 @@ public class MapScreen extends AbstractMechanicsScreen {
         Gdx.gl.glClearColor(0.36f, 0.72f, 0.96f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        b2dr.render(world, gameCamera.combined);
+
         missionLabel.setText(mission);
         coordinateLabel.setText(formatPlayerCoordinate());
 
@@ -442,8 +444,10 @@ public class MapScreen extends AbstractMechanicsScreen {
             toKill.b2body.setActive(false);
             world.destroyBody(toKill.b2body);
         }
-        renderer.render();
+
+//        int[] layers = new int[] {2};
         b2dr.render(world, gameCamera.combined);
+        renderer.render();
 
         game.batch.setProjectionMatrix(gameCamera.combined);
         game.batch.begin();
@@ -458,7 +462,6 @@ public class MapScreen extends AbstractMechanicsScreen {
         game.batch.end();
         renderer.setView(gameCamera);
         batch = game.batch;
-        b2dr.render(world, gameCamera.combined);
 
 
 //        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
