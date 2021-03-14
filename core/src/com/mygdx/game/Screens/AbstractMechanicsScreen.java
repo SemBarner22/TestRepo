@@ -20,7 +20,7 @@ public class AbstractMechanicsScreen implements Screen {
     protected Stage stage;
     protected Table container;
     protected Skin skin;
-    protected Button backButton;
+//    protected Button backButton;
 
     public AbstractMechanicsScreen(final Strategy strategy, final int curPlayer, final Screen previousScreen) {
         this.strategy = strategy;
@@ -37,12 +37,12 @@ public class AbstractMechanicsScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
         container.setFillParent(true);
         skin = new Skin(Gdx.files.internal("uiskin.json"));
-        backButton = new TextButton("back", skin);
-        backButton.addListener(new ClickListener() {
-            public void clicked(InputEvent event, float x, float y) {
-                strategy.setScreen(previousScreen);
-            }
-        });
+//        backButton = new TextButton("back", skin);
+//        backButton.addListener(new ClickListener() {
+//            public void clicked(InputEvent event, float x, float y) {
+//                strategy.setScreen(previousScreen);
+//            }
+//        });
     }
 
     @Override

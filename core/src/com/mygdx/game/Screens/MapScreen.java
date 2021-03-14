@@ -46,9 +46,6 @@ import java.util.ArrayList;
 public class MapScreen extends AbstractMechanicsScreen {
 
     public char goal = 'O';
-
-    private Stage stage;
-    private Table container;
     private int row_height;
 
     private Config config;
