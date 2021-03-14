@@ -17,10 +17,12 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.mygdx.game.Entity.EmptyScreen;
+import com.mygdx.game.Screens.ChooseGoalScreen;
 import com.mygdx.game.Screens.FightScreen;
 import com.mygdx.game.Screens.MapScreen;
 
 public class Strategy extends Game {
+	public int goal = 1;
 	public Config config;
 	ImageButton start;
 	ImageButton exit;
