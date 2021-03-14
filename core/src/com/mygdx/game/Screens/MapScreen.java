@@ -236,6 +236,7 @@ public class MapScreen extends AbstractMechanicsScreen {
             public void clicked(InputEvent event, float x, float y) {
                 if (player.b2body.getLinearVelocity().y == 0) {
                     player.b2body.applyLinearImpulse(new Vector2(0, Strategy.MOVE_MUL * 1f), player.b2body.getWorldCenter(), true);
+                    player.updateTexture(PlayerShipForMap.Direction.U);
                 }
             }
         });
@@ -247,6 +248,7 @@ public class MapScreen extends AbstractMechanicsScreen {
             public void clicked(InputEvent event, float x, float y) {
                 if (player.b2body.getLinearVelocity().x == 0) {
                     player.b2body.applyLinearImpulse(new Vector2(-Strategy.MOVE_MUL * 1f, 0), player.b2body.getWorldCenter(), true);
+                    player.updateTexture(PlayerShipForMap.Direction.L);
                 }
             }
         });
@@ -265,6 +267,7 @@ public class MapScreen extends AbstractMechanicsScreen {
             public void clicked(InputEvent event, float x, float y) {
                 if (player.b2body.getLinearVelocity().x == 0) {
                     player.b2body.applyLinearImpulse(new Vector2(Strategy.MOVE_MUL * 1f, 0), player.b2body.getWorldCenter(), true);
+                    player.updateTexture(PlayerShipForMap.Direction.R);
                 }
             }
         });
@@ -276,6 +279,7 @@ public class MapScreen extends AbstractMechanicsScreen {
             public void clicked(InputEvent event, float x, float y) {
                 if (player.b2body.getLinearVelocity().y == 0) {
                     player.b2body.applyLinearImpulse(new Vector2(0, -Strategy.MOVE_MUL * 1f), player.b2body.getWorldCenter(), true);
+                    player.updateTexture(PlayerShipForMap.Direction.D);
                 }
             }
         });
@@ -313,7 +317,7 @@ public class MapScreen extends AbstractMechanicsScreen {
 //            table.row();
 //            table.add(new Label(i + "uno", skin)).expandX().fillX();
 //
-//            TextButton button = new TextButton(i + "dos", skin);
+////            TextButton button = new TextButton(i + "dos", skin);
 //            table.add(button);
 //            button.addListener(new ClickListener() {
 //                public void clicked (InputEvent event, float x, float y) {
@@ -338,18 +342,22 @@ public class MapScreen extends AbstractMechanicsScreen {
     public void handleInput(float dt) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP) && player.b2body.getLinearVelocity().y == 0) {
             player.b2body.applyLinearImpulse(new Vector2(0, Strategy.MOVE_MUL * 1f), player.b2body.getWorldCenter(), true);
+            player.updateTexture(PlayerShipForMap.Direction.U);
             moveEnemies();
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN) && player.b2body.getLinearVelocity().y == 0) {
             player.b2body.applyLinearImpulse(new Vector2(0, -Strategy.MOVE_MUL * 1f), player.b2body.getWorldCenter(), true);
+            player.updateTexture(PlayerShipForMap.Direction.D);
             moveEnemies();
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x == 0) {
             player.b2body.applyLinearImpulse(new Vector2(Strategy.MOVE_MUL * 1f, 0), player.b2body.getWorldCenter(), true);
+            player.updateTexture(PlayerShipForMap.Direction.R);
             moveEnemies();
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x == 0) {
             player.b2body.applyLinearImpulse(new Vector2(-Strategy.MOVE_MUL * 1f, 0), player.b2body.getWorldCenter(), true);
+            player.updateTexture(PlayerShipForMap.Direction.L);
             moveEnemies();
         }
     }
