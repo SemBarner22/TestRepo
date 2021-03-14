@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -32,6 +33,7 @@ public class Strategy extends Game {
 	Stage stage;
 	Table table;
 	int Help_Guides = 12;
+	Skin skin;
 	int row_height;
 	int col_width;
 	public static int V_WIDTH;
@@ -95,6 +97,17 @@ public class Strategy extends Game {
 		exit.scaleBy(0.5f);
 		stage.addActor(start);
 		stage.addActor(exit);
+
+		skin = new Skin(Gdx.files.internal("uiskin.json"));
+		Label label = new Label("LifeLine", skin);
+		if (config.desktop()) {
+			label.setPosition(col_width * 4, Gdx.graphics.getHeight() - row_height * 5f);
+			label.setFontScale(2.5f);
+		} else {
+			label.setFontScale(5f);
+			label.setPosition(col_width * 5, Gdx.graphics.getHeight() - row_height * 5f);
+		}
+		stage.addActor(label);
 //		Table table = new Table();
 //		stage.addActor(table);
 //		table.addActor(new Label("LifeLine", exit.getSkin()));
