@@ -88,7 +88,6 @@ public class Strategy extends Game {
 				stage.clear();
 				setScreen(new MapScreen(Strategy.this, 0, new EmptyScreen()));
 				return true;
-
 			}
 		});
 		exit.addListener(new InputListener() {
