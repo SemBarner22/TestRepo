@@ -4,8 +4,8 @@ import java.util.Locale;
 
 public class GameLevel {
     public static class TransitGroup {
-        int groupSize, groupMeanY;
-        boolean right;
+        public int groupSize, groupMeanY;
+        public boolean right;
 
         public TransitGroup(int groupSize, int groupMeanY, boolean right) {
             this.groupSize = groupSize;
@@ -16,17 +16,11 @@ public class GameLevel {
 
     static String intelFormatNone = "There are not any expected large formations transitions expected.";
     static String intelFormat = "Our intel reports that the large fleets will be transiting the inlet near these y-coords. Keep away!";
-    String intel;
-    String briefing;
-//    String homelandBriefing;
-//    String frontlineBriefing;
-    int patrolCount;
+    public String intel;
+    public String briefing;
+    public int patrolCount;
 
-    TransitGroup[] transitGroups;
-
-    int patrolLower;
-    int patrolUpper;
-    boolean patrolRight;
+    public TransitGroup[] transitGroups;
 
     public GameLevel(int level) {
         switch (level) {
@@ -114,5 +108,9 @@ public class GameLevel {
             intelBuilder.append(String.format(Locale.US, "Group of est. size %d near y-coord %d, %s.%n", transitGroup.groupSize, transitGroup.groupMeanY, transitGroup.right ? "due West" : "due East"));
         }
         intel = intelBuilder.toString();
+    }
+
+    public String getBriefing() {
+        return this.briefing + String.format("%n%n") + this.intel;
     }
 }

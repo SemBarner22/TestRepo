@@ -19,6 +19,7 @@ public class ChooseGoalScreen extends AbstractMechanicsScreen {
     public Label label;
     private char goal;
     private Map<String, String> portToCoordinate = new HashMap<>();
+    public MapScreen mapScreen;
 
     public ChooseGoalScreen(Strategy strategy, int curPlayer, Screen previousScreen, char goal) {
         super(strategy, curPlayer, previousScreen);
@@ -27,7 +28,9 @@ public class ChooseGoalScreen extends AbstractMechanicsScreen {
         portToCoordinate.put("B", "X: 114, Y: 16");
         portToCoordinate.put("C", "X: 25, Y: 114");
         portToCoordinate.put("D", "X: 113, Y: 111");
-        MapScreen.gameLevel = new GameLevel(level);
+        mapScreen = (MapScreen) previousScreen;
+        mapScreen.gameLevel = new GameLevel(level);
+        labelText = mapScreen.gameLevel.getBriefing();
     }
 
     @Override
@@ -55,7 +58,11 @@ public class ChooseGoalScreen extends AbstractMechanicsScreen {
 //        stage.addActor(table);
 //        table.pad(100).defaults().expandX().space(4);
         label = new Label(labelText, skin);
-        container.add(label).center().padLeft(100).expandX();
+        label.setWrap(true);
+//        label.pack();
+//        label.setWidth(200);
+//        label.pack();
+        container.add(label).width(Strategy.V_WIDTH * 0.8f).center().expandX();
         container.row();
         Button investment = new TextButton(a, skin);
         container.add(investment).left().padLeft(100);
@@ -70,8 +77,9 @@ public class ChooseGoalScreen extends AbstractMechanicsScreen {
                         finalA,
                         portToCoordinate.get(finalA)
                 );
-                level++;
-                strategy.setScreen(previousScreen);
+                triggerNextLevel();
+
+
             }
         });
         Button test = new TextButton(b, skin);
@@ -85,8 +93,7 @@ public class ChooseGoalScreen extends AbstractMechanicsScreen {
                         finalB,
                         portToCoordinate.get(finalB)
                 );
-                level++;
-                strategy.setScreen(previousScreen);
+                triggerNextLevel();
             }
         });
     }
@@ -97,4 +104,11 @@ public class ChooseGoalScreen extends AbstractMechanicsScreen {
         label.setText(labelText);
     }
 
+    private void triggerNextLevel() {
+        level++;
+        mapScreen.gameLevel = new GameLevel(level);
+        labelText = mapScreen.gameLevel.getBriefing();
+        mapScreen.rearrageEnemies();
+        strategy.setScreen(previousScreen);
+    }
 }
