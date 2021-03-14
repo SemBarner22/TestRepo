@@ -11,8 +11,8 @@ public class EnemyStrategyTransit implements EnemyStrategy {
     }
 
     @Override
-    public Vector2 nextMove() {
-        return new Vector2(right ? Strategy.MOVE_MUL * 1f : -Strategy.MOVE_MUL * 1f, 0);
+    public Vector2 nextMove(float k) {
+        return new Vector2(right ? Strategy.MOVE_MUL * k : -Strategy.MOVE_MUL * k, 0);
     }
 
     @Override

@@ -21,11 +21,11 @@ public class EnemyStrategyPatrol implements EnemyStrategy {
     }
 
     @Override
-    public Vector2 nextMove() {
+    public Vector2 nextMove(float k) {
         Vector2 ret = null;
         switch (cur) {
             case R: {
-                ret = new Vector2(Strategy.MOVE_MUL * 1f, 0);
+                ret = new Vector2(Strategy.MOVE_MUL * k, 0);
                 steps++;
                 if (steps == range) {
                     steps = 0;
@@ -34,7 +34,7 @@ public class EnemyStrategyPatrol implements EnemyStrategy {
                 break;
             }
             case U: {
-                ret = new Vector2(0, Strategy.MOVE_MUL * 1f);
+                ret = new Vector2(0, Strategy.MOVE_MUL * k);
                 steps++;
                 if (steps == range) {
                     steps = 0;
@@ -43,7 +43,7 @@ public class EnemyStrategyPatrol implements EnemyStrategy {
                 break;
             }
             case L: {
-                ret = new Vector2(-Strategy.MOVE_MUL * 1f, 0);
+                ret = new Vector2(-Strategy.MOVE_MUL * k, 0);
                 steps++;
                 if (steps == range) {
                     steps = 0;
@@ -52,7 +52,7 @@ public class EnemyStrategyPatrol implements EnemyStrategy {
                 break;
             }
             case D: {
-                ret = new Vector2(0, -Strategy.MOVE_MUL * 1f);
+                ret = new Vector2(0, -Strategy.MOVE_MUL * k);
                 steps++;
                 if (steps == range) {
                     steps = 0;

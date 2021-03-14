@@ -335,34 +335,70 @@ public class MapScreen extends AbstractMechanicsScreen {
 //        }
 
 //    }
+    private void movePlayer(Vector2 vec) {
+        if (player != null) {
+            player.b2body.applyLinearImpulse(vec, player.b2body.getWorldCenter(), true);
+        }
+    }
     public void moveEnemies() {
         for (EnemyShipForMap enemy : enemies) {
             if (!enemy.enabled) {
                 continue;
             }
-            enemy.b2body.applyLinearImpulse(enemy.strategy.nextMove(), enemy.b2body.getWorldCenter(), true);
+            enemy.b2body.applyLinearImpulse(enemy.strategy.nextMove(1f), enemy.b2body.getWorldCenter(), true);
+            enemy.updateTexture();
+        }
+    }
+
+    public void moveEnemies(float k) {
+        for (EnemyShipForMap enemy : enemies) {
+            if (!enemy.enabled) {
+                continue;
+            }
+            enemy.b2body.applyLinearImpulse(enemy.strategy.nextMove(k), enemy.b2body.getWorldCenter(), true);
             enemy.updateTexture();
         }
     }
 
     public void handleInput(float dt) {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.UP) && player.b2body.getLinearVelocity().y == 0) {
-            player.b2body.applyLinearImpulse(new Vector2(0, Strategy.MOVE_MUL * 1f), player.b2body.getWorldCenter(), true);
+        if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+            movePlayer(new Vector2(0, Strategy.MOVE_MUL * 1f));
+//            player.b2body.applyLinearImpulse(new Vector2(0, Strategy.MOVE_MUL * 1f), player.b2body.getWorldCenter(), true);
             player.updateTexture(PlayerShipForMap.Direction.U);
             moveEnemies();
+        } else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+            movePlayer(new Vector2(0, Strategy.MOVE_MUL * 0.25f));
+//            player.b2body.applyLinearImpulse(new Vector2(0, Strategy.MOVE_MUL * 0.25f), player.b2body.getWorldCenter(), true);
+            player.updateTexture(PlayerShipForMap.Direction.U);
+            moveEnemies(0.25f);
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN) && player.b2body.getLinearVelocity().y == 0) {
-            player.b2body.applyLinearImpulse(new Vector2(0, -Strategy.MOVE_MUL * 1f), player.b2body.getWorldCenter(), true);
+        if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
+            movePlayer(new Vector2(0, -Strategy.MOVE_MUL * 1f));
+//            player.b2body.applyLinearImpulse(new Vector2(0, -Strategy.MOVE_MUL * 1f), player.b2body.getWorldCenter(), true);
             player.updateTexture(PlayerShipForMap.Direction.D);
             moveEnemies();
+        } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+            movePlayer(new Vector2(0, -Strategy.MOVE_MUL * 0.25f));
+            player.updateTexture(PlayerShipForMap.Direction.D);
+            moveEnemies(0.25f);
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x == 0) {
-            player.b2body.applyLinearImpulse(new Vector2(Strategy.MOVE_MUL * 1f, 0), player.b2body.getWorldCenter(), true);
+        if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
+            movePlayer(new Vector2(Strategy.MOVE_MUL * 1f, 0));
+//            player.b2body.applyLinearImpulse(new Vector2(Strategy.MOVE_MUL * 1f, 0), player.b2body.getWorldCenter(), true);
+            player.updateTexture(PlayerShipForMap.Direction.R);
+            moveEnemies();
+        } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+            movePlayer(new Vector2(Strategy.MOVE_MUL * 0.25f, 0));
             player.updateTexture(PlayerShipForMap.Direction.R);
             moveEnemies();
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x == 0) {
-            player.b2body.applyLinearImpulse(new Vector2(-Strategy.MOVE_MUL * 1f, 0), player.b2body.getWorldCenter(), true);
+        if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
+            movePlayer(new Vector2(-Strategy.MOVE_MUL * 1f, 0));
+//            player.b2body.applyLinearImpulse(new Vector2(-Strategy.MOVE_MUL * 1f, 0), player.b2body.getWorldCenter(), true);
+            player.updateTexture(PlayerShipForMap.Direction.L);
+            moveEnemies();
+        } else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+            movePlayer(new Vector2(-Strategy.MOVE_MUL * 0.25f, 0));
             player.updateTexture(PlayerShipForMap.Direction.L);
             moveEnemies();
         }
