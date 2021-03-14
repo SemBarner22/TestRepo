@@ -2,6 +2,8 @@ package com.mygdx.game.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
@@ -13,8 +15,10 @@ import com.mygdx.game.Strategy;
 
 public class GameOverScreen extends AbstractMechanicsScreen {
 
+
     public GameOverScreen(Strategy strategy, int i, AbstractMechanicsScreen screen) {
         super(strategy, i, screen);
+        Strategy.manager.get("music/sounds/death.mp3", Music.class).play();
     }
 
     @Override

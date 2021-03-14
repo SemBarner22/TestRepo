@@ -242,7 +242,7 @@ public class FightScreen extends AbstractMechanicsScreen {
         if (!isFireEnemy && timer < -1 && nextScreen == null) {
             isFireEnemy = true;
             Strategy.manager.get("music/sounds/bump.mp3", Sound.class).play();
-            timer = 10;
+            timer = 5;
             float dist = shipBodyEnemy.b2body.getPosition().x - shipCormaPlayer.b2body.getPosition().x;
             coreEnemy = new Core(world, this, shipCormaEnemy.b2body.getPosition().x, shipCormaEnemy.b2body.getPosition().y, Math.asin(dist / 1000), atlas3, -1);
         }
