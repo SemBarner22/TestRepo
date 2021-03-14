@@ -211,7 +211,11 @@ public class MapScreen extends AbstractMechanicsScreen {
     }
 
     private String formatPlayerCoordinate() {
-        return String.format("X: %f, Y: %f", player.getX(), player.getY());
+        return String.format(
+                "X: %d, Y: %d",
+                Math.round(player.getX()),
+                Math.round(player.getY())
+        );
     }
 
     public TextureAtlas getAtlas() {
@@ -360,12 +364,18 @@ public class MapScreen extends AbstractMechanicsScreen {
         missionLabel.setText(mission);
         coordinateLabel.setText(formatPlayerCoordinate());
 
+        EnemyShipForMap toKill = null;
         for (EnemyShipForMap enemyShipForMap: enemies) {
             if ((enemyShipForMap.x - player.getX()) * (enemyShipForMap.x - player.getX()) + (enemyShipForMap.y - player.getY()) * (enemyShipForMap.y - player.getY()) < 20) {
+                toKill = enemyShipForMap;
                 strategy.setScreen(new FightScreen(strategy, 0, this));
+                break;
             }
         }
 
+        if (enemies.contains(toKill)) {
+            enemies.remove(toKill);
+        }
         renderer.render();
         b2dr.render(world, gameCamera.combined);
 

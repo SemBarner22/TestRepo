@@ -257,6 +257,6 @@ public class FightScreen extends AbstractMechanicsScreen {
 
     @Override
     public void dispose() {
-
+        map.dispose();
     }
 }
