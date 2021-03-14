@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="left-down" width="4" height="4" tilewidth="16" tileheight="16" infinite="0" nextlayerid="2" nextobjectid="1">
+ <tileset firstgid="1" source="all_tiles_set.tsx"/>
+ <tileset firstgid="23" source="ship1.tsx"/>
+ <tileset firstgid="24" source="ship11.tsx"/>
+ <tileset firstgid="25" source="ship2.tsx"/>
+ <tileset firstgid="26" source="l1.tsx"/>
+ <tileset firstgid="27" source="l11.tsx"/>
+ <tileset firstgid="28" source="l111.tsx"/>
+ <tileset firstgid="29" source="l2.tsx"/>
+ <layer id="1" name="Слой тайлов 1" width="4" height="4">
+  <data encoding="base64" compression="zlib">
+   eJzjZGBg4ETDMkAsgcSXBGJZLOpAGAAcnADX
+  </data>
+ </layer>
+</map>
