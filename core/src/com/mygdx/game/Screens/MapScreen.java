@@ -72,6 +72,7 @@ public class MapScreen extends AbstractMechanicsScreen {
 
     static String mission = "aaaaa";
     public Label missionLabel;
+    public Label coordinateLabel;
 
     public MapScreen(Strategy strategy, int i, Screen emptyScreen) {
         super(strategy, i, emptyScreen);
@@ -209,6 +210,10 @@ public class MapScreen extends AbstractMechanicsScreen {
 //        }
     }
 
+    private String formatPlayerCoordinate() {
+        return String.format("X: %f, Y: %f", player.getX(), player.getY());
+    }
+
     public TextureAtlas getAtlas() {
         return atlas;
     }
@@ -278,8 +283,11 @@ public class MapScreen extends AbstractMechanicsScreen {
         table.setFillParent(true);
 
         missionLabel = new Label(mission, skin);
+        coordinateLabel = new Label(formatPlayerCoordinate(), skin);
 
         table.add(missionLabel).expandX().padTop(10);
+        table.add(coordinateLabel).expandX().padTop(10);
+        table.row();
 
         stage.addActor(table);
     }
@@ -352,6 +360,7 @@ public class MapScreen extends AbstractMechanicsScreen {
 
 
         missionLabel.setText(mission);
+        coordinateLabel.setText(formatPlayerCoordinate());
 
         for (EnemyShipForMap enemyShipForMap: enemies) {
             if ((enemyShipForMap.x - player.getX()) * (enemyShipForMap.x - player.getX()) + (enemyShipForMap.y - player.getY()) * (enemyShipForMap.y - player.getY()) < 20) {
