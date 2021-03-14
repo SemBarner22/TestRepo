@@ -71,7 +71,7 @@ public class MapScreen extends AbstractMechanicsScreen {
 
     public MapScreen(Strategy strategy, int i, Screen emptyScreen) {
         super(strategy, i, emptyScreen);
-        mission = "Go to port A";
+        mission = "Go to port A[ X: 56, Y: 13]";
         this.config = strategy.config;
 
         atlas = new TextureAtlas("ship_set.txt");
@@ -381,8 +381,10 @@ public class MapScreen extends AbstractMechanicsScreen {
             }
         }
 
-        if (enemies.contains(toKill)) {
+        if (toKill != null && enemies.contains(toKill)) {
             enemies.remove(toKill);
+            toKill.b2body.setActive(false);
+            world.destroyBody(toKill.b2body);
         }
         renderer.render();
         b2dr.render(world, gameCamera.combined);
