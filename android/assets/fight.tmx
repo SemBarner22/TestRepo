@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="40" height="14" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="19">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="60" height="14" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="19">
  <tileset firstgid="1" name="water_tileset" tilewidth="16" tileheight="16" tilecount="36" columns="6">
   <image source="water_tileset.png" width="96" height="96"/>
  </tileset>
@@ -12,9 +12,9 @@
  <tileset firstgid="39" source="sky_set.tsx"/>
  <tileset firstgid="44" source="water.tsx"/>
  <tileset firstgid="46" source="rock.tsx"/>
- <layer id="1" name="background" width="40" height="14">
+ <layer id="1" name="background" width="60" height="14">
   <data encoding="base64" compression="zlib">
-   eJztkTsSwCAIBblNYn5Kcv+7hUJmGApFTWYoLLbzLU8IABAm3SzO2SZDrM7Zf+Jx4pBcRCQScRM44GLHV93Zp8Hcu5aPAukqzcL8nvfS2k337MnzXfRtrDMs3WSed2TNt/jlvWp/sXgs+dM5h3NenldfdA==
+   eJztkt0OgCAIRnmbsh/Jev93y4vYiOUSza2pF+fKcfhADACYTrUMjTF1qmZsjLkQx08cJbEe9Gye3eMyXF84NLvT7pbySdy1h7d6ZEgXObDQ7vg7RvQKzSoz59Rzj2Zu6aY7lLcYmzklKybWh/7cwv0+aJ4nt7Yf75OalTw59amsjbE0xgnMFY8h
   </data>
  </layer>
  <objectgroup id="5" name="water" visible="0">
