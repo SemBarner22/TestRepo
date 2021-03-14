@@ -7,13 +7,22 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.Strategy;
 
+import java.util.HashMap;
+import java.util.Map;
+
+
 public class ChooseGoalScreen extends AbstractMechanicsScreen {
 
     private char goal;
+    private Map<String, String> portToCoordinate = new HashMap<>();
 
     public ChooseGoalScreen(Strategy strategy, int curPlayer, Screen previousScreen, char goal) {
         super(strategy, curPlayer, previousScreen);
         this.goal = goal;
+        portToCoordinate.put("A", "X: 56, Y: 13");
+        portToCoordinate.put("B", "X: 114, Y: 16");
+        portToCoordinate.put("C", "X: 25, Y: 114");
+        portToCoordinate.put("D", "X: 113, Y: 111");
     }
 
     @Override
@@ -50,7 +59,11 @@ public class ChooseGoalScreen extends AbstractMechanicsScreen {
         investment.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 strategy.goal = finalA.charAt(0) - 'A' + 1;
-                MapScreen.mission = "Go to port " + finalA;
+                MapScreen.mission = String.format(
+                        "Go to port %s [%s]",
+                        finalA,
+                        portToCoordinate.get(finalA)
+                );
                 strategy.setScreen(previousScreen);
             }
         });
