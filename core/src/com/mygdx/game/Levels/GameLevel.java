@@ -89,7 +89,7 @@ public class GameLevel {
             }
             case 8: {
                 briefing = "We knew you could do that! You are a hero! But there are still other heroes those need immediate treat. We won't consider this operation a success unless you get home safe. Good luck!";
-                patrolCount = 100;
+                patrolCount = 120;
                 transitGroups = new TransitGroup[] {
                         new TransitGroup(10, 40, true),
                         new TransitGroup(10, 50, false),
