@@ -26,14 +26,14 @@ public class GameLevel {
     public GameLevel(int level) {
         switch (level) {
             case 1: {
-                briefing = "Soldier! The situation is desperate. Our frontliners have been cut off by the enemy naval blockade. It is crucial to keep the supply line and evacuate the wounded soldiers. Breach through the blockade and reach any of our bridgeheads on the other coast. You will unload the supplies and load our fellow soldiers there. Also, be aware of cliffs, we are not skilled enough to avoid them. Stay safe and come back home alive!";
+                briefing = "Soldier! The situation is desperate. Our frontliners have been cut off by the enemy naval blockade. It is crucial to keep the supply line and evacuate the wounded soldiers. Breach through the blockade and reach any of our bridgeheads on the other coast. You will unload the supplies and load our fellow soldiers there. Also, be aware of cliffs, we are not skilled enough to avoid them. Choose the bridgehead (C due West or D due East) where our troops should be expecting you. Stay safe and come back home alive!";
                 patrolCount = 20;
                 transitGroups = new TransitGroup[0];
                 intel = intelFormatNone;
                 break;
             }
             case 2: {
-                briefing = "Glad you've made it here! We may survive one more day here. Return to base ASAP! Choose the one you are going to return to.";
+                briefing = "Glad you've made it here! We may survive one more day here. Return to base ASAP! Choose the one you are going to return to (A due West or B due East).";
                 patrolCount = 30;
                 transitGroups = new TransitGroup[0];
                 intel = intelFormatNone;
