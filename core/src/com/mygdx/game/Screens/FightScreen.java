@@ -75,6 +75,8 @@ public class FightScreen extends AbstractMechanicsScreen {
 
     public float timerForNextScreen = 0;
     public Screen nextScreen = null;
+    public int gravityPlayer = 0;
+    public int gravityEnemy = 0;
 
     public FightScreen(Strategy strategy, int i, Screen emptyScreen) {
         super(strategy, i, emptyScreen);
@@ -256,16 +258,16 @@ public class FightScreen extends AbstractMechanicsScreen {
         world.step(1/60f, 6, 2);
 
 
-        shipBodyPlayer.update(dt);
-        shipBackPlayer.update(dt);
-        shipSailPlayer.update(dt);
-        shipMachtaPlayer.update(dt);
-        shipCormaPlayer.update(dt);
-        shipBodyEnemy.update(dt);
-        shipBackEnemy.update(dt);
-        shipSailEnemy.update(dt);
-        shipMachtaEnemy.update(dt);
-        shipCormaEnemy.update(dt);
+        shipBodyPlayer.update(dt, gravityPlayer);
+        shipBackPlayer.update(dt, gravityPlayer);
+        shipSailPlayer.update(dt, gravityPlayer);
+        shipMachtaPlayer.update(dt, gravityPlayer);
+        shipCormaPlayer.update(dt, gravityPlayer);
+        shipBodyEnemy.update(dt, gravityEnemy);
+        shipBackEnemy.update(dt, gravityEnemy);
+        shipSailEnemy.update(dt, gravityEnemy);
+        shipMachtaEnemy.update(dt, gravityEnemy);
+        shipCormaEnemy.update(dt, gravityEnemy);
         if (isFireEnemy) {
             isFireEnemy = coreEnemy.update(dt);
             coreEnemy.b2body.setActive(isFireEnemy);

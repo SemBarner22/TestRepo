@@ -36,6 +36,7 @@ public class FightScreenContactListener implements ContactListener {
             if (screen.nextScreen == null) {
                 Strategy.manager.get("music/sounds/babax.mp3", Sound.class).play();
                 screen.nextScreen = screen2;
+                screen.gravityEnemy = 2;
                 screen.timerForNextScreen = 5;
             }
             //strategy.setScreen(screen2);
@@ -46,6 +47,7 @@ public class FightScreenContactListener implements ContactListener {
                     Strategy.manager.get("music/sounds/babax.mp3", Sound.class).play();
                     screen.nextScreen = new GameOverScreen(strategy, 0, screen);
                     screen.timerForNextScreen = 5;
+                    screen.gravityPlayer = 2;
                     //strategy.setScreen(new GameOverScreen(strategy, 0, screen));
                 }
             }
@@ -55,6 +57,7 @@ public class FightScreenContactListener implements ContactListener {
                 Strategy.manager.get("music/sounds/babax.mp3", Sound.class).play();
                 screen.nextScreen = new GameOverScreen(strategy, 0, screen);
                 screen.timerForNextScreen = 5;
+                screen.gravityPlayer = 2;
                 //strategy.setScreen(new GameOverScreen(strategy, 0, screen));
 
             }

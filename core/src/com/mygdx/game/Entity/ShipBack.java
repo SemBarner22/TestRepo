@@ -41,7 +41,8 @@ public class ShipBack extends Sprite {
         b2body.setGravityScale(0);
     }
 
-    public void update(float dt) {
+    public void update(float dt, int gr) {
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+        b2body.setGravityScale(gr);
     }
 }
